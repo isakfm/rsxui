@@ -265,17 +265,21 @@ rsx! {
 
 ### Planned Components
 
-- [ ] **Action** — Action area for forms
-- [ ] **Avatar** — User avatars with fallback
-- [ ] **Avatar Group** — Multiple overlapping avatars
+- [ ] **Avatar** — User avatars and avatar group
 - [ ] **Breadcrumb** — Navigation breadcrumb
 - [ ] **Carousel** — Image/content carousel
+- [ ] **Chat Bubble** - Chat messages
 - [ ] **Checkbox** — Checkbox input
 - [ ] **Collapse** — Collapsible content
+- [ ] **Countdown** — Countdown timer
 - [ ] **Container** — Responsive container
-- [ ] **Divider** — Content divider
+- [ ] **Diff** — Responsive container
+- [ ] **Dock** — Bottom navigation or Bottom bar
+- [ ] **Divider** — Side-by-side comparison
 - [ ] **Drawer** — Side drawer navigation
 - [ ] **Dropdown** — Dropdown menu
+- [ ] **Fab** - Floating Action Button
+- [ ] **Fieldset** -  Container for grouping related form elements.
 - [ ] **File** — File input
 - [ ] **Footer** — Page footer
 - [ ] **Hero** — Hero section
@@ -286,21 +290,23 @@ rsx! {
 - [ ] **Menu** — Navigation menu
 - [ ] **Mockup** — Device mockups (phone, window, etc.)
 - [ ] **Navbar** — Navigation bar
+- [ ] **Progress** - Progress bar
 - [ ] **Radio** — Radio button
 - [ ] **Range** — Range slider
 - [ ] **Rating** — Star rating
 - [ ] **Select** — Dropdown select
+- [ ] **Skeleton** - Component for showing loading state
 - [ ] **Stack** — Stacked elements
-- [ ] **Statistics** — Stats display
+- [ ] **Status** — Status display
+- [ ] **Stats** — Stats display
 - [ ] **Steps** — Step wizard
 - [ ] **Table** — Data table
 - [ ] **Tabs** — Tab navigation
-- [ ] **Telephone Input** — Phone number input
 - [ ] **Textarea** — Multi-line text input
 - [ ] **Timeline** — Timeline display
 - [ ] **Toast** — Toast notifications
 - [ ] **Tooltip** — Hover tooltip
-- [ ] **Countdown** — Countdown timer
+- [ ] **Validator** — Input's validation
 
 ### Infrastructure Goals
 
