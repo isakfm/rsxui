@@ -1,0 +1,39 @@
+[workspace]
+resolver = "2"
+members = [
+    "rsx",
+    "rsx-macros",
+    "rsxui",
+    "website",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Isak Rickyanto <isak.rickyanto@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/rsxui/rsxui"
+rust-version = "1.94"
+
+[workspace.dependencies]
+async-trait = "0.1"
+axum = { version = "0.7", features = ["macros"] }
+bon = "3.9"
+convert_case = "0.6"
+futures = "0.3"
+html-escape = "0.2"
+mime = "0.3"
+proc-macro2 = "1.0"
+proc-macro2-diagnostics = "0.10"
+quote = "1.0"
+rstml = "0.11"
+rsx = { path = "rsx" }
+serde = { version = "1.0", features = ["derive"] }
+syn = { version = "2.0", features = ["full"] }
+thiserror = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

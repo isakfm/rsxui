@@ -1,0 +1,19 @@
+[package]
+name = "rsxui"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+bon.workspace = true
+enum_stringify = "0.6.4"
+rsx = { path = "../rsx" }
+rsx-macros = { path = "../rsx-macros" }
+serde.workspace = true
+
+[dev-dependencies]
+rstml.workspace = true
+tokio.workspace = true

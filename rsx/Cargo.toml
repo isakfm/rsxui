@@ -1,0 +1,17 @@
+[package]
+name = "rsx"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+bon.workspace = true
+html-escape.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+
+[dev-dependencies]
+rstml.workspace = true

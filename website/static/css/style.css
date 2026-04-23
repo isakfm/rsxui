@@ -1,0 +1,15 @@
+.drawer-content {
+    padding: 2rem;
+}
+.menu-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.code-wrapper {
+    background-color: var(--color-neutral);
+    border-radius: var(--radius-box);
+}
