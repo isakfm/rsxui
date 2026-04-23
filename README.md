@@ -118,7 +118,7 @@ let class = classes!(
 
 ### `#[ui]` — Component with All Attributes
 
-The `#[ui]` attribute generates a component with automatic support for HTML, HTMX, Alpine.js, and ARIA attributes:
+The `#[ui]` attribute generates a component with automatic support for HTML, HTMX, Alpine.js, and ARIA attributes that is accessible via props:
 
 ```rust
 use rsx_macros::ui;
@@ -126,7 +126,7 @@ use rsx_macros::ui;
 #[ui]
 fn Greeting(message: String) -> String {
     rsx! {
-        <div class="greeting">{message}</div>
+        <div class="greeting" {props.render_attrs()}>{props.message}</div>
     }
 }
 
