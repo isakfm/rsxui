@@ -67,7 +67,7 @@ let user = "Alice";
 let html = rsx! {
     <div>
         <p>"Welcome, {user}!"</p>
-        <Button label="Get Started" color={Color::Primary} />
+        <Button label="Get Started" color=Color::Primary />
     </div>
 };
 ```
@@ -215,15 +215,15 @@ let html = rsx! {
 use rsxui::components::{Button, Color, Size, ButtonStyle};
 
 // Primary button
-rsx! { <Button label="Click me" color={Color::Primary} /> }
+rsx! { <Button label="Click me" color=Color::Primary /> }
 
 // Sizes
-rsx! { <Button label="Small" size={Size::Sm} /> }
-rsx! { <Button label="Large" size={Size::Lg} /> }
+rsx! { <Button label="Small" size=Size::Sm /> }
+rsx! { <Button label="Large" size=Size::Lg /> }
 
 // Styles
-rsx! { <Button label="Outline" style={ButtonStyle::Outline} /> }
-rsx! { <Button label="Soft" style={ButtonStyle::Soft} /> }
+rsx! { <Button label="Outline" style=ButtonStyle::Outline /> }
+rsx! { <Button label="Soft" style=ButtonStyle::Soft /> }
 
 // With icons and loading
 rsx! { <Button label="Loading..." loading=true /> }
@@ -254,7 +254,7 @@ use rsxui::components::{Input, Color};
 rsx! {
     <Input
         placeholder="Enter your email"
-        color={Color::Primary}
+        color=Color::Primary
     />
 };
 ```
