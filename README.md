@@ -206,6 +206,9 @@ let html = rsx! {
 | `Badge` | Label/badge with color and size variants |
 | `Card` | Container with figure, body, title, and actions |
 | `Alert` | Message alerts with color and soft variants |
+| `Drawer` | Responsive side navigation panel |
+| `Menu` | Menu and menu item for navigation |
+
 
 ### Component Examples
 
@@ -273,10 +276,14 @@ rsx! {
 - [ ] **Collapse** — Collapsible content
 - [ ] **Countdown** — Countdown timer
 - [ ] **Container** — Responsive container
+<<<<<<< HEAD
 - [ ] **Diff** — Responsive container
 - [ ] **Dock** — Bottom navigation or Bottom bar
 - [ ] **Divider** — Side-by-side comparison
 - [ ] **Drawer** — Side drawer navigation
+=======
+- [ ] **Divider** — Content divider
+>>>>>>> 9a0beb1 (Update implemented components)
 - [ ] **Dropdown** — Dropdown menu
 - [ ] **Fab** - Floating Action Button
 - [ ] **Fieldset** -  Container for grouping related form elements.
@@ -287,7 +294,6 @@ rsx! {
 - [ ] **Join** — Grouped elements
 - [ ] **Kbd** — Keyboard key display
 - [ ] **Mask** — Image mask/shape
-- [ ] **Menu** — Navigation menu
 - [ ] **Mockup** — Device mockups (phone, window, etc.)
 - [ ] **Navbar** — Navigation bar
 - [ ] **Progress** - Progress bar
