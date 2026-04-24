@@ -54,5 +54,5 @@ pub async fn page() -> Html<String> {
         </div>
     };
 
-    Html(layout::drawer(content, "/components/alert"))
+    Html(layout::drawer(content, "/components/alert").await)
 }

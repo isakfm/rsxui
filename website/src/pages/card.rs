@@ -146,5 +146,5 @@ pub async fn page() -> Html<String> {
         </div>
     };
 
-    Html(layout::drawer(content, "/components/card"))
+    Html(layout::drawer(content, "/components/card").await)
 }

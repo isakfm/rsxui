@@ -61,5 +61,5 @@ pub async fn page() -> Html<String> {
         </div>
     };
 
-    Html(layout::drawer(content, "/"))
+    Html(layout::drawer(content, "/").await)
 }

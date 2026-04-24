@@ -5,3 +5,4 @@ pub mod card;
 pub mod drawer;
 pub mod home;
 pub mod input;
+pub mod menu;
