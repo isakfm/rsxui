@@ -1,7 +1,12 @@
+pub mod accordion;
 pub mod alert;
+pub mod avatar;
 pub mod badge;
 pub mod button;
 pub mod card;
+pub mod chat;
+pub mod collapse;
+pub mod countdown;
 pub mod drawer;
 pub mod home;
 pub mod input;

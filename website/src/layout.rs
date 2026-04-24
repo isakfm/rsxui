@@ -6,12 +6,17 @@ use rsxui::components::{
 pub async fn drawer(content: String, active_path: &str) -> String {
     let sidebar_items = [
         ("/", "Home"),
-        ("/components/button", "Button"),
-        ("/components/input", "Input"),
-        ("/components/badge", "Badge"),
+        ("/components/accordion", "Accordion"),
         ("/components/alert", "Alert"),
+        ("/components/avatar", "Avatar"),
+        ("/components/badge", "Badge"),
+        ("/components/button", "Button"),
         ("/components/card", "Card"),
+        ("/components/chat", "Chat"),
+        ("/components/collapse", "Collapse"),
+        ("/components/countdown", "Countdown"),
         ("/components/drawer", "Drawer"),
+        ("/components/input", "Input"),
         ("/components/menu", "Menu"),
     ];
 

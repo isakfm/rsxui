@@ -10,6 +10,7 @@ rust-version.workspace = true
 [dependencies]
 bon.workspace = true
 enum_stringify = "0.6.4"
+rand = "0.8"
 rsx = { path = "../rsx" }
 rsx-macros = { path = "../rsx-macros" }
 serde.workspace = true

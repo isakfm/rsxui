@@ -201,12 +201,17 @@ let html = rsx! {
 
 | Component | Description |
 |-----------|-------------|
-| `Button` | DaisyUI button with variants, sizes, and loading state |
-| `Input` | Text input with styles and validation states |
-| `Badge` | Label/badge with color and size variants |
-| `Card` | Container with figure, body, title, and actions |
+| `Accordion` | Group of collapsible items with radio inputs or details |
 | `Alert` | Message alerts with color and soft variants |
+| `Avatar` | User avatars with status indicators and groups |
+| `Badge` | Label/badge with color and size variants |
+| `Button` | DaisyUI button with variants, sizes, and loading state |
+| `Card` | Container with figure, body, title, and actions |
+| `Chat` | Chat bubbles with placement, colors, header/footer |
+| `Collapse` | Collapsible content with arrow/plus modifiers |
+| `Countdown` | Animated number countdown with CSS transitions |
 | `Drawer` | Responsive side navigation panel |
+| `Input` | Text input with styles and validation states |
 | `Menu` | Menu and menu item for navigation |
 
 
@@ -266,56 +271,71 @@ rsx! {
 
 ## Roadmap
 
+### Implemented Components
+
+- [x] **Accordion** — Group of collapsible items (radio or details)
+- [x] **Alert** — Message alerts with color and soft variants
+- [x] **Avatar** — User avatars with status and groups
+- [x] **Badge** — Label/badge with color and size variants
+- [x] **Button** — DaisyUI button with variants, sizes, loading state
+- [x] **Card** — Container with figure, body, title, and actions
+- [x] **Chat** — Chat bubbles with placement, colors, header/footer
+- [x] **Collapse** — Collapsible content with arrow/plus modifiers
+- [x] **Countdown** — Animated number countdown with CSS transitions
+- [x] **Drawer** — Responsive side navigation panel
+- [x] **Input** — Text input with styles and validation states
+- [x] **Menu** — Navigation menu with active/focus/disabled states
+
 ### Planned Components
 
-- [ ] **Avatar** — User avatars and avatar group
 - [ ] **Breadcrumb** — Navigation breadcrumb
 - [ ] **Carousel** — Image/content carousel
-- [ ] **Chat Bubble** - Chat messages
 - [ ] **Checkbox** — Checkbox input
-- [ ] **Collapse** — Collapsible content
-- [ ] **Countdown** — Countdown timer
 - [ ] **Container** — Responsive container
-- [ ] **Diff** — Responsive container
-- [ ] **Dock** — Bottom navigation or Bottom bar
-- [ ] **Divider** — Side-by-side comparison
+- [ ] **Diff** — Side-by-side comparison
+- [ ] **Dock** — Bottom navigation bar
 - [ ] **Divider** — Content divider
 - [ ] **Dropdown** — Dropdown menu
-- [ ] **Fab** - Floating Action Button
-- [ ] **Fieldset** -  Container for grouping related form elements.
-- [ ] **File** — File input
+- [ ] **Fab** — Floating Action Button
+- [ ] **Fieldset** — Container for grouping form elements
+- [ ] **File Input** — File upload input
 - [ ] **Footer** — Page footer
 - [ ] **Hero** — Hero section
 - [ ] **Indicator** — Status indicator
 - [ ] **Join** — Grouped elements
 - [ ] **Kbd** — Keyboard key display
+- [ ] **Loading** — Loading spinner/animation
 - [ ] **Mask** — Image mask/shape
+- [ ] **Modal** — Dialog modal
 - [ ] **Mockup** — Device mockups (phone, window, etc.)
 - [ ] **Navbar** — Navigation bar
-- [ ] **Progress** - Progress bar
+- [ ] **Pagination** — Page navigation
+- [ ] **Progress** — Progress bar
 - [ ] **Radio** — Radio button
 - [ ] **Range** — Range slider
 - [ ] **Rating** — Star rating
 - [ ] **Select** — Dropdown select
-- [ ] **Skeleton** - Component for showing loading state
+- [ ] **Skeleton** — Loading state placeholder
 - [ ] **Stack** — Stacked elements
-- [ ] **Status** — Status display
-- [ ] **Stats** — Stats display
+- [ ] **Stat** — Statistics display
 - [ ] **Steps** — Step wizard
+- [ ] **Swap** — Swap icon/content
 - [ ] **Table** — Data table
 - [ ] **Tabs** — Tab navigation
 - [ ] **Textarea** — Multi-line text input
 - [ ] **Timeline** — Timeline display
 - [ ] **Toast** — Toast notifications
+- [ ] **Toggle** — Toggle switch
 - [ ] **Tooltip** — Hover tooltip
-- [ ] **Validator** — Input's validation
+- [ ] **Validator** — Input validation
 
 ### Infrastructure Goals
 
-- [ ] Comprehensive test coverage
-- [ ] Documentation website
-- [ ] IDE support (Rust Analyzer snippets)
-- [ ] Crates.io release
+- [x] Documentation website — Live at http://localhost:3000
+- [x] Component test coverage — Tests for all implemented components
+- [ ] Comprehensive test coverage — Edge cases and integration tests
+- [ ] IDE support — Rust Analyzer snippets
+- [ ] Crates.io release — Publish to crates.io
 
 ---
 

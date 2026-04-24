@@ -158,18 +158,32 @@ pub fn show_if(condition: bool, attr: &str) -> String {
 // Re-exports
 // ============================================
 
+pub mod accordion;
 pub mod alert;
+pub mod avatar;
 pub mod badge;
 pub mod button;
 pub mod card;
+pub mod chat;
+pub mod collapse;
+pub mod countdown;
 pub mod drawer;
 pub mod input;
 pub mod menu;
 
+pub use accordion::{AccordionDetails, AccordionItem, AccordionModifier};
 pub use alert::{Alert, AlertProps};
+pub use avatar::{Avatar, AvatarGroup, AvatarStatus};
 pub use badge::{Badge, BadgeProps, BadgeStyle};
 pub use button::{Button, ButtonModifier, ButtonProps, ButtonStyle, ButtonType};
 pub use card::{Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle};
+pub use chat::{
+    Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPlacement,
+};
+pub use collapse::{
+    Collapse, CollapseContent, CollapseModifier, CollapseTitle,
+};
+pub use countdown::{Countdown, CountdownGroup, CountdownValue};
 pub use drawer::{
     Drawer, DrawerButton, DrawerContent, DrawerOverlay, DrawerPlacement, DrawerSide, DrawerToggle,
 };
