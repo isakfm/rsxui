@@ -94,27 +94,39 @@ impl<'a> WalkNodesOutput<'a> {
     }
 }
 
-/// If the last statement of a block is an `if` without `else`, wrap the
-/// then-branch with `.to_string()` and add `else { String::new() }` so
-/// both branches return `String` regardless of the original type.
+/// Recursively wrap if/for expressions that return non-String in the last position
 fn wrap_block_if_needed(stmts: &[syn::Stmt]) -> proc_macro2::TokenStream {
-    if let Some(last) = stmts.last() {
-        if let syn::Stmt::Expr(expr, _) = last {
-            if let syn::Expr::If(if_expr) = expr {
-                if if_expr.else_branch.is_none() {
-                    let cond = &if_expr.cond;
-                    let then_branch = &if_expr.then_branch;
-                    let all_but_last = &stmts[..stmts.len() - 1];
-                    return quote! {
-                        #(#all_but_last)*
-                        if #cond {
-                            (#then_branch).to_string()
-                        } else {
-                            String::new()
-                        }
-                    };
-                }
+    if let Some(syn::Stmt::Expr(expr, _)) = stmts.last() {
+        if let syn::Expr::If(if_expr) = expr {
+            if if_expr.else_branch.is_none() {
+                let cond = &if_expr.cond;
+                let then_branch = &if_expr.then_branch;
+                let all_but_last = &stmts[..stmts.len() - 1];
+                return quote! {
+                    #(#all_but_last)*
+                    if #cond {
+                        (#then_branch).to_string()
+                    } else {
+                        String::new()
+                    }
+                };
             }
+        } else if let syn::Expr::ForLoop(for_expr) = expr {
+            let pat = &for_expr.pat;
+            let iter = &for_expr.expr;
+            let body_stmts = &for_expr.body.stmts;
+            let wrapped_body = wrap_block_if_needed(body_stmts);
+            let all_but_last = &stmts[..stmts.len() - 1];
+            return quote! {
+                #(#all_but_last)*
+                {
+                    let mut __html = ::std::string::String::new();
+                    for #pat in #iter {
+                        __html.push_str(&(#wrapped_body));
+                    }
+                    __html
+                }
+            };
         }
     }
     quote!(#(#stmts)*)
@@ -489,25 +501,63 @@ fn known_ui_attrs() -> Vec<(&'static str, &'static str, bool)> {
     }
     // HTMX attrs
     for field in [
-        "hx_get", "hx_post", "hx_put", "hx_delete", "hx_patch",
-        "hx_trigger", "hx_target", "hx_swap", "hx_swap_oob",
-        "hx_indicator", "hx_headers", "hx_ext", "hx_boost",
-        "hx_history", "hx_include", "hx_exclude", "hx_replace_url",
-        "hx_preserve", "hx_prompt", "hx_confirm", "hx_on",
-        "hx_params", "hx_validate",
+        "hx_get",
+        "hx_post",
+        "hx_put",
+        "hx_delete",
+        "hx_patch",
+        "hx_trigger",
+        "hx_target",
+        "hx_swap",
+        "hx_swap_oob",
+        "hx_indicator",
+        "hx_headers",
+        "hx_ext",
+        "hx_boost",
+        "hx_history",
+        "hx_include",
+        "hx_exclude",
+        "hx_replace_url",
+        "hx_preserve",
+        "hx_prompt",
+        "hx_confirm",
+        "hx_on",
+        "hx_params",
+        "hx_validate",
     ] {
         let html = field.replace('_', "-");
         attrs.push((field, Box::leak(html.into_boxed_str()), false));
     }
     // ARIA attrs
     for field in [
-        "aria_label", "aria_labelledby", "aria_describedby", "aria_hidden",
-        "aria_disabled", "aria_expanded", "aria_selected", "aria_checked",
-        "aria_invalid", "aria_required", "aria_owns", "aria_controls",
-        "aria_current", "aria_details", "aria_errormessage", "aria_flowto",
-        "aria_keyshortcuts", "aria_live", "aria_relevant", "aria_atomic",
-        "aria_colcount", "aria_colindex", "aria_colspan", "aria_rowcount",
-        "aria_rowindex", "aria_rowspan", "aria_sort", "aria_description",
+        "aria_label",
+        "aria_labelledby",
+        "aria_describedby",
+        "aria_hidden",
+        "aria_disabled",
+        "aria_expanded",
+        "aria_selected",
+        "aria_checked",
+        "aria_invalid",
+        "aria_required",
+        "aria_owns",
+        "aria_controls",
+        "aria_current",
+        "aria_details",
+        "aria_errormessage",
+        "aria_flowto",
+        "aria_keyshortcuts",
+        "aria_live",
+        "aria_relevant",
+        "aria_atomic",
+        "aria_colcount",
+        "aria_colindex",
+        "aria_colspan",
+        "aria_rowcount",
+        "aria_rowindex",
+        "aria_rowspan",
+        "aria_sort",
+        "aria_description",
         "aria_busy",
     ] {
         let html = field.replace('_', "-");
@@ -515,21 +565,57 @@ fn known_ui_attrs() -> Vec<(&'static str, &'static str, bool)> {
     }
     // Alpine attrs
     for field in [
-        "x_data", "x_init", "x_bind", "x_on", "x_model", "x_show",
-        "x_for", "x_transition", "x_effect", "x_cloak", "x_ignore",
-        "x_text", "x_html", "x_ref", "x_mask", "x_scope", "x_teleport",
+        "x_data",
+        "x_init",
+        "x_bind",
+        "x_on",
+        "x_model",
+        "x_show",
+        "x_for",
+        "x_transition",
+        "x_effect",
+        "x_cloak",
+        "x_ignore",
+        "x_text",
+        "x_html",
+        "x_ref",
+        "x_mask",
+        "x_scope",
+        "x_teleport",
     ] {
         let html = field.replace('_', "-");
         attrs.push((field, Box::leak(html.into_boxed_str()), false));
     }
     // Event attrs
     for field in [
-        "onclick", "ondblclick", "oncontextmenu", "onmousedown", "onmouseup",
-        "onmouseenter", "onmouseleave", "onmousemove", "onmouseover", "onmouseout",
-        "onkeydown", "onkeyup", "onkeypress", "onfocus", "onblur",
-        "onfocusin", "onfocusout", "onchange", "oninput", "onsubmit",
-        "onreset", "oninvalid", "oncut", "oncopy", "onpaste",
-        "onload", "onerror", "onscroll",
+        "onclick",
+        "ondblclick",
+        "oncontextmenu",
+        "onmousedown",
+        "onmouseup",
+        "onmouseenter",
+        "onmouseleave",
+        "onmousemove",
+        "onmouseover",
+        "onmouseout",
+        "onkeydown",
+        "onkeyup",
+        "onkeypress",
+        "onfocus",
+        "onblur",
+        "onfocusin",
+        "onfocusout",
+        "onchange",
+        "oninput",
+        "onsubmit",
+        "onreset",
+        "oninvalid",
+        "oncut",
+        "oncopy",
+        "onpaste",
+        "onload",
+        "onerror",
+        "onscroll",
     ] {
         attrs.push((field, field, false));
     }
@@ -539,11 +625,32 @@ fn known_ui_attrs() -> Vec<(&'static str, &'static str, bool)> {
 /// Standard HTML boolean attributes that user-defined `bool` fields can map to.
 fn known_html_bool_attrs() -> std::collections::HashSet<&'static str> {
     [
-        "disabled", "readonly", "required", "checked", "selected", "multiple",
-        "autofocus", "autoplay", "controls", "loop", "muted", "playsinline",
-        "hidden", "open", "reversed", "async", "defer", "nomodule", "ismap",
-        "allowfullscreen", "formnovalidate", "novalidate", "spellcheck",
-        "contenteditable", "draggable", "translate",
+        "disabled",
+        "readonly",
+        "required",
+        "checked",
+        "selected",
+        "multiple",
+        "autofocus",
+        "autoplay",
+        "controls",
+        "loop",
+        "muted",
+        "playsinline",
+        "hidden",
+        "open",
+        "reversed",
+        "async",
+        "defer",
+        "nomodule",
+        "ismap",
+        "allowfullscreen",
+        "formnovalidate",
+        "novalidate",
+        "spellcheck",
+        "contenteditable",
+        "draggable",
+        "translate",
     ]
     .into_iter()
     .collect()
@@ -625,7 +732,8 @@ fn expand_component_internal(
                     };
                     extra_fields.push(ty);
                 }
-                let render_impl = generate_render_attrs_impl(&props_name, &std::collections::HashSet::new(), &[]);
+                let render_impl =
+                    generate_render_attrs_impl(&props_name, &std::collections::HashSet::new(), &[]);
                 quote! {
                     #[derive(::rsx::bon::Builder, Default)]
                     pub struct #props_name {
@@ -706,7 +814,12 @@ fn expand_component_internal(
                         if known_bool_attrs.contains(name.as_str()) {
                             // Check if type is `bool`
                             if let syn::Type::Path(p) = t.ty.as_ref() {
-                                if p.path.segments.last().map(|s| s.ident == "bool").unwrap_or(false) {
+                                if p.path
+                                    .segments
+                                    .last()
+                                    .map(|s| s.ident == "bool")
+                                    .unwrap_or(false)
+                                {
                                     let html_name = name.replace('_', "-");
                                     return Some((ident.ident.clone(), html_name));
                                 }
@@ -717,14 +830,19 @@ fn expand_component_internal(
                 })
                 .collect();
 
-            let field_defs_tokens: Vec<_> =
-                field_defs.iter().map(|t| {
+            let field_defs_tokens: Vec<_> = field_defs
+                .iter()
+                .map(|t| {
                     let attrs = &t.attrs;
                     let pat = &t.pat;
                     let ty = &t.ty;
                     let has_builder_attr = attrs.iter().any(|attr| attr.path().is_ident("builder"));
                     let is_option = if let syn::Type::Path(p) = ty.as_ref() {
-                        p.path.segments.last().map(|s| s.ident == "Option").unwrap_or(false)
+                        p.path
+                            .segments
+                            .last()
+                            .map(|s| s.ident == "Option")
+                            .unwrap_or(false)
                     } else {
                         false
                     };
@@ -735,7 +853,8 @@ fn expand_component_internal(
                     } else {
                         quote! { #[builder(default)] pub #pat: #ty }
                     }
-                }).collect();
+                })
+                .collect();
 
             let field_names: Vec<_> = item
                 .sig
@@ -778,7 +897,8 @@ fn expand_component_internal(
                     }
                 }
 
-                let render_impl = generate_render_attrs_impl(&props_name, &user_field_names, &user_bool_fields);
+                let render_impl =
+                    generate_render_attrs_impl(&props_name, &user_field_names, &user_bool_fields);
 
                 quote! {
                     #[derive(::rsx::bon::Builder, Default)]
