@@ -18,13 +18,12 @@
 //! };
 //! ```
 
+use super::{Color, Size};
+use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx_macros::{classes, rsx, ui};
-use enum_stringify::EnumStringify;
-use super::{Color, Size};
 
 pub use super::Size as ButtonSize;
-
 
 #[derive(Debug, Clone, PartialEq, Default, EnumStringify)]
 #[enum_stringify(case = "kebab", prefix = "btn-")]
@@ -100,7 +99,11 @@ mod tests {
         assert!(html.contains("class=\"btn\""));
         assert!(html.contains(">Click me</button>"));
         // Verify no trailing space before >
-        assert!(!html.contains(" \">"), "Found trailing space before >: {}", html);
+        assert!(
+            !html.contains(" \">"),
+            "Found trailing space before >: {}",
+            html
+        );
     }
 
     #[tokio::test]
@@ -160,7 +163,6 @@ mod tests {
             );
         }
     }
-
 
     #[tokio::test]
     async fn test_button_with_id() {
@@ -282,7 +284,7 @@ mod tests {
                 <Button label="Styled" style=style.clone() />
             };
             let expected = style.to_string();
-            println!("{}",html.clone());
+            println!("{}", html.clone());
             assert!(
                 html.contains(&expected),
                 "Missing style class {} for {:?}",

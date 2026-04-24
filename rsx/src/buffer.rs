@@ -9,12 +9,16 @@ pub struct Buffer {
 impl Buffer {
     #[inline]
     pub fn new() -> Self {
-        Self { inner: String::new() }
+        Self {
+            inner: String::new(),
+        }
     }
 
     #[inline]
     pub fn with_capacity(capacity: usize) -> Self {
-        Self { inner: String::with_capacity(capacity) }
+        Self {
+            inner: String::with_capacity(capacity),
+        }
     }
 
     #[inline]
@@ -65,7 +69,8 @@ impl Buffer {
         self.inner.push(' ');
         self.inner.push_str(name);
         self.inner.push_str("=\"");
-        self.inner.push_str(&html_escape::encode_unquoted_attribute(value));
+        self.inner
+            .push_str(&html_escape::encode_unquoted_attribute(value));
         self.inner.push('"');
     }
 

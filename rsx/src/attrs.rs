@@ -225,25 +225,39 @@ impl RenderAttrs for AriaAttrs {
             parts.push(format!(r#" aria-describedby="{}""#, v));
         }
         if let Some(v) = self.aria_hidden {
-            if v { parts.push(r#" aria-hidden="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-hidden="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_disabled {
-            if v { parts.push(r#" aria-disabled="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-disabled="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_expanded {
-            if v { parts.push(r#" aria-expanded="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-expanded="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_selected {
-            if v { parts.push(r#" aria-selected="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-selected="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_checked {
-            if v { parts.push(r#" aria-checked="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-checked="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_invalid {
-            if v { parts.push(r#" aria-invalid="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-invalid="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_required {
-            if v { parts.push(r#" aria-required="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-required="true""#.to_string());
+            }
         }
         if let Some(ref v) = self.aria_owns {
             parts.push(format!(r#" aria-owns="{}""#, v));
@@ -273,7 +287,9 @@ impl RenderAttrs for AriaAttrs {
             parts.push(format!(r#" aria-relevant="{}""#, v));
         }
         if let Some(v) = self.aria_atomic {
-            if v { parts.push(r#" aria-atomic="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-atomic="true""#.to_string());
+            }
         }
         if let Some(v) = self.aria_colcount {
             parts.push(format!(r#" aria-colcount="{}""#, v));
@@ -300,7 +316,9 @@ impl RenderAttrs for AriaAttrs {
             parts.push(format!(r#" aria-description="{}""#, v));
         }
         if let Some(v) = self.aria_busy {
-            if v { parts.push(r#" aria-busy="true""#.to_string()); }
+            if v {
+                parts.push(r#" aria-busy="true""#.to_string());
+            }
         }
 
         parts.join("")
@@ -336,7 +354,9 @@ impl RenderAttrs for HtmxAttrs {
             parts.push(format!(r#" hx-swap="{}""#, v));
         }
         if let Some(v) = self.hx_swap_oob {
-            if v { parts.push(r#" hx-swap-oob="true""#.to_string()); }
+            if v {
+                parts.push(r#" hx-swap-oob="true""#.to_string());
+            }
         }
         if let Some(ref v) = self.hx_indicator {
             parts.push(format!(r#" hx-indicator="{}""#, v));
@@ -348,10 +368,14 @@ impl RenderAttrs for HtmxAttrs {
             parts.push(format!(r#" hx-ext="{}""#, v));
         }
         if let Some(v) = self.hx_boost {
-            if v { parts.push(r#" hx-boost="true""#.to_string()); }
+            if v {
+                parts.push(r#" hx-boost="true""#.to_string());
+            }
         }
         if let Some(v) = self.hx_history {
-            if v { parts.push(r#" hx-history="true""#.to_string()); }
+            if v {
+                parts.push(r#" hx-history="true""#.to_string());
+            }
         }
         if let Some(ref v) = self.hx_include {
             parts.push(format!(r#" hx-include="{}""#, v));
@@ -363,7 +387,9 @@ impl RenderAttrs for HtmxAttrs {
             parts.push(format!(r#" hx-replace-url="{}""#, v));
         }
         if let Some(v) = self.hx_preserve {
-            if v { parts.push(r#" hx-preserve="true""#.to_string()); }
+            if v {
+                parts.push(r#" hx-preserve="true""#.to_string());
+            }
         }
         if let Some(ref v) = self.hx_prompt {
             parts.push(format!(r#" hx-prompt="{}""#, v));
@@ -378,7 +404,9 @@ impl RenderAttrs for HtmxAttrs {
             parts.push(format!(r#" hx-params="{}""#, v));
         }
         if let Some(v) = self.hx_validate {
-            if v { parts.push(r#" hx-validate="true""#.to_string()); }
+            if v {
+                parts.push(r#" hx-validate="true""#.to_string());
+            }
         }
 
         parts.join("")
@@ -417,10 +445,14 @@ impl RenderAttrs for AlpineAttrs {
             parts.push(format!(r#" x-effect="{}""#, v));
         }
         if let Some(v) = self.x_cloak {
-            if v { parts.push(r#" x-cloak="true""#.to_string()); }
+            if v {
+                parts.push(r#" x-cloak="true""#.to_string());
+            }
         }
         if let Some(v) = self.x_ignore {
-            if v { parts.push(r#" x-ignore="true""#.to_string()); }
+            if v {
+                parts.push(r#" x-ignore="true""#.to_string());
+            }
         }
         if let Some(ref v) = self.x_text {
             parts.push(format!(r#" x-text="{}""#, v));

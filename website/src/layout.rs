@@ -2,21 +2,23 @@ use rsx_macros::rsx;
 
 pub fn drawer(content: String, active_path: &str) -> String {
     let sidebar_items = vec![
-        ("/", "Home", false),
-        ("/components/button", "Button", false),
-        ("/components/input", "Input", false),
-        ("/components/badge", "Badge", false),
-        ("/components/alert", "Alert", false),
-        ("/components/card", "Card", false),
+        ("/", "Home"),
+        ("/components/button", "Button"),
+        ("/components/input", "Input"),
+        ("/components/badge", "Badge"),
+        ("/components/alert", "Alert"),
+        ("/components/card", "Card"),
+        ("/components/drawer", "Drawer"),
     ];
 
-    let menu_items: String = sidebar_items
-        .into_iter()
-        .map(|(path, label, _is_header)| {
-            let active_class = if path == active_path { "active" } else { "" };
-            rsx! {
-                <li><a href={path} class={active_class}>{label}</a></li>
-            }
+    let menu_items: Vec<String> = sidebar_items
+        .iter()
+        .map(|(path, label)| {
+            let active_class = if *path == active_path { "active" } else { "" };
+            format!(
+                "<li><a href=\"{}\" class=\"{}\">{}</a></li>",
+                path, active_class, label
+            )
         })
         .collect();
 
@@ -56,7 +58,7 @@ pub fn drawer(content: String, active_path: &str) -> String {
                                 <p class="text-sm text-gray-500">DaisyUI Components for Rust</p>
                             </div>
                             <ul class="menu menu-sm">
-                                {menu_items}
+                                {menu_items.join("")}
                             </ul>
                         </div>
                         <div class="mt-4 pt-4 border-t border-base-300">

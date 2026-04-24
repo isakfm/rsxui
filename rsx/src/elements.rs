@@ -4,8 +4,8 @@ pub struct Elements;
 
 impl Elements {
     pub const VOID_ELEMENTS: &'static [&'static str] = &[
-        "area", "base", "br", "col", "embed", "hr", "img", "input",
-        "link", "meta", "param", "source", "track", "wbr",
+        "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param",
+        "source", "track", "wbr",
     ];
 
     #[inline]

@@ -33,9 +33,9 @@
 //! };
 //! ```
 
+use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx_macros::{classes, rsx, ui};
-use enum_stringify::EnumStringify;
 
 use super::{Color, Size};
 
@@ -102,10 +102,7 @@ pub fn Card(
 // ============================================
 
 #[ui]
-pub fn CardFigure(
-    #[builder(default)] class: String,
-    children: String,
-) -> String {
+pub fn CardFigure(#[builder(default)] class: String, children: String) -> String {
     rsx! {
         <figure class={classes!(props.class)}>
             {props.children}
@@ -118,10 +115,7 @@ pub fn CardFigure(
 // ============================================
 
 #[ui]
-pub fn CardBody(
-    #[builder(default)] class: String,
-    children: String,
-) -> String {
+pub fn CardBody(#[builder(default)] class: String, children: String) -> String {
     rsx! {
         <div class={classes!("card-body", props.class)}>
             {props.children}
@@ -134,10 +128,7 @@ pub fn CardBody(
 // ============================================
 
 #[ui]
-pub fn CardTitle(
-    #[builder(default)] class: String,
-    children: String,
-) -> String {
+pub fn CardTitle(#[builder(default)] class: String, children: String) -> String {
     rsx! {
         <h2 class={classes!("card-title", props.class)}>
             {props.children}
@@ -150,10 +141,7 @@ pub fn CardTitle(
 // ============================================
 
 #[ui]
-pub fn CardActions(
-    #[builder(default)] class: String,
-    children: String,
-) -> String {
+pub fn CardActions(#[builder(default)] class: String, children: String) -> String {
     rsx! {
         <div class={classes!("card-actions", props.class)}>
             {props.children}
@@ -168,8 +156,8 @@ pub fn CardActions(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
     use crate::components::Button;
+    use rsx_macros::rsx;
 
     #[tokio::test]
     async fn test_card_basic() {

@@ -1,6 +1,6 @@
 use axum::response::Html;
-use rsxui::components::{Badge, BadgeStyle, Color, Size};
 use rsx_macros::rsx;
+use rsxui::components::{Badge, BadgeStyle, Color, Size};
 
 use crate::layout;
 

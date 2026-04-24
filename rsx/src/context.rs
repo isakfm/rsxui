@@ -26,9 +26,7 @@ where
         context
             .borrow()
             .get(&TypeId::of::<T>())
-            .and_then(|any| {
-                any.downcast_ref::<T>().cloned()
-            })
+            .and_then(|any| any.downcast_ref::<T>().cloned())
     })
 }
 

@@ -1,9 +1,8 @@
 use axum::response::Html;
-use rsxui::components::{
-    Card, CardBody, CardFigure, CardTitle, CardActions,
-    CardStyle, CardLayout, Color, Size
-};
 use rsx_macros::rsx;
+use rsxui::components::{
+    Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle, Color, Size,
+};
 
 use crate::layout;
 

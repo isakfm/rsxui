@@ -19,9 +19,9 @@
 //! };
 //! ```
 
+use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx_macros::{classes, rsx, ui};
-use enum_stringify::EnumStringify;
 
 use super::{Color, Size};
 

@@ -5,8 +5,8 @@
 
 mod buffer;
 pub mod elements;
-pub mod escape;
 pub mod error;
+pub mod escape;
 pub mod props;
 pub mod render;
 
@@ -15,13 +15,13 @@ pub mod attrs;
 pub mod context;
 pub mod prelude;
 
+pub use attributes::EscapeAttribute;
 pub use buffer::Buffer;
 pub use elements::Elements;
-pub use escape::{escape_content, escape_attribute, PreEscaped};
 pub use error::RsxuiError;
-pub use props::{Component, Props, props_builder};
+pub use escape::{escape_attribute, escape_content, PreEscaped};
+pub use props::{props_builder, Component, Props};
 pub use render::Render;
-pub use attributes::EscapeAttribute;
 
-pub use html_escape::encode_unquoted_attribute;
 pub use bon;
+pub use html_escape::encode_unquoted_attribute;

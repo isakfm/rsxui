@@ -1,6 +1,6 @@
 use axum::response::Html;
-use rsxui::components::{Alert, Color};
 use rsx_macros::rsx;
+use rsxui::components::{Alert, Color};
 
 use crate::layout;
 

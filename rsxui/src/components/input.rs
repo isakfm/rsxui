@@ -19,11 +19,11 @@
 //! };
 //! ```
 
+use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx_macros::{classes, rsx, ui};
-use enum_stringify::EnumStringify;
 
-use super::{Color, Size, attr_if};
+use super::{attr_if, Color, Size};
 
 #[derive(Debug, Clone, PartialEq, Default, EnumStringify)]
 #[enum_stringify(case = "kebab", prefix = "input-")]
@@ -37,10 +37,8 @@ pub enum InputStyle {
 #[ui]
 pub fn Input(
     input_type: String,
-    #[builder(into)]
-    placeholder: Option<String>,
-    #[builder(into)]
-    value: Option<String>,
+    #[builder(into)] placeholder: Option<String>,
+    #[builder(into)] value: Option<String>,
     size: Size,
     color: Color,
     #[builder(default)] style: InputStyle,
@@ -137,7 +135,10 @@ mod tests {
             <Input />
         };
         // None values should not render empty attributes
-        assert!(!html.contains("placeholder"), "placeholder should be omitted when None");
+        assert!(
+            !html.contains("placeholder"),
+            "placeholder should be omitted when None"
+        );
         assert!(!html.contains("value"), "value should be omitted when None");
         assert!(!html.contains("name"), "name should be omitted when None");
     }

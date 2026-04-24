@@ -1,6 +1,6 @@
 use axum::response::Html;
-use rsxui::components::{Button, ButtonModifier, ButtonStyle, ButtonType, Color, Size};
 use rsx_macros::rsx;
+use rsxui::components::{Button, ButtonModifier, ButtonStyle, ButtonType, Color, Size};
 
 use crate::layout;
 

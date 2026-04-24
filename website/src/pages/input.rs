@@ -1,6 +1,6 @@
 use axum::response::Html;
-use rsxui::components::{Input, InputStyle, Color, Size};
 use rsx_macros::rsx;
+use rsxui::components::{Color, Input, InputStyle, Size};
 
 use crate::layout;
 
