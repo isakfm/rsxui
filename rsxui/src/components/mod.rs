@@ -146,6 +146,8 @@ pub fn attr_if(name: &str, value: &Option<String>) -> String {
         .unwrap_or_default()
 }
 
+/// Helper: returns a boolean attribute (e.g. `disabled`, `checked`, `open`) when condition is true,
+/// otherwise returns empty string. The attribute name is HTML-escaped.
 pub fn show_if(condition: bool, attr: &str) -> String {
     use rsx::EscapeAttribute;
     if condition {

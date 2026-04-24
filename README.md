@@ -193,6 +193,19 @@ let html = rsx! {
 };
 ```
 
+### `show_if(condition, attr)`
+
+Returns a boolean attribute (e.g. `disabled`, `checked`) when condition is true:
+
+```rust
+use rsxui::components::show_if;
+
+let html = rsx! {
+    <button {show_if(is_disabled, "disabled")}>"Submit"</button>
+    <input type="checkbox" {show_if(is_checked, "checked")} />
+};
+```
+
 ---
 
 ## DaisyUI Components
