@@ -167,11 +167,25 @@ pub mod badge;
 pub mod button;
 pub mod card;
 pub mod chat;
+pub mod checkbox;
 pub mod collapse;
 pub mod countdown;
+pub mod diff;
+pub mod divider;
 pub mod drawer;
+pub mod fieldset;
+pub mod file_input;
+pub mod filter;
 pub mod input;
+pub mod label;
 pub mod menu;
+pub mod radio;
+pub mod range;
+pub mod rating;
+pub mod select;
+pub mod textarea;
+pub mod toggle;
+pub mod validator;
 
 pub use accordion::{AccordionDetails, AccordionItem, AccordionModifier};
 pub use alert::{Alert, AlertProps};
@@ -179,15 +193,25 @@ pub use avatar::{Avatar, AvatarGroup, AvatarStatus};
 pub use badge::{Badge, BadgeProps, BadgeStyle};
 pub use button::{Button, ButtonModifier, ButtonProps, ButtonStyle, ButtonType};
 pub use card::{Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle};
-pub use chat::{
-    Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPlacement,
-};
-pub use collapse::{
-    Collapse, CollapseContent, CollapseModifier, CollapseTitle,
-};
+pub use chat::{Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPlacement};
+pub use checkbox::Checkbox;
+pub use collapse::{Collapse, CollapseContent, CollapseModifier, CollapseTitle};
 pub use countdown::{Countdown, CountdownGroup, CountdownValue};
+pub use diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
+pub use divider::Divider;
 pub use drawer::{
     Drawer, DrawerButton, DrawerContent, DrawerOverlay, DrawerPlacement, DrawerSide, DrawerToggle,
 };
+pub use fieldset::Fieldset;
+pub use file_input::{FileInput, FileInputProps, FileInputStyle};
+pub use filter::Filter;
 pub use input::{Input, InputProps, InputStyle};
+pub use label::{FloatingLabel, Label};
 pub use menu::{Menu, MenuItem, MenuState};
+pub use radio::Radio;
+pub use range::Range;
+pub use rating::Rating;
+pub use select::{Select, SelectProps, SelectStyle};
+pub use textarea::{Textarea, TextareaProps, TextareaStyle};
+pub use toggle::Toggle;
+pub use validator::{Validator, ValidatorHint};

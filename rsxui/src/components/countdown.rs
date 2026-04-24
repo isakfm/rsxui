@@ -8,10 +8,7 @@ use rsx_macros::{classes, component, rsx};
 // ============================================
 
 #[component]
-pub fn CountdownGroup(
-    #[builder(default)] class: String,
-    children: String,
-) -> String {
+pub fn CountdownGroup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
         <span class={classes!("countdown", class)}>
             {children}

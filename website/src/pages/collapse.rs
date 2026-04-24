@@ -1,8 +1,6 @@
 use axum::response::Html;
 use rsx_macros::rsx;
-use rsxui::components::{
-    Collapse, CollapseContent, CollapseModifier, CollapseTitle,
-};
+use rsxui::components::{Collapse, CollapseContent, CollapseModifier, CollapseTitle};
 
 use crate::layout;
 

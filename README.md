@@ -221,11 +221,25 @@ let html = rsx! {
 | `Button` | DaisyUI button with variants, sizes, and loading state |
 | `Card` | Container with figure, body, title, and actions |
 | `Chat` | Chat bubbles with placement, colors, header/footer |
+| `Checkbox` | Checkbox input with color and size variants |
 | `Collapse` | Collapsible content with arrow/plus modifiers |
 | `Countdown` | Animated number countdown with CSS transitions |
+| `Diff` | Side-by-side image/text comparison with slider |
+| `Divider` | Content divider with text, colors, and orientation |
 | `Drawer` | Responsive side navigation panel |
-| `Input` | Text input with styles and validation states |
-| `Menu` | Menu and menu item for navigation |
+| `Fieldset` | Container for grouping form elements with title |
+| `FileInput` | File upload input with color and size variants |
+| `Filter` | Tab-style filter buttons |
+| `Input` | Text input with color and size variants |
+| `Label` | Form label and floating label |
+| `Menu` | Navigation menu with active/focus/disabled states |
+| `Radio` | Radio button with color and size variants |
+| `Range` | Range slider with color and size variants |
+| `Rating` | Star rating with half stars, custom masks, and read-only mode |
+| `Select` | Dropdown select with color and size variants |
+| `Textarea` | Multi-line text input with color and size variants |
+| `Toggle` | Toggle switch with color and size variants |
+| `Validator` | Input validation wrapper with hint messages |
 
 
 ### Component Examples
@@ -293,25 +307,34 @@ rsx! {
 - [x] **Button** — DaisyUI button with variants, sizes, loading state
 - [x] **Card** — Container with figure, body, title, and actions
 - [x] **Chat** — Chat bubbles with placement, colors, header/footer
+- [x] **Checkbox** — Checkbox input with color and size variants
 - [x] **Collapse** — Collapsible content with arrow/plus modifiers
 - [x] **Countdown** — Animated number countdown with CSS transitions
+- [x] **Diff** — Side-by-side image/text comparison with slider
+- [x] **Divider** — Content divider with text, colors, and orientation
 - [x] **Drawer** — Responsive side navigation panel
-- [x] **Input** — Text input with styles and validation states
+- [x] **Fieldset** — Container for grouping form elements with title
+- [x] **File Input** — File upload input with color and size variants
+- [x] **Filter** — Tab-style filter buttons
+- [x] **Input** — Text input with color and size variants
+- [x] **Label** — Form label and floating label
 - [x] **Menu** — Navigation menu with active/focus/disabled states
+- [x] **Radio** — Radio button with color and size variants
+- [x] **Range** — Range slider with color and size variants
+- [x] **Rating** — Star rating with half stars, custom masks, and read-only mode
+- [x] **Select** — Dropdown select with color and size variants
+- [x] **Textarea** — Multi-line text input with color and size variants
+- [x] **Toggle** — Toggle switch with color and size variants
+- [x] **Validator** — Input validation wrapper with hint messages
 
 ### Planned Components
 
 - [ ] **Breadcrumb** — Navigation breadcrumb
 - [ ] **Carousel** — Image/content carousel
-- [ ] **Checkbox** — Checkbox input
 - [ ] **Container** — Responsive container
-- [ ] **Diff** — Side-by-side comparison
 - [ ] **Dock** — Bottom navigation bar
-- [ ] **Divider** — Content divider
 - [ ] **Dropdown** — Dropdown menu
 - [ ] **Fab** — Floating Action Button
-- [ ] **Fieldset** — Container for grouping form elements
-- [ ] **File Input** — File upload input
 - [ ] **Footer** — Page footer
 - [ ] **Hero** — Hero section
 - [ ] **Indicator** — Status indicator
@@ -324,10 +347,6 @@ rsx! {
 - [ ] **Navbar** — Navigation bar
 - [ ] **Pagination** — Page navigation
 - [ ] **Progress** — Progress bar
-- [ ] **Radio** — Radio button
-- [ ] **Range** — Range slider
-- [ ] **Rating** — Star rating
-- [ ] **Select** — Dropdown select
 - [ ] **Skeleton** — Loading state placeholder
 - [ ] **Stack** — Stacked elements
 - [ ] **Stat** — Statistics display
@@ -335,12 +354,9 @@ rsx! {
 - [ ] **Swap** — Swap icon/content
 - [ ] **Table** — Data table
 - [ ] **Tabs** — Tab navigation
-- [ ] **Textarea** — Multi-line text input
 - [ ] **Timeline** — Timeline display
 - [ ] **Toast** — Toast notifications
-- [ ] **Toggle** — Toggle switch
 - [ ] **Tooltip** — Hover tooltip
-- [ ] **Validator** — Input validation
 
 ### Infrastructure Goals
 
