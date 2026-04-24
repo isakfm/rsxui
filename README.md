@@ -238,6 +238,8 @@ let html = rsx! {
 | `Filter` | Tab-style filter buttons |
 | `Footer` | Page footer with vertical and center variants |
 | `Hero` | Hero section with overlay and content areas |
+| `Hover3d` | 3D hover effect wrapper |
+| `HoverGallery` | Image hover gallery |
 | `Indicator` | Status indicator positioned on corners |
 | `Input` | Text input with color and size variants |
 | `Join` | Grouped elements with vertical/orientation variants |
@@ -246,16 +248,19 @@ let html = rsx! {
 | `Link` | Styled link with hover and color variants |
 | `List` | List with row wrap/grow modifiers |
 | `Loading` | Loading spinner/animation with styles and sizes |
+| `Mask` | Image mask/shape with 16 shape variants |
 | `Menu` | Navigation menu with active/focus/disabled states |
 | `Navbar` | Navigation bar with start/center/end sections |
 | `Pagination` | Page navigation with active/disabled states |
 | `PhoneMockup` | iPhone mockup with camera and display |
 | `Progress` | Progress bar with colors and indeterminate state |
+| `RadialProgress` | Circular progress indicator |
 | `Radio` | Radio button with color and size variants |
 | `Range` | Range slider with color and size variants |
 | `Rating` | Star rating with half stars, custom masks, and read-only mode |
 | `Select` | Dropdown select with color and size variants |
 | `Skeleton` | Loading state placeholder with text variant |
+| `Stack` | Stacked elements with alignment modifiers |
 | `Stat` | Statistics display with title, value, description, and actions |
 | `Status` | Status dot with colors, sizes, and animations |
 | `Steps` | Step wizard with data-content and direction |
@@ -264,6 +269,7 @@ let html = rsx! {
 | `Table` | Data table with zebra, pin rows/cols, and sizes |
 | `Textarea` | Multi-line text input with color and size variants |
 | `TextRotate` | Animated text rotation effect |
+| `Timeline` | Timeline display with vertical/horizontal directions |
 | `Toast` | Toast notification wrapper with placement |
 | `Toggle` | Toggle switch with color and size variants |
 | `Tooltip` | Hover tooltip with placements and colors |
@@ -351,6 +357,8 @@ rsx! {
 - [x] **Filter** — Tab-style filter buttons
 - [x] **Footer** — Page footer with vertical and center variants
 - [x] **Hero** — Hero section with overlay and content areas
+- [x] **Hover3d** — 3D hover effect wrapper
+- [x] **HoverGallery** — Image hover gallery
 - [x] **Indicator** — Status indicator positioned on corners
 - [x] **Input** — Text input with color and size variants
 - [x] **Join** — Grouped elements with vertical/orientation variants
@@ -359,16 +367,19 @@ rsx! {
 - [x] **Link** — Styled link with hover and color variants
 - [x] **List** — List with row wrap/grow modifiers
 - [x] **Loading** — Loading spinner/animation with styles and sizes
+- [x] **Mask** — Image mask/shape with 16 shape variants
 - [x] **Menu** — Navigation menu with active/focus/disabled states
 - [x] **Navbar** — Navigation bar with start/center/end sections
 - [x] **Pagination** — Page navigation with active/disabled states
 - [x] **PhoneMockup** — iPhone mockup with camera and display
 - [x] **Progress** — Progress bar with colors and indeterminate state
+- [x] **RadialProgress** — Circular progress indicator
 - [x] **Radio** — Radio button with color and size variants
 - [x] **Range** — Range slider with color and size variants
 - [x] **Rating** — Star rating with half stars, custom masks, and read-only mode
 - [x] **Select** — Dropdown select with color and size variants
 - [x] **Skeleton** — Loading state placeholder with text variant
+- [x] **Stack** — Stacked elements with alignment modifiers
 - [x] **Stat** — Statistics display with title, value, description, and actions
 - [x] **Status** — Status dot with colors, sizes, and animations
 - [x] **Steps** — Step wizard with data-content and direction
@@ -377,6 +388,7 @@ rsx! {
 - [x] **Table** — Data table with zebra, pin rows/cols, and sizes
 - [x] **Textarea** — Multi-line text input with color and size variants
 - [x] **TextRotate** — Animated text rotation effect
+- [x] **Timeline** — Timeline display with vertical/horizontal directions
 - [x] **Toast** — Toast notification wrapper with placement
 - [x] **Toggle** — Toggle switch with color and size variants
 - [x] **Tooltip** — Hover tooltip with placements and colors
@@ -388,14 +400,8 @@ rsx! {
 - [ ] **Calendar** — Date picker calendar
 - [ ] **Carousel** — Image/content carousel
 - [ ] **Fab** — Floating Action Button
-- [ ] **Hover3d** — 3D hover effect
-- [ ] **HoverGallery** — Hover gallery effect
-- [ ] **Mask** — Image mask/shape
 - [ ] **Modal** — Dialog modal
-- [ ] **RadialProgress** — Circular progress indicator
-- [ ] **Stack** — Stacked elements
 - [ ] **ThemeController** — Theme switcher controller
-- [ ] **Timeline** — Timeline display
 
 ### Infrastructure Goals
 
