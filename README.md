@@ -243,9 +243,12 @@ let html = rsx! {
 | `Join` | Grouped elements with vertical/orientation variants |
 | `Kbd` | Keyboard key display with size variants |
 | `Label` | Form label and floating label |
+| `Link` | Styled link with hover and color variants |
 | `List` | List with row wrap/grow modifiers |
 | `Loading` | Loading spinner/animation with styles and sizes |
 | `Menu` | Navigation menu with active/focus/disabled states |
+| `Navbar` | Navigation bar with start/center/end sections |
+| `Pagination` | Page navigation with active/disabled states |
 | `PhoneMockup` | iPhone mockup with camera and display |
 | `Progress` | Progress bar with colors and indeterminate state |
 | `Radio` | Radio button with color and size variants |
@@ -255,11 +258,15 @@ let html = rsx! {
 | `Skeleton` | Loading state placeholder with text variant |
 | `Stat` | Statistics display with title, value, description, and actions |
 | `Status` | Status dot with colors, sizes, and animations |
+| `Steps` | Step wizard with data-content and direction |
 | `Swap` | Swap icon/content with rotate/flip effects |
+| `Tab` | Tab navigation with box/border/lift styles |
 | `Table` | Data table with zebra, pin rows/cols, and sizes |
 | `Textarea` | Multi-line text input with color and size variants |
 | `TextRotate` | Animated text rotation effect |
+| `Toast` | Toast notification wrapper with placement |
 | `Toggle` | Toggle switch with color and size variants |
+| `Tooltip` | Hover tooltip with placements and colors |
 | `Validator` | Input validation wrapper with hint messages |
 | `WindowMockup` | Operating system window mockup |
 
@@ -349,9 +356,12 @@ rsx! {
 - [x] **Join** — Grouped elements with vertical/orientation variants
 - [x] **Kbd** — Keyboard key display with size variants
 - [x] **Label** — Form label and floating label
+- [x] **Link** — Styled link with hover and color variants
 - [x] **List** — List with row wrap/grow modifiers
 - [x] **Loading** — Loading spinner/animation with styles and sizes
 - [x] **Menu** — Navigation menu with active/focus/disabled states
+- [x] **Navbar** — Navigation bar with start/center/end sections
+- [x] **Pagination** — Page navigation with active/disabled states
 - [x] **PhoneMockup** — iPhone mockup with camera and display
 - [x] **Progress** — Progress bar with colors and indeterminate state
 - [x] **Radio** — Radio button with color and size variants
@@ -361,11 +371,15 @@ rsx! {
 - [x] **Skeleton** — Loading state placeholder with text variant
 - [x] **Stat** — Statistics display with title, value, description, and actions
 - [x] **Status** — Status dot with colors, sizes, and animations
+- [x] **Steps** — Step wizard with data-content and direction
 - [x] **Swap** — Swap icon/content with rotate/flip effects
+- [x] **Tab** — Tab navigation with box/border/lift styles
 - [x] **Table** — Data table with zebra, pin rows/cols, and sizes
 - [x] **Textarea** — Multi-line text input with color and size variants
 - [x] **TextRotate** — Animated text rotation effect
+- [x] **Toast** — Toast notification wrapper with placement
 - [x] **Toggle** — Toggle switch with color and size variants
+- [x] **Tooltip** — Hover tooltip with placements and colors
 - [x] **Validator** — Input validation wrapper with hint messages
 - [x] **WindowMockup** — Operating system window mockup
 
@@ -376,19 +390,12 @@ rsx! {
 - [ ] **Fab** — Floating Action Button
 - [ ] **Hover3d** — 3D hover effect
 - [ ] **HoverGallery** — Hover gallery effect
-- [ ] **Link** — Styled link component
 - [ ] **Mask** — Image mask/shape
 - [ ] **Modal** — Dialog modal
-- [ ] **Navbar** — Navigation bar
-- [ ] **Pagination** — Page navigation
 - [ ] **RadialProgress** — Circular progress indicator
 - [ ] **Stack** — Stacked elements
-- [ ] **Steps** — Step wizard
-- [ ] **Tab** — Tab navigation
 - [ ] **ThemeController** — Theme switcher controller
 - [ ] **Timeline** — Timeline display
-- [ ] **Toast** — Toast notifications
-- [ ] **Tooltip** — Hover tooltip
 
 ### Infrastructure Goals
 
