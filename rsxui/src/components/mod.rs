@@ -146,6 +146,14 @@ pub fn attr_if(name: &str, value: &Option<String>) -> String {
         .unwrap_or_default()
 }
 
+pub fn show_if(condition: bool, attr: &str) -> String {
+    use rsx::EscapeAttribute;
+    if condition {
+        return format!(r#" {}"#, attr.escape_attribute());
+    }
+    String::new()
+}
+
 // ============================================
 // Re-exports
 // ============================================
@@ -156,13 +164,14 @@ pub mod button;
 pub mod card;
 pub mod drawer;
 pub mod input;
+pub mod menu;
 
 pub use alert::{Alert, AlertProps};
 pub use badge::{Badge, BadgeProps, BadgeStyle};
 pub use button::{Button, ButtonModifier, ButtonProps, ButtonStyle, ButtonType};
 pub use card::{Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle};
 pub use drawer::{
-    Drawer, DrawerButton, DrawerContent, DrawerMenu, DrawerMenuItem, DrawerNav, DrawerOverlay,
-    DrawerPlacement, DrawerSide, DrawerToggle,
+    Drawer, DrawerButton, DrawerContent, DrawerOverlay, DrawerPlacement, DrawerSide, DrawerToggle,
 };
 pub use input::{Input, InputProps, InputStyle};
+pub use menu::{Menu, MenuItem, MenuState};
