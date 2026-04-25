@@ -6,22 +6,26 @@ use crate::layout;
 
 pub async fn page() -> Html<String> {
     let basic_example = rsx! {
-        <Toast>
-            <div class="alert alert-info">
-                <span>"New registration."</span>
-            </div>
-        </Toast>
+        <div class="relative h-32 bg-base-200 rounded-box overflow-hidden">
+            <Toast class="absolute">
+                <div class="alert alert-info">
+                    <span>"New registration."</span>
+                </div>
+            </Toast>
+        </div>
     };
 
     let multiple_example = rsx! {
-        <Toast horizontal=ToastHorizontal::Center>
-            <div class="alert alert-info">
-                <span>"New email arrived."</span>
-            </div>
-            <div class="alert alert-success">
-                <span>"Message sent successfully."</span>
-            </div>
-        </Toast>
+        <div class="relative h-40 bg-base-200 rounded-box overflow-hidden">
+            <Toast horizontal=ToastHorizontal::Center class="absolute">
+                <div class="alert alert-info">
+                    <span>"New email arrived."</span>
+                </div>
+                <div class="alert alert-success">
+                    <span>"Message sent successfully."</span>
+                </div>
+            </Toast>
+        </div>
     };
 
     let placement_example = rsx! {
@@ -46,6 +50,7 @@ pub async fn page() -> Html<String> {
             </p>
 
             <div class="divider">"Basic Toast"</div>
+            <p class="text-sm text-gray-600 mb-4">"A single alert inside a toast, positioned relative to its container."</p>
             {basic_example}
 
             <div class="divider">"Multiple Toasts"</div>
@@ -53,7 +58,7 @@ pub async fn page() -> Html<String> {
             {multiple_example}
 
             <div class="divider">"Placement"</div>
-            <p class="text-sm text-gray-600 mb-4">"Position toast on any corner."</p>
+            <p class="text-sm text-gray-600 mb-4">"Position toast on any corner using horizontal and vertical props."</p>
             {placement_example}
 
             <div class="divider">"Code Example"</div>
@@ -62,11 +67,13 @@ pub async fn page() -> Html<String> {
                 "use rsx_macros::rsx;",
                 "",
                 "let html = rsx! {",
-                "    <Toast horizontal={ToastHorizontal::End} vertical={ToastVertical::Top}>",
-                "        <div class=\"alert alert-info\">",
-                "            <span>\"New mail arrived.\"</span>",
-                "        </div>",
-                "    </Toast>",
+                "    <div class=\"relative\">",
+                "        <Toast horizontal={ToastHorizontal::End} vertical={ToastVertical::Top} class=\"absolute\">",
+                "            <div class=\"alert alert-info\">",
+                "                <span>\"New mail arrived.\"</span>",
+                "            </div>",
+                "        </Toast>",
+                "    </div>",
                 "};",
             ])}
         </div>

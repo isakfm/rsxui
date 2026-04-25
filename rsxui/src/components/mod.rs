@@ -167,7 +167,9 @@ pub mod badge;
 pub mod breadcrumb;
 pub mod browser_mockup;
 pub mod button;
+pub mod calendar;
 pub mod card;
+pub mod carousel;
 pub mod chat;
 pub mod checkbox;
 pub mod code_mockup;
@@ -178,6 +180,7 @@ pub mod divider;
 pub mod dock;
 pub mod drawer;
 pub mod dropdown;
+pub mod fab;
 pub mod fieldset;
 pub mod file_input;
 pub mod filter;
@@ -195,6 +198,7 @@ pub mod list;
 pub mod loading;
 pub mod mask;
 pub mod menu;
+pub mod modal;
 pub mod navbar;
 pub mod pagination;
 pub mod phone_mockup;
@@ -214,6 +218,7 @@ pub mod tab;
 pub mod table;
 pub mod textarea;
 pub mod textrotate;
+pub mod theme_controller;
 pub mod timeline;
 pub mod toast;
 pub mod toggle;
@@ -228,7 +233,9 @@ pub use badge::{Badge, BadgeProps, BadgeStyle};
 pub use breadcrumb::Breadcrumb;
 pub use browser_mockup::{BrowserMockup, BrowserToolbar};
 pub use button::{Button, ButtonModifier, ButtonProps, ButtonStyle, ButtonType};
+pub use calendar::CallyCalendar;
 pub use card::{Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle};
+pub use carousel::{Carousel, CarouselDirection, CarouselItem, CarouselSnap};
 pub use chat::{Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPlacement};
 pub use checkbox::Checkbox;
 pub use code_mockup::CodeMockup;
@@ -241,6 +248,7 @@ pub use drawer::{
     Drawer, DrawerButton, DrawerContent, DrawerOverlay, DrawerPlacement, DrawerSide, DrawerToggle,
 };
 pub use dropdown::{Dropdown, DropdownContent, DropdownModifier, DropdownPlacement};
+pub use fab::{Fab, FabClose, FabMainAction, FabModifier};
 pub use fieldset::Fieldset;
 pub use file_input::{FileInput, FileInputProps, FileInputStyle};
 pub use filter::Filter;
@@ -258,6 +266,7 @@ pub use list::{List, ListRow};
 pub use loading::{Loading, LoadingStyle};
 pub use mask::{Mask, MaskModifier, MaskShape};
 pub use menu::{Menu, MenuItem, MenuState};
+pub use modal::{Modal, ModalAction, ModalBackdrop, ModalBox, ModalPlacement, ModalToggle};
 pub use navbar::{Navbar, NavbarCenter, NavbarEnd, NavbarStart};
 pub use pagination::{Pagination, PaginationItem};
 pub use phone_mockup::PhoneMockup;
@@ -277,6 +286,9 @@ pub use tab::{Tab, TabContent, TabPlacement, TabRadio, TabStyle, Tabs};
 pub use table::Table;
 pub use textarea::{Textarea, TextareaProps, TextareaStyle};
 pub use textrotate::TextRotate;
+pub use theme_controller::{
+    ThemeControllerButton, ThemeControllerCheckbox, ThemeControllerRadio, ThemeControllerToggle,
+};
 pub use timeline::{
     Timeline, TimelineDirection, TimelineEnd, TimelineItem, TimelineMiddle, TimelineModifier,
     TimelineStart,

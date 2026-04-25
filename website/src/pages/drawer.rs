@@ -57,7 +57,7 @@ pub async fn page() -> Html<String> {
     };
 
     let responsive_example = rsx! {
-        <Drawer open=true>
+        <Drawer open=true class="h-200">
             <DrawerToggle id="drawer-responsive" />
             <DrawerContent>
                 <DrawerButton for_id="drawer-responsive" show_on="lg:hidden" />
@@ -65,7 +65,7 @@ pub async fn page() -> Html<String> {
             </DrawerContent>
             <DrawerSide>
                 <DrawerOverlay for_id="drawer-responsive" />
-                <Menu class="p-4 w-80 min-h-full bg-base-200">
+                <Menu class="p-4 w-80 min-h-200 bg-base-200">
                     <MenuItem>"Sidebar Item 1"</MenuItem>
                     <MenuItem>"Sidebar Item 2"</MenuItem>
                 </Menu>

@@ -1,9 +1,9 @@
 // Menu Components
 // Based on DaisyUI Menu: https://daisyui.com/components/menu/
 
-use crate::components::{class_if, show_if};
+use crate::components::{class_if, show_if, Size};
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx_macros::{classes, component, rsx, ui};
 
 // ============================================
 // MenuState - Menu item state
@@ -24,11 +24,11 @@ pub enum MenuState {
 // Menu - Dropdown/Select menu list
 // ============================================
 
-#[component]
-pub fn Menu(#[builder(default)] class: String, children: String) -> String {
+#[ui]
+pub fn Menu(size: Size, #[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <ul class={classes!("menu", class)}>
-            {children}
+        <ul class={classes!("menu", props.size.prefix("menu"), props.class)}>
+            {props.children}
         </ul>
     }
 }

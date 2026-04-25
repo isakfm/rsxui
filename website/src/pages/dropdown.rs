@@ -87,10 +87,6 @@ pub async fn page() -> Html<String> {
             <p class="text-sm text-gray-600 mb-4">"Opens on hover too."</p>
             {hover_example}
 
-            <div class="divider">"Force Open"</div>
-            <p class="text-sm text-gray-600 mb-4">"Always visible with Open modifier."</p>
-            {open_example}
-
             <div class="divider">"Positions"</div>
             <p class="text-sm text-gray-600 mb-4">"Top and End placements."</p>
             {positions_example}
@@ -99,7 +95,11 @@ pub async fn page() -> Html<String> {
             <p class="text-sm text-gray-600 mb-4">"Any element can be dropdown content."</p>
             {card_example}
 
-            <div class="divider">"Code Example"</div>
+            <div class="divider">"Force Open"</div>
+            <p class="text-sm text-gray-600 mb-4">"Always visible with Open modifier."</p>
+            {open_example}
+
+            <div class="divider pt-20">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Dropdown, DropdownContent, DropdownModifier, DropdownPlacement};",
                 "use rsx_macros::rsx;",

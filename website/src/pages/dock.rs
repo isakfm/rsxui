@@ -4,39 +4,81 @@ use rsxui::components::{Dock, DockItem, Size};
 
 use crate::layout;
 
+fn home_icon() -> &'static str {
+    r#"<svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><polyline points="1 11 12 2 23 11" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></polyline><path d="m5,13v7c0,1.105.895,2,2,2h10c1.105,0,2-.895,2-2v-7" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path><line x1="12" y1="22" x2="12" y2="18" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></line></g></svg>"#
+}
+
+fn inbox_icon() -> &'static str {
+    r#"<svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><polyline points="3 14 9 14 9 17 15 17 15 14 21 14" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2"></polyline><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></rect></g></svg>"#
+}
+
+fn settings_icon() -> &'static str {
+    r#"<svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></circle><path d="m22,13.25v-2.5l-2.318-.966c-.167-.581-.395-1.135-.682-1.654l.954-2.318-1.768-1.768-2.318.954c-.518-.287-1.073-.515-1.654-.682l-.966-2.318h-2.5l-.966,2.318c-.581.167-1.135.395-1.654.682l-2.318-.954-1.768,1.768.954,2.318c-.287.518-.515,1.073-.682,1.654l-2.318.966v2.5l2.318.966c.167.581.395,1.135.682,1.654l-.954,2.318,1.768,1.768,2.318-.954c.518.287,1.073.515,1.654.682l.966,2.318h2.5l.966-2.318c.581-.167,1.135-.395,1.654-.682l2.318.954,1.768-1.768-.954-2.318c.287-.518.515-1.073.682-1.654l2.318-.966Z" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path></g></svg>"#
+}
+
+fn dock_preview(children: String) -> String {
+    rsx! {
+        <div class="w-full max-w-sm mx-auto border border-base-300 rounded-box bg-base-100 overflow-hidden relative min-h-[8rem] flex flex-col justify-end" style="transform: scale(1)">
+            {children}
+        </div>
+    }
+}
+
 pub async fn page() -> Html<String> {
-    let basic_example = rsx! {
-        <Dock>
-            <DockItem label="Home">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </DockItem>
-            <DockItem active=true label="Inbox">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </DockItem>
-            <DockItem label="Settings">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            </DockItem>
-        </Dock>
-    };
+    let ios_note = r#"<code class="bg-base-200 px-1 rounded">&lt;meta name="viewport" content="viewport-fit=cover"&gt;</code> is required for responsiveness of the dock in iOS."#;
 
     let sizes_example = rsx! {
-        <div class="flex flex-col gap-4">
-            <Dock size=Size::Xs>
-                <DockItem active=true>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                </DockItem>
-                <DockItem>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/></svg>
-                </DockItem>
-            </Dock>
-            <Dock size=Size::Lg>
-                <DockItem active=true label="Home">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                </DockItem>
-                <DockItem label="Inbox">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/></svg>
-                </DockItem>
-            </Dock>
+        <div class="flex flex-col gap-6">
+            <div>
+                <p class="text-sm text-gray-600 mb-2">"Extra Small"</p>
+                {dock_preview(rsx! {
+                    <Dock size=Size::Xs>
+                        <DockItem>{home_icon()}</DockItem>
+                        <DockItem active=true>{inbox_icon()}</DockItem>
+                        <DockItem>{settings_icon()}</DockItem>
+                    </Dock>
+                })}
+            </div>
+            <div>
+                <p class="text-sm text-gray-600 mb-2">"Small"</p>
+                {dock_preview(rsx! {
+                    <Dock size=Size::Sm>
+                        <DockItem>{home_icon()}</DockItem>
+                        <DockItem active=true>{inbox_icon()}</DockItem>
+                        <DockItem>{settings_icon()}</DockItem>
+                    </Dock>
+                })}
+            </div>
+            <div>
+                <p class="text-sm text-gray-600 mb-2">"Medium"</p>
+                {dock_preview(rsx! {
+                    <Dock size=Size::Md>
+                        <DockItem label="Home">{home_icon()}</DockItem>
+                        <DockItem active=true label="Inbox">{inbox_icon()}</DockItem>
+                        <DockItem label="Settings">{settings_icon()}</DockItem>
+                    </Dock>
+                })}
+            </div>
+            <div>
+                <p class="text-sm text-gray-600 mb-2">"Large"</p>
+                {dock_preview(rsx! {
+                    <Dock size=Size::Lg>
+                        <DockItem label="Home">{home_icon()}</DockItem>
+                        <DockItem active=true label="Inbox">{inbox_icon()}</DockItem>
+                        <DockItem label="Settings">{settings_icon()}</DockItem>
+                    </Dock>
+                })}
+            </div>
+            <div>
+                <p class="text-sm text-gray-600 mb-2">"Extra Large"</p>
+                {dock_preview(rsx! {
+                    <Dock size=Size::Xl>
+                        <DockItem label="Home">{home_icon()}</DockItem>
+                        <DockItem active=true label="Inbox">{inbox_icon()}</DockItem>
+                        <DockItem label="Settings">{settings_icon()}</DockItem>
+                    </Dock>
+                })}
+            </div>
         </div>
     };
 
@@ -48,14 +90,16 @@ pub async fn page() -> Html<String> {
             </div>
 
             <p class="text-lg mb-8">
-                "Dock (also known as Bottom navigation) sticks to the bottom of the screen."
+                "Dock (also known as Bottom navigation or Bottom bar) is a UI element that provides navigation options to the user. Dock sticks to the bottom of the screen."
             </p>
 
-            <div class="divider">"Basic Dock"</div>
-            {basic_example}
+            <div class="alert alert-info mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>{ios_note}</span>
+            </div>
 
-            <div class="divider">"Sizes"</div>
-            <p class="text-sm text-gray-600 mb-4">"Extra small and large docks."</p>
+
+            <div class="divider">"Dock in Various Sizes"</div>
             {sizes_example}
 
             <div class="divider">"Code Example"</div>
@@ -65,8 +109,15 @@ pub async fn page() -> Html<String> {
                 "",
                 "let html = rsx! {",
                 "    <Dock>",
-                "        <DockItem label=\"Home\">\"🏠\"</DockItem>",
-                "        <DockItem active={true} label=\"Inbox\">\"📥\"</DockItem>",
+                "        <DockItem label=\"Home\">",
+                "            <svg class=\"size-[1.2em]\" ...>\"...\"</svg>",
+                "        </DockItem>",
+                "        <DockItem active={true} label=\"Inbox\">",
+                "            <svg class=\"size-[1.2em]\" ...>\"...\"</svg>",
+                "        </DockItem>",
+                "        <DockItem label=\"Settings\">",
+                "            <svg class=\"size-[1.2em]\" ...>\"...\"</svg>",
+                "        </DockItem>",
                 "    </Dock>",
                 "};",
             ])}

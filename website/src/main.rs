@@ -19,7 +19,9 @@ async fn main() {
         )
         .route("/components/breadcrumb", get(pages::breadcrumb::page))
         .route("/components/button", get(pages::button::page))
+        .route("/components/calendar", get(pages::calendar::page))
         .route("/components/card", get(pages::card::page))
+        .route("/components/carousel", get(pages::carousel::page))
         .route("/components/chat", get(pages::chat::page))
         .route("/components/checkbox", get(pages::checkbox::page))
         .route("/components/code_mockup", get(pages::code_mockup::page))
@@ -30,6 +32,7 @@ async fn main() {
         .route("/components/dock", get(pages::dock::page))
         .route("/components/drawer", get(pages::drawer::page))
         .route("/components/dropdown", get(pages::dropdown::page))
+        .route("/components/fab", get(pages::fab::page))
         .route("/components/fieldset", get(pages::fieldset::page))
         .route("/components/file_input", get(pages::file_input::page))
         .route("/components/filter", get(pages::filter::page))
@@ -47,6 +50,7 @@ async fn main() {
         .route("/components/loading", get(pages::loading::page))
         .route("/components/mask", get(pages::mask::page))
         .route("/components/menu", get(pages::menu::page))
+        .route("/components/modal", get(pages::modal::page))
         .route("/components/navbar", get(pages::navbar::page))
         .route("/components/pagination", get(pages::pagination::page))
         .route("/components/phone_mockup", get(pages::phone_mockup::page))
@@ -69,6 +73,10 @@ async fn main() {
         .route("/components/table", get(pages::table::page))
         .route("/components/textarea", get(pages::textarea::page))
         .route("/components/textrotate", get(pages::textrotate::page))
+        .route(
+            "/components/theme_controller",
+            get(pages::theme_controller::page),
+        )
         .route("/components/timeline", get(pages::timeline::page))
         .route("/components/toast", get(pages::toast::page))
         .route("/components/toggle", get(pages::toggle::page))

@@ -113,7 +113,7 @@ pub fn Timeline(
     children: String,
 ) -> String {
     rsx! {
-        <ul class={classes!("timeline", direction.to_string(), modifier.to_string(), class)}>
+        <ul class={classes!("timeline", direction, modifier, class)}>
             {children}
         </ul>
     }

@@ -54,14 +54,9 @@ pub fn Step(
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let color_class = if props.color != Color::Default {
-        props.color.prefix("step")
-    } else {
-        String::new()
-    };
     rsx! {
         <li
-            class=classes!("step", color_class, class_if(props.icon, "step-icon"), props.class)
+            class=classes!("step", props.color.prefix("step"), class_if(props.icon, "step-icon"), props.class)
             {attr_if("data-content", &props.data_content)}>
             {props.children}
         </li>

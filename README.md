@@ -222,7 +222,9 @@ let html = rsx! {
 | `Breadcrumb` | Navigation breadcrumb with icons |
 | `BrowserMockup` | Browser window mockup with toolbar |
 | `Button` | DaisyUI button with variants, sizes, and loading state |
+| `Calendar` | Cally, Pikaday, React Day Picker calendar wrappers |
 | `Card` | Container with figure, body, title, and actions |
+| `Carousel` | Image/content carousel with snap and direction variants |
 | `Chat` | Chat bubbles with placement, colors, header/footer |
 | `Checkbox` | Checkbox input with color and size variants |
 | `CodeMockup` | Code editor mockup with syntax prefixes |
@@ -233,6 +235,7 @@ let html = rsx! {
 | `Dock` | Bottom navigation bar with icons and labels |
 | `Drawer` | Responsive side navigation panel |
 | `Dropdown` | Dropdown menu with hover/open modifiers and placements |
+| `Fab` | Floating Action Button with speed dial and flower variants |
 | `Fieldset` | Container for grouping form elements with title |
 | `FileInput` | File upload input with color and size variants |
 | `Filter` | Tab-style filter buttons |
@@ -250,6 +253,7 @@ let html = rsx! {
 | `Loading` | Loading spinner/animation with styles and sizes |
 | `Mask` | Image mask/shape with 16 shape variants |
 | `Menu` | Navigation menu with active/focus/disabled states |
+| `Modal` | Dialog modal with placements and backdrop |
 | `Navbar` | Navigation bar with start/center/end sections |
 | `Pagination` | Page navigation with active/disabled states |
 | `PhoneMockup` | iPhone mockup with camera and display |
@@ -269,6 +273,7 @@ let html = rsx! {
 | `Table` | Data table with zebra, pin rows/cols, and sizes |
 | `Textarea` | Multi-line text input with color and size variants |
 | `TextRotate` | Animated text rotation effect |
+| `ThemeController` | Theme switcher using toggle/checkbox/radio inputs |
 | `Timeline` | Timeline display with vertical/horizontal directions |
 | `Toast` | Toast notification wrapper with placement |
 | `Toggle` | Toggle switch with color and size variants |
@@ -341,7 +346,9 @@ rsx! {
 - [x] **Breadcrumb** — Navigation breadcrumb with icons
 - [x] **BrowserMockup** — Browser window mockup with toolbar
 - [x] **Button** — DaisyUI button with variants, sizes, loading state
+- [x] **Calendar** — Cally, Pikaday, React Day Picker calendar wrappers
 - [x] **Card** — Container with figure, body, title, and actions
+- [x] **Carousel** — Image/content carousel with snap and direction variants
 - [x] **Chat** — Chat bubbles with placement, colors, header/footer
 - [x] **Checkbox** — Checkbox input with color and size variants
 - [x] **CodeMockup** — Code editor mockup with syntax prefixes
@@ -352,6 +359,7 @@ rsx! {
 - [x] **Dock** — Bottom navigation bar with icons and labels
 - [x] **Drawer** — Responsive side navigation panel
 - [x] **Dropdown** — Dropdown menu with hover/open modifiers and placements
+- [x] **Fab** — Floating Action Button with speed dial and flower variants
 - [x] **Fieldset** — Container for grouping form elements with title
 - [x] **File Input** — File upload input with color and size variants
 - [x] **Filter** — Tab-style filter buttons
@@ -369,6 +377,7 @@ rsx! {
 - [x] **Loading** — Loading spinner/animation with styles and sizes
 - [x] **Mask** — Image mask/shape with 16 shape variants
 - [x] **Menu** — Navigation menu with active/focus/disabled states
+- [x] **Modal** — Dialog modal with placements and backdrop
 - [x] **Navbar** — Navigation bar with start/center/end sections
 - [x] **Pagination** — Page navigation with active/disabled states
 - [x] **PhoneMockup** — iPhone mockup with camera and display
@@ -388,6 +397,7 @@ rsx! {
 - [x] **Table** — Data table with zebra, pin rows/cols, and sizes
 - [x] **Textarea** — Multi-line text input with color and size variants
 - [x] **TextRotate** — Animated text rotation effect
+- [x] **ThemeController** — Theme switcher using toggle/checkbox/radio inputs
 - [x] **Timeline** — Timeline display with vertical/horizontal directions
 - [x] **Toast** — Toast notification wrapper with placement
 - [x] **Toggle** — Toggle switch with color and size variants
@@ -397,11 +407,7 @@ rsx! {
 
 ### Planned Components
 
-- [ ] **Calendar** — Date picker calendar
-- [ ] **Carousel** — Image/content carousel
-- [ ] **Fab** — Floating Action Button
-- [ ] **Modal** — Dialog modal
-- [ ] **ThemeController** — Theme switcher controller
+All DaisyUI components are now implemented! 🎉
 
 ### Infrastructure Goals
 
