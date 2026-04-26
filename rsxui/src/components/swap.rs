@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Swap, SwapOn, SwapOff};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Swap>
@@ -23,7 +23,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -92,7 +92,7 @@ pub fn Swap(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_swap_basic() {

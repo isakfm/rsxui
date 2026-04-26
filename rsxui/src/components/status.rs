@@ -11,14 +11,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Status, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Status color=Color::Success size=Size::Md aria_label="Online" />
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{Color, Size};
 
@@ -55,7 +55,7 @@ pub fn Status(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_status_basic() {

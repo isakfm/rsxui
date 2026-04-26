@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Input, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Input placeholder="Enter name" color={Color::Primary} size={Size::Lg} />
@@ -21,7 +21,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::{attr_if, Color, Size};
 
@@ -72,7 +72,7 @@ pub fn Input(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_input_basic() {

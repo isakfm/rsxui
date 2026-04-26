@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Navbar, NavbarStart, NavbarCenter, NavbarEnd};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Navbar>
@@ -21,7 +21,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // NavbarStart - Left-aligned section
@@ -74,7 +74,7 @@ pub fn Navbar(#[builder(default)] class: String, children: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_navbar_basic() {

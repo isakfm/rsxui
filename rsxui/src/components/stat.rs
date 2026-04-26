@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Stats, Stat, StatTitle, StatValue, StatDesc};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Stats>
@@ -24,7 +24,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{class_if, Color};
 
@@ -130,7 +130,7 @@ pub fn Stats(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_stats_basic() {

@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::Table;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Table zebra=true>
@@ -21,7 +21,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{class_if, Size};
 
@@ -61,7 +61,7 @@ pub fn Table(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_table_basic() {

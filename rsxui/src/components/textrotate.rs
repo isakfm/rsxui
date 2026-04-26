@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::TextRotate;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <TextRotate>
@@ -21,7 +21,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -51,7 +51,7 @@ pub fn TextRotate(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_text_rotate_basic() {

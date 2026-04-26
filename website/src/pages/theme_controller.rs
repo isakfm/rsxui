@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{
     ThemeControllerButton, ThemeControllerCheckbox, ThemeControllerRadio, ThemeControllerToggle,
 };
@@ -97,7 +97,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{ThemeControllerToggle, ThemeControllerRadio};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <ThemeControllerToggle value=\"synthwave\" />",

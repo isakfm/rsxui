@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Textarea, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Textarea placeholder="Enter message..." color={Color::Primary} size={Size::Lg} />
@@ -21,7 +21,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::{attr_if, Color, Size};
 
@@ -69,7 +69,7 @@ pub fn Textarea(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_textarea_basic() {

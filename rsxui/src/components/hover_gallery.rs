@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::HoverGallery;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <HoverGallery class="max-w-60">
@@ -21,7 +21,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // HoverGallery - Image hover gallery
@@ -43,7 +43,7 @@ pub fn HoverGallery(#[builder(default)] class: String, children: String) -> Stri
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_hover_gallery_basic() {

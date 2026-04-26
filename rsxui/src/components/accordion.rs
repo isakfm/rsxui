@@ -2,7 +2,7 @@
 // Based on DaisyUI Accordion: https://daisyui.com/components/accordion/
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // AccordionModifier - Accordion modifier
@@ -68,7 +68,7 @@ pub fn AccordionDetails(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_accordion_basic() {

@@ -1,6 +1,6 @@
-//! Integration tests for `#[ui]` macro with DaisyUI components
+//! Integration tests for `#[ui]` macro output (via `rsx` re-exports)
 
-use rsx_macros::{rsx, ui};
+use rsx::{rsx, ui};
 
 #[ui]
 fn DaisyCard(heading: String) -> String {
@@ -20,3 +20,4 @@ async fn test_daisy_card() {
     assert!(html.contains("<div class=\"card\">"));
     assert!(html.contains("<h2>My Card</h2>"));
 }
+

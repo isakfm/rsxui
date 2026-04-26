@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Drawer, DrawerSide, Color};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Drawer id="my-drawer">
@@ -30,7 +30,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 #[allow(unused_imports)]
 use super::{Menu, MenuItem, MenuState};

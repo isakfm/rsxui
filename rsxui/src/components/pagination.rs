@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Pagination, PaginationItem};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Pagination>
@@ -22,7 +22,7 @@
 //! ```
 
 use crate::components::class_if;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // PaginationItem - Individual page button
@@ -67,7 +67,7 @@ pub fn Pagination(#[builder(default)] class: String, children: String) -> String
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_pagination_basic() {

@@ -3,7 +3,7 @@
 
 use crate::components::{class_if, show_if, Size};
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx, ui};
+use rsx::{classes, component, rsx, ui};
 
 // ============================================
 // MenuState - Menu item state
@@ -63,7 +63,7 @@ pub fn MenuItem(#[builder(default)] state: MenuState, url: String, children: Str
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_menu_basic() {

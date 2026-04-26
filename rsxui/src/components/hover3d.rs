@@ -9,7 +9,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::Hover3d;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Hover3d>
@@ -18,7 +18,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // Hover3d - 3D hover effect wrapper
@@ -48,7 +48,7 @@ pub fn Hover3d(#[builder(default)] class: String, children: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_hover3d_basic() {

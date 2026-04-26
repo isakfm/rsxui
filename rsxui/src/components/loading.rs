@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Loading, LoadingStyle, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Loading style=LoadingStyle::Spinner size=Size::Lg />
@@ -19,7 +19,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::Size;
 
@@ -66,7 +66,7 @@ pub fn Loading(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_loading_basic() {

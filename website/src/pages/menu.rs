@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Menu, MenuItem, MenuState};
 
 use crate::layout;
@@ -118,7 +118,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Menu, MenuItem, MenuState};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Menu class=\"bg-base-200 w-56 rounded-box\">",

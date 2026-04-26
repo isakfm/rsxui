@@ -11,14 +11,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Range, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Range min="0" max="100" value="50" color={Color::Primary} size={Size::Lg} />
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{attr_if, show_if, Color, Size};
 
@@ -62,7 +62,7 @@ pub fn Range(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_range_basic() {

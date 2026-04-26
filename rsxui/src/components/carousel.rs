@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Carousel, CarouselItem, CarouselSnap};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Carousel snap={CarouselSnap::Center}>
@@ -23,7 +23,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // CarouselSnap - Snap alignment for carousel
@@ -99,7 +99,7 @@ pub fn Carousel(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_carousel_basic() {

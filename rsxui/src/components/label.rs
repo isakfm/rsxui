@@ -1,7 +1,7 @@
 // Label Component
 // Based on DaisyUI Label: https://daisyui.com/components/label/
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // Label - Input label wrapper
@@ -38,7 +38,7 @@ pub fn FloatingLabel(text: String, #[builder(default)] class: String, children: 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_label_basic() {

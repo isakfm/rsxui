@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Hero, HeroContent};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Hero class="bg-base-200">
@@ -22,7 +22,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // HeroContent - Content wrapper inside hero
@@ -74,7 +74,7 @@ pub fn Hero(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_hero_basic() {

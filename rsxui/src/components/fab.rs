@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Fab, FabModifier};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Fab modifier={FabModifier::Flower}>
@@ -23,7 +23,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // FabModifier - FAB layout modifier
@@ -84,7 +84,7 @@ pub fn Fab(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_fab_basic() {

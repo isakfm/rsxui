@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::CallyCalendar;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <CallyCalendar class="bg-base-100 border border-base-300 shadow-lg rounded-box">
@@ -23,7 +23,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // CallyCalendar - Cally web component wrapper
@@ -45,7 +45,7 @@ pub fn CallyCalendar(#[builder(default)] class: String, children: String) -> Str
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_cally_calendar_basic() {

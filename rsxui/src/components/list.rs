@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{List, ListRow};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <List>
@@ -21,7 +21,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -63,7 +63,7 @@ pub fn List(#[builder(default)] class: String, children: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_list_basic() {

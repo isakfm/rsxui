@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Link, LinkStyle, Color};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Link href="https://example.com" color={Color::Primary}>
@@ -22,7 +22,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::Color;
 
@@ -68,7 +68,7 @@ pub fn Link(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_link_basic() {

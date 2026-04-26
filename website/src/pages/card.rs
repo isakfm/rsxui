@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{
     Card, CardActions, CardBody, CardFigure, CardLayout, CardStyle, CardTitle, Color, Size,
 };
@@ -126,7 +126,7 @@ pub async fn page() -> Html<String> {
                 "    Card, CardBody, CardFigure, CardTitle, CardActions,",
                 "    CardStyle, Color",
                 "};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Card color=Color::Primary style=CardStyle::Border class=\"bg-base-100 w-96 shadow-sm\">",

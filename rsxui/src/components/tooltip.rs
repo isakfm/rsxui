@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Tooltip, TooltipPlacement, Color};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Tooltip data_tip="Hello!" placement={TooltipPlacement::Top} color={Color::Primary}>
@@ -23,7 +23,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::{class_if, Color};
 
@@ -79,7 +79,7 @@ pub fn Tooltip(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_tooltip_basic() {

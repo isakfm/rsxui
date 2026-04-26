@@ -21,7 +21,7 @@
 use super::{Color, Size};
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 pub use super::Size as ButtonSize;
 
@@ -88,7 +88,7 @@ pub fn Button(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_button_basic() {

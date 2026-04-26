@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Steps, Step, Color, StepDirection};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Steps>
@@ -24,7 +24,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::{attr_if, class_if, Color};
 
@@ -88,7 +88,7 @@ pub fn Steps(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_steps_basic() {

@@ -1,4 +1,4 @@
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::{
     components::{
         Drawer, DrawerContent, DrawerOverlay, DrawerSide, DrawerToggle, Menu, MenuItem, MenuState,

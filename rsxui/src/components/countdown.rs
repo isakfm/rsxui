@@ -1,7 +1,7 @@
 // Countdown Component
 // Based on DaisyUI Countdown: https://daisyui.com/components/countdown/
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // CountdownGroup - Wrapper for multiple countdown values
@@ -114,7 +114,7 @@ pub fn Countdown(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_countdown_basic() {

@@ -1,7 +1,7 @@
 // Fieldset Component
 // Based on DaisyUI Fieldset: https://daisyui.com/components/fieldset/
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // Fieldset - Form field grouping
@@ -39,7 +39,7 @@ pub fn Fieldset(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_fieldset_basic() {

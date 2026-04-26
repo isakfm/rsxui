@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Indicator, IndicatorItem};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Indicator>
@@ -23,7 +23,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -78,7 +78,7 @@ pub fn Indicator(#[builder(default)] class: String, children: String) -> String 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_indicator_basic() {

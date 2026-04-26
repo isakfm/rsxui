@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Dropdown, DropdownContent, DropdownModifier, DropdownPlacement};
 
 use crate::layout;
@@ -102,7 +102,7 @@ pub async fn page() -> Html<String> {
             <div class="divider pt-20">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Dropdown, DropdownContent, DropdownModifier, DropdownPlacement};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Dropdown placement={DropdownPlacement::End} modifier={DropdownModifier::Hover}>",

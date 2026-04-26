@@ -2,7 +2,7 @@
 // Based on DaisyUI Divider: https://daisyui.com/components/divider/
 
 use crate::components::Color;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // Divider - Content separator
@@ -40,7 +40,7 @@ use crate::components::class_if;
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_divider_basic() {

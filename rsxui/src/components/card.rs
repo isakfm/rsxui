@@ -15,7 +15,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Card, CardBody, CardFigure, CardTitle, CardActions, CardStyle, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Card color=Color::Primary size=Size::Md style=CardStyle::Border>
@@ -35,7 +35,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use super::{Color, Size};
 
@@ -157,7 +157,7 @@ pub fn CardActions(#[builder(default)] class: String, children: String) -> Strin
 mod tests {
     use super::*;
     use crate::components::Button;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_card_basic() {

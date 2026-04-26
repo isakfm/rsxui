@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Hero, HeroContent};
 
 use crate::layout;
@@ -71,7 +71,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Hero, HeroContent};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Hero class=\"bg-base-200 min-h-[300px]\">",

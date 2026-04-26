@@ -10,14 +10,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::Filter;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Filter tabs=vec!["Tab 1".to_string(), "Tab 2".to_string()] />
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // Filter - DaisyUI filter
@@ -78,7 +78,7 @@ pub fn Filter(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_filter_basic() {

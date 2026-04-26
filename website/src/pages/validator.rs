@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::Validator;
 
 use crate::layout;
@@ -53,7 +53,7 @@ At least one uppercase letter"#;
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::Validator;",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "// Email validator",
                 "let html = rsx! {",

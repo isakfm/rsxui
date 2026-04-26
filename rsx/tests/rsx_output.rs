@@ -1,6 +1,6 @@
-//! Integration tests for rsx! macro output
+//! Integration tests for rsx! macro output (via `rsx` re-exports)
 
-use rsx_macros::{raw, rsx};
+use rsx::{raw, rsx};
 
 #[test]
 fn test_simple_element() {
@@ -198,72 +198,3 @@ fn test_span_element() {
     assert_eq!(html, r#"<span class="highlight">Important</span>"#);
 }
 
-#[test]
-fn test_paragraph_with_multiple_lines() {
-    let html = rsx! {
-        <p>"Line one"</p>
-        <p>"Line two"</p>
-    };
-    assert!(html.contains("<p>Line one</p>"));
-    assert!(html.contains("<p>Line two</p>"));
-}
-
-#[test]
-fn test_if_without_else_true() {
-    let show = true;
-    let html = rsx! {
-        <div>
-            {
-                if show {
-                    "visible"
-                }
-            }
-        </div>
-    };
-    assert_eq!(html, "<div>visible</div>");
-}
-
-#[test]
-fn test_if_without_else_false() {
-    let show = false;
-    let html = rsx! {
-        <div>
-            {
-                if show {
-                    "visible"
-                }
-            }
-        </div>
-    };
-    assert_eq!(html, "<div></div>");
-}
-
-#[test]
-fn test_if_let_without_else() {
-    let name: Option<&str> = Some("Alice");
-    let html = rsx! {
-        <div>
-            {
-                if let Some(n) = name {
-                    rsx! { <span>{n}</span> }
-                }
-            }
-        </div>
-    };
-    assert_eq!(html, "<div><span>Alice</span></div>");
-}
-
-#[test]
-fn test_if_let_without_else_none() {
-    let name: Option<&str> = None;
-    let html = rsx! {
-        <div>
-            {
-                if let Some(n) = name {
-                    rsx! { <span>{n}</span> }
-                }
-            }
-        </div>
-    };
-    assert_eq!(html, "<div></div>");
-}

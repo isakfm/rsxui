@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{BrowserMockup, BrowserToolbar};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <BrowserMockup>
@@ -22,7 +22,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // BrowserToolbar - Browser address bar
@@ -53,7 +53,7 @@ pub fn BrowserMockup(#[builder(default)] class: String, children: String) -> Str
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_browser_mockup_basic() {

@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Modal, ModalBox, ModalAction, ModalPlacement};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Modal placement={ModalPlacement::Middle} id="my_modal">
@@ -28,7 +28,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx_macros::{classes, component, rsx, ui};
+use rsx::{classes, component, rsx, ui};
 
 use crate::components::{class_if, show_if};
 
@@ -125,7 +125,7 @@ pub fn Modal(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_modal_basic() {

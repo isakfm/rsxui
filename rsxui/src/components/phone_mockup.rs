@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::PhoneMockup;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <PhoneMockup>
@@ -19,7 +19,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // PhoneMockup - iPhone mockup
@@ -46,7 +46,7 @@ pub fn PhoneMockup(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_phone_mockup_basic() {

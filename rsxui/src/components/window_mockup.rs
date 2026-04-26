@@ -9,7 +9,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::WindowMockup;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <WindowMockup>
@@ -18,7 +18,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // WindowMockup - OS window mockup
@@ -40,7 +40,7 @@ pub fn WindowMockup(#[builder(default)] class: String, children: String) -> Stri
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_window_mockup_basic() {

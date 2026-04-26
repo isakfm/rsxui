@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Diff, DiffItem1, DiffItem2, DiffResizer};
 
 use crate::layout;
@@ -55,7 +55,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Diff, DiffItem1, DiffItem2, DiffResizer};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Diff class=\"aspect-16/9\">",

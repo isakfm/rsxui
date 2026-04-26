@@ -12,14 +12,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Rating, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Rating max=5 size=Size::Md />
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{class_if, show_if, Size};
 
@@ -152,7 +152,7 @@ pub fn Rating(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_rating_basic() {

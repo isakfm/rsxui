@@ -594,6 +594,7 @@ dependencies = [
  "bon",
  "html-escape",
  "rstml",
+ "rsx-macros",
  "thiserror",
  "tokio",
 ]
@@ -609,7 +610,6 @@ dependencies = [
  "proc-macro2-diagnostics",
  "quote",
  "rstml",
- "rsx",
  "serde",
  "syn",
  "tokio",
@@ -624,7 +624,6 @@ dependencies = [
  "rand",
  "rstml",
  "rsx",
- "rsx-macros",
  "serde",
  "tokio",
 ]
@@ -635,7 +634,6 @@ version = "0.1.0"
 dependencies = [
  "axum",
  "rsx",
- "rsx-macros",
  "rsxui",
  "tokio",
  "tower-http",

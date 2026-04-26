@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{
     Drawer, DrawerButton, DrawerContent, DrawerOverlay, DrawerSide, DrawerToggle, Menu, MenuItem,
 };
@@ -123,7 +123,7 @@ pub async fn page() -> Html<String> {
                 "    Drawer, DrawerToggle, DrawerContent, DrawerSide,",
                 "    DrawerOverlay, DrawerButton, Menu, MenuItem,",
                 "};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Drawer id=\"my-drawer\">",

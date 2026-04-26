@@ -14,7 +14,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::Validator;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Validator hint="Enter valid email address">
@@ -23,7 +23,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -70,7 +70,7 @@ pub fn Validator(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_validator_basic() {

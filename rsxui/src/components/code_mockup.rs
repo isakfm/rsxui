@@ -9,7 +9,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::CodeMockup;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <CodeMockup>
@@ -19,7 +19,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // CodeMockup - Code editor mockup
@@ -39,7 +39,7 @@ pub fn CodeMockup(#[builder(default)] class: String, children: String) -> String
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_code_mockup_basic() {

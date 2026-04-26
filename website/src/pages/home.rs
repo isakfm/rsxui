@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 
 use crate::layout;
 
@@ -41,7 +41,7 @@ pub async fn page() -> Html<String> {
             <div class="mt-8">
                 <h2 class="text-2xl font-bold mb-4">"Quick Start"</h2>
                 {crate::html_utils::code_example(&[
-                    "use rsx_macros::rsx;",
+                    "use rsx::rsx;",
                     "use rsxui::components::{Button, Color, Size};",
                     "",
                     "let html = rsx! {",

@@ -10,7 +10,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Toast, ToastHorizontal, ToastVertical};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Toast horizontal={ToastHorizontal::End} vertical={ToastVertical::Top}>
@@ -20,7 +20,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // ToastHorizontal - Horizontal placement
@@ -77,7 +77,7 @@ pub fn Toast(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_toast_basic() {

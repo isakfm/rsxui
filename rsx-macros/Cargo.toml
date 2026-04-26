@@ -18,10 +18,8 @@ rstml.workspace = true
 syn.workspace = true
 convert_case.workspace = true
 html-escape.workspace = true
-rsx.workspace = true
 serde.workspace = true
 
 [dev-dependencies]
-rsx.workspace = true
 bon.workspace = true
 tokio.workspace = true

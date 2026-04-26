@@ -12,6 +12,7 @@ bon.workspace = true
 html-escape.workspace = true
 thiserror.workspace = true
 tokio.workspace = true
+rsx-macros = { path = "../rsx-macros" }
 
 [dev-dependencies]
 rstml.workspace = true

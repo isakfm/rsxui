@@ -15,6 +15,9 @@ pub mod attrs;
 pub mod context;
 pub mod prelude;
 
+// Re-export proc macros so downstream crates can depend on `rsx` only.
+pub use rsx_macros::{classes, component, props, raw, rsx, ui};
+
 pub use attributes::EscapeAttribute;
 pub use buffer::Buffer;
 pub use elements::Elements;

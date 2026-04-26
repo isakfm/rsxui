@@ -12,7 +12,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Dropdown, DropdownContent, DropdownPlacement, DropdownModifier};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Dropdown placement=DropdownPlacement::End modifier=DropdownModifier::Hover>
@@ -27,7 +27,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::class_if;
 
@@ -109,7 +109,7 @@ pub fn Dropdown(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_dropdown_basic() {

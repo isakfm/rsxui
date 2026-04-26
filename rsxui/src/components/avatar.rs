@@ -2,7 +2,7 @@
 // Based on DaisyUI Avatar: https://daisyui.com/components/avatar/
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // AvatarStatus - Avatar status modifier
@@ -70,7 +70,7 @@ pub fn AvatarGroup(#[builder(default)] class: String, children: String) -> Strin
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_avatar_basic() {

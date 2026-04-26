@@ -13,7 +13,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Timeline, TimelineItem, TimelineDirection};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Timeline>
@@ -27,7 +27,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // TimelineDirection - Timeline layout direction
@@ -126,7 +126,7 @@ pub fn Timeline(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_timeline_basic() {

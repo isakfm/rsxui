@@ -11,7 +11,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{ThemeControllerToggle, ThemeControllerRadio};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <ThemeControllerToggle value="synthwave" />
@@ -19,7 +19,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use crate::components::{attr_if, show_if};
 
@@ -116,7 +116,7 @@ pub fn ThemeControllerButton(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_theme_controller_toggle() {

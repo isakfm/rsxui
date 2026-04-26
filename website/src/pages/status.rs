@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Color, Size, Status};
 
 use crate::layout;
@@ -73,7 +73,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Status, Color, Size};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Status color={Color::Success} size={Size::Md} aria_label=\"Online\" />",

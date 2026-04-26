@@ -1,7 +1,7 @@
 // Diff Component
 // Based on DaisyUI Diff: https://daisyui.com/components/diff/
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // DiffItem1 - First comparison item
@@ -60,7 +60,7 @@ pub fn Diff(#[builder(default)] class: String, children: String) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_diff_basic() {

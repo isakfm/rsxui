@@ -11,14 +11,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Checkbox, Color, Size};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Checkbox color={Color::Primary} size={Size::Lg} checked=true />
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{attr_if, show_if, Color, Size};
 
@@ -60,7 +60,7 @@ pub fn Checkbox(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_checkbox_basic() {

@@ -9,7 +9,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::Breadcrumb;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Breadcrumb>
@@ -20,7 +20,7 @@
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // No additional imports needed
 
@@ -44,7 +44,7 @@ pub fn Breadcrumb(#[builder(default)] class: String, children: String) -> String
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_breadcrumb_basic() {

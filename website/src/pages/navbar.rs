@@ -1,5 +1,5 @@
 use axum::response::Html;
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{
     Avatar, Dropdown, DropdownContent, DropdownPlacement, Navbar, NavbarCenter, NavbarEnd,
     NavbarStart,
@@ -125,7 +125,7 @@ pub async fn page() -> Html<String> {
             <div class="divider">"Code Example"</div>
             {crate::html_utils::code_example(&[
                 "use rsxui::components::{Navbar, NavbarStart, NavbarCenter, NavbarEnd};",
-                "use rsx_macros::rsx;",
+                "use rsx::rsx;",
                 "",
                 "let html = rsx! {",
                 "    <Navbar class=\"bg-base-200\">",

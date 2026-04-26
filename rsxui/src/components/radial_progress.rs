@@ -9,14 +9,14 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::RadialProgress;
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <RadialProgress value="70">"70%"</RadialProgress>
 //! };
 //! ```
 
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 // ============================================
 // RadialProgress - Circular progress indicator
@@ -55,7 +55,7 @@ pub fn RadialProgress(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_radial_progress_basic() {

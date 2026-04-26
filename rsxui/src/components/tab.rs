@@ -13,7 +13,7 @@
 //!
 //! ```rust,ignore
 //! use rsxui::components::{Tabs, Tab, TabStyle, TabPlacement};
-//! use rsx_macros::rsx;
+//! use rsx::rsx;
 //!
 //! let html = rsx! {
 //!     <Tabs style={TabStyle::Lift}>
@@ -25,7 +25,7 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx_macros::{classes, component, rsx};
+use rsx::{classes, component, rsx};
 
 use super::{class_if, show_if};
 
@@ -144,7 +144,7 @@ pub fn Tabs(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use rsx_macros::rsx;
+    use rsx::rsx;
 
     #[tokio::test]
     async fn test_tabs_basic() {
