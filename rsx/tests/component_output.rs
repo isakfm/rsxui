@@ -219,3 +219,201 @@ fn ProductItem(item: Product) -> String {
     }
 }
 
+#[component]
+fn ProductHeader(title: String) -> String {
+    rsx! {
+        <div class="product-header">
+            <h3>{title}</h3>
+        </div>
+    }
+}
+
+#[component]
+fn Products(products: Vec<Product>) -> String {
+    rsx! {
+        <div class="products">
+            <ProductHeader title="Product List" />
+            {
+                for p in &products {
+                    rsx! { <ProductItem item=p.clone() /> }
+                }
+            }
+        </div>
+    }
+}
+
+#[tokio::test]
+async fn test_product_struct() {
+    let product = Product::new(1, "Widget", 19.99);
+    assert_eq!(product.id, 1);
+    assert_eq!(product.name, "Widget");
+    assert_eq!(product.price, 19.99);
+}
+
+#[tokio::test]
+async fn test_product_item_component() {
+    let product = Product::new(42, "Gadget", 29.99);
+    let html = rsx! {
+        <ProductItem item=product />
+    };
+    assert!(html.contains("data-id=\"42\""));
+    assert!(html.contains("Gadget</span>"));
+    assert!(html.contains("$29.99"));
+}
+
+#[tokio::test]
+async fn test_product_header_component() {
+    let html = rsx! {
+        <ProductHeader title="Featured Products" />
+    };
+    assert!(html.contains("<div class=\"product-header\">"));
+    assert!(html.contains("<h3>Featured Products</h3>"));
+}
+
+#[tokio::test]
+async fn test_nested_products_component() {
+    let products = vec![
+        Product::new(1, "Apple", 1.99),
+        Product::new(2, "Banana", 0.99),
+        Product::new(3, "Orange", 2.49),
+    ];
+    let html = rsx! {
+        <Products products=products />
+    };
+    assert!(html.contains("<div class=\"products\">"));
+    assert!(html.contains("<div class=\"product-header\">"));
+    assert!(html.contains("Apple</span>"));
+    assert!(html.contains("Banana</span>"));
+    assert!(html.contains("Orange</span>"));
+}
+
+#[tokio::test]
+async fn test_products_with_header() {
+    let products = vec![Product::new(1, "Test Product", 10.00)];
+    let html = rsx! {
+        <div>
+            <Products products=products />
+        </div>
+    };
+    assert!(html.contains("<div>"));
+    assert!(html.contains("<div class=\"products\">"));
+    assert!(html.contains("Product List</h3>"));
+    assert!(html.contains("</div>"));
+}
+
+#[tokio::test]
+async fn test_empty_products() {
+    let products: Vec<Product> = vec![];
+    let html = rsx! {
+        <Products products=products />
+    };
+    assert!(html.contains("<div class=\"products\">"));
+    assert!(html.contains("<div class=\"product-header\">"));
+    assert!(html.contains("Product List</h3>"));
+}
+
+#[tokio::test]
+async fn test_product_item_with_special_characters() {
+    let product = Product::new(1, "Rock & Roll", 15.00);
+    let html = rsx! {
+        <ProductItem item=product />
+    };
+    assert!(html.contains("Rock & Roll"));
+    assert!(html.contains("data-id=\"1\""));
+}
+
+#[tokio::test]
+async fn test_multiple_products_rendering() {
+    let products = vec![
+        Product::new(1, "Item A", 10.0),
+        Product::new(2, "Item B", 20.0),
+    ];
+    let html = rsx! {
+        <Products products=products />
+    };
+    assert!(html.contains("data-id=\"1\""));
+    assert!(html.contains("data-id=\"2\""));
+    assert!(html.contains("Item A</span>"));
+    assert!(html.contains("Item B</span>"));
+    assert!(html.contains("$10"));
+    assert!(html.contains("$20"));
+}
+
+#[tokio::test]
+async fn test_product_price_formatting() {
+    let products = vec![
+        Product::new(1, "Cheap", 0.01),
+        Product::new(2, "Expensive", 9999.99),
+    ];
+    let html = rsx! {
+        <Products products=products />
+    };
+    assert!(html.contains("$0.01"));
+    assert!(html.contains("$9999.99"));
+}
+
+#[tokio::test]
+async fn test_for_loop_with_filter() {
+    let products = vec![
+        Product::new(1, "Apple", 1.99),
+        Product::new(2, "Banana", 0.99),
+        Product::new(3, "Cherry", 2.99),
+    ];
+    let html = rsx! {
+        <div>
+            {
+                for p in &products {
+                    if p.price > 1.0 {
+                        rsx! { <ProductItem item=p.clone() /> }
+                    }
+                }
+            }
+        </div>
+    };
+    assert!(html.contains("Apple"));
+    assert!(html.contains("Cherry"));
+    assert!(!html.contains("Banana"));
+}
+
+#[tokio::test]
+async fn test_for_loop_with_index() {
+    let items = vec![
+        "First".to_string(),
+        "Second".to_string(),
+        "Third".to_string(),
+    ];
+    let mut html_output = String::new();
+    let mut idx = 0;
+
+    html_output.push_str("<div>");
+    for item in &items {
+        let item_html = rsx! { <span data-index={idx}>{item}</span> };
+        html_output.push_str(&item_html);
+        idx += 1;
+    }
+    html_output.push_str("</div>");
+
+    assert!(html_output.contains("data-index=\"0\""));
+    assert!(html_output.contains("data-index=\"1\""));
+    assert!(html_output.contains("data-index=\"2\""));
+    assert!(html_output.contains("First"));
+    assert!(html_output.contains("Second"));
+    assert!(html_output.contains("Third"));
+}
+
+#[tokio::test]
+async fn test_for_loop_empty_collection() {
+    let empty: Vec<Product> = vec![];
+    let html = rsx! {
+        <div>
+            {
+                for p in &empty {
+                    rsx! { <ProductItem item=p.clone() /> }
+                }
+            }
+        </div>
+    };
+    assert!(html.contains("<div>"));
+    assert!(html.contains("</div>"));
+    assert!(!html.contains("product-item"));
+}
