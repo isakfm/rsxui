@@ -34,7 +34,7 @@ rsxui/
 | Crate | Description |
 |-------|-------------|
 | `rsx` | Core HTML rendering, escaping, and buffer management |
-| `rsx-macros` | `rsx!`, `classes!`, `#[ui]`, `#[component]` macros |
+| `rsx-macros` | Internal proc-macro crate (macros are re-exported by `rsx`) |
 | `rsxui` | Pre-built DaisyUI components (Button, Card, Input, etc.) |
 
 ---
@@ -46,14 +46,13 @@ rsxui/
 ```toml
 [dependencies]
 rsx = { path = "rsx" }
-rsx-macros = { path = "rsx-macros" }
 rsxui = { path = "rsxui" }
 ```
 
 ### Basic Usage
 
 ```rust
-use rsx_macros::rsx;
+use rsx::rsx;
 use rsxui::components::{Button, Color, Size};
 
 // Simple HTML
@@ -82,7 +81,7 @@ let html = rsx! {
 The main macro for rendering HTML with Rust expressions:
 
 ```rust
-use rsx_macros::rsx;
+use rsx::rsx;
 
 let items = vec!["Apples", "Bananas", "Oranges"];
 
@@ -103,7 +102,7 @@ let html = rsx! {
 Clean CSS class composition with conditional logic:
 
 ```rust
-use rsx_macros::classes;
+use rsx::classes;
 
 let is_active = true;
 let size = "lg";
@@ -122,7 +121,7 @@ let class = classes!(
 The `#[ui]` attribute generates a component with automatic support for HTML, HTMX, Alpine.js, and ARIA attributes that is accessible via props:
 
 ```rust
-use rsx_macros::ui;
+use rsx::{rsx, ui};
 
 #[ui]
 fn Greeting(message: String) -> String {
@@ -147,7 +146,7 @@ let html = rsx! {
 For simpler components without auto-generated attributes:
 
 ```rust
-use rsx_macros::{component, rsx};
+use rsx::{component, rsx};
 
 #[component]
 pub fn Card(title: String, content: String) -> String {
@@ -425,7 +424,7 @@ All DaisyUI components are now implemented! 🎉
 
 ```rust
 use axum::{Router, routing::get, response::Html};
-use rsx_macros::rsx;
+use rsx::rsx;
 
 async fn home() -> Html<String> {
     let html = rsx! {
