@@ -24,7 +24,7 @@
 
 use rsx::{classes, component, rsx};
 
-use super::{class_if, Size};
+use super::{Size, class_if};
 
 // ============================================
 // DockItem - A single item in the dock

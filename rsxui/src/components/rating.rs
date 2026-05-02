@@ -21,7 +21,7 @@
 
 use rsx::{classes, component, rsx};
 
-use super::{class_if, show_if, Size};
+use super::{Size, class_if, show_if};
 
 // ============================================
 // Rating - DaisyUI rating

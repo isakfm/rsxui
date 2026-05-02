@@ -26,7 +26,7 @@
 
 use rsx::{classes, component, rsx};
 
-use super::{class_if, Color};
+use super::{Color, class_if};
 
 // ============================================
 // StatTitle - Title part of a stat

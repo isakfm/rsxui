@@ -26,7 +26,7 @@
 use enum_stringify::EnumStringify;
 use rsx::{classes, rsx, ui};
 
-use super::{attr_if, class_if, Color};
+use super::{Color, attr_if, class_if};
 
 // ============================================
 // StepDirection - Steps layout direction

@@ -25,7 +25,7 @@ use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx::{classes, rsx, ui};
 
-use super::{class_if, Color};
+use super::{Color, class_if};
 
 // ============================================
 // TooltipPlacement - Tooltip position

@@ -23,7 +23,7 @@
 
 use rsx::{classes, component, rsx};
 
-use super::{class_if, Size};
+use super::{Size, class_if};
 
 // ============================================
 // Table - Data table

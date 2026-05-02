@@ -9,13 +9,13 @@
 
 use proc_macro::TokenStream;
 use proc_macro2_diagnostics::Diagnostic;
-use quote::{quote, ToTokens, TokenStreamExt};
+use quote::{ToTokens, TokenStreamExt, quote};
 use rstml::node::{CustomNode, KeyedAttribute, Node, NodeAttribute, NodeElement, NodeName};
 use rstml::recoverable::{ParseRecoverable, RecoverableContext};
 use rstml::{Parser, ParserConfig};
 use std::collections::HashSet;
 use syn::parse::ParseStream;
-use syn::{braced, Expr, FnArg, ItemFn, ItemStruct, Pat, Token};
+use syn::{Expr, FnArg, ItemFn, ItemStruct, Pat, Token, braced};
 
 #[proc_macro]
 pub fn rsx(tokens: TokenStream) -> TokenStream {
@@ -733,9 +733,9 @@ impl ToTokens for CustomElement<'_> {
 
 #[proc_macro]
 pub fn classes(tokens: TokenStream) -> TokenStream {
-    use syn::punctuated::Punctuated;
     use syn::Expr;
     use syn::Token;
+    use syn::punctuated::Punctuated;
 
     let parsed: Punctuated<Expr, Token![,]> =
         syn::parse_macro_input!(tokens with Punctuated::parse_terminated);

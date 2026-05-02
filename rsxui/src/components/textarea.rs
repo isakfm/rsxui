@@ -23,7 +23,7 @@ use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
 use rsx::{classes, rsx, ui};
 
-use super::{attr_if, Color, Size};
+use super::{Color, Size, attr_if};
 
 #[derive(Debug, Clone, PartialEq, Default, EnumStringify)]
 #[enum_stringify(case = "kebab", prefix = "textarea-")]

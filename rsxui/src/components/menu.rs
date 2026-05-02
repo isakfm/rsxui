@@ -1,7 +1,7 @@
 // Menu Components
 // Based on DaisyUI Menu: https://daisyui.com/components/menu/
 
-use crate::components::{class_if, show_if, Size};
+use crate::components::{Size, class_if, show_if};
 use enum_stringify::EnumStringify;
 use rsx::{classes, component, rsx, ui};
 

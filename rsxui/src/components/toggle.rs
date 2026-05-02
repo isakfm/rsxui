@@ -20,7 +20,7 @@
 
 use rsx::{classes, component, rsx};
 
-use super::{attr_if, show_if, Color, Size};
+use super::{Color, Size, attr_if, show_if};
 
 // ============================================
 // Toggle

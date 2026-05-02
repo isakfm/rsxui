@@ -22,8 +22,8 @@ pub use attributes::EscapeAttribute;
 pub use buffer::Buffer;
 pub use elements::Elements;
 pub use error::RsxuiError;
-pub use escape::{escape_attribute, escape_content, PreEscaped};
-pub use props::{props_builder, Component, Props};
+pub use escape::{PreEscaped, escape_attribute, escape_content};
+pub use props::{Component, Props, props_builder};
 pub use render::Render;
 
 pub use bon;
