@@ -9,11 +9,13 @@
 
 use proc_macro::TokenStream;
 use proc_macro2_diagnostics::Diagnostic;
-use quote::{quote, ToTokens};
-use rstml::node::{KeyedAttribute, Node, NodeAttribute, NodeElement, NodeName};
+use quote::{quote, ToTokens, TokenStreamExt};
+use rstml::node::{CustomNode, KeyedAttribute, Node, NodeAttribute, NodeElement, NodeName};
+use rstml::recoverable::{ParseRecoverable, RecoverableContext};
 use rstml::{Parser, ParserConfig};
 use std::collections::HashSet;
-use syn::{FnArg, ItemFn, ItemStruct};
+use syn::parse::ParseStream;
+use syn::{braced, Expr, FnArg, ItemFn, ItemStruct, Pat, Token};
 
 #[proc_macro]
 pub fn rsx(tokens: TokenStream) -> TokenStream {
@@ -38,7 +40,8 @@ fn rsx_inner(tokens: TokenStream, ide_helper: bool) -> proc_macro2::TokenStream 
     let config = ParserConfig::new()
         .recover_block(true)
         .element_close_use_default_wildcard_ident(true)
-        .always_self_closed_elements(empty_elements_set());
+        .always_self_closed_elements(empty_elements_set())
+        .custom_node::<RsxCustomNode>();
 
     let parser = Parser::new(config);
     let (nodes, errors) = parser.parse_recoverable(tokens).split_vec();
@@ -47,7 +50,7 @@ fn rsx_inner(tokens: TokenStream, ide_helper: bool) -> proc_macro2::TokenStream 
 
 fn process_nodes(
     ide_helper: bool,
-    nodes: &[Node],
+    nodes: &[Node<RsxCustomNode>],
     errors: Vec<Diagnostic>,
 ) -> proc_macro2::TokenStream {
     let WalkNodesOutput {
@@ -132,7 +135,241 @@ fn wrap_block_if_needed(stmts: &[syn::Stmt]) -> proc_macro2::TokenStream {
     quote!(#(#stmts)*)
 }
 
-fn walk_nodes<'a>(nodes: &'a [Node]) -> WalkNodesOutput<'a> {
+// ---- Custom Nodes: @for, @if ----
+
+/// Block of nodes inside braces `{ ... }`
+#[derive(Clone, Debug)]
+struct RsxBlock {
+    brace_token: syn::token::Brace,
+    body: Vec<Node<RsxCustomNode>>,
+}
+
+impl ToTokens for RsxBlock {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        self.brace_token.surround(tokens, |tokens| {
+            tokens.append_all(&self.body);
+        });
+    }
+}
+
+impl ParseRecoverable for RsxBlock {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let inner = |parser: &mut RecoverableContext, input: ParseStream| {
+            let content;
+            let brace_token = braced!(content in input);
+            let mut body = vec![];
+            while !content.is_empty() {
+                let Some(val) = parser.parse_recoverable(&content) else {
+                    return Ok(None);
+                };
+                body.push(val);
+            }
+            Ok(Some(RsxBlock { brace_token, body }))
+        };
+        parser.parse_mixed_fn(input, inner)?
+    }
+}
+
+/// `@for pat in expr { body }`
+#[derive(Clone, Debug)]
+struct RsxForExpr {
+    keyword: Token![for],
+    pat: Pat,
+    token_in: Token![in],
+    expr: Expr,
+    block: RsxBlock,
+}
+
+impl ToTokens for RsxForExpr {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        self.keyword.to_tokens(tokens);
+        self.pat.to_tokens(tokens);
+        self.token_in.to_tokens(tokens);
+        self.expr.to_tokens(tokens);
+        self.block.to_tokens(tokens);
+    }
+}
+
+impl ParseRecoverable for RsxForExpr {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let keyword = parser.parse_simple(input)?;
+        let pat = parser.parse_mixed_fn(input, |_parse, input| {
+            Pat::parse_multi_with_leading_vert(input)
+        })?;
+        let token_in = parser.parse_simple(input)?;
+        let expr = parser.parse_mixed_fn(input, |_, input| {
+            input.call(Expr::parse_without_eager_brace)
+        })?;
+        let block = parser.parse_recoverable(input)?;
+        Some(RsxForExpr {
+            keyword,
+            pat,
+            token_in,
+            expr,
+            block,
+        })
+    }
+}
+
+/// `else if condition { body }`
+#[derive(Clone, Debug)]
+struct RsxElseIf {
+    else_token: Token![else],
+    if_token: Token![if],
+    condition: Expr,
+    then_branch: RsxBlock,
+}
+
+impl ToTokens for RsxElseIf {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        self.else_token.to_tokens(tokens);
+        self.if_token.to_tokens(tokens);
+        self.condition.to_tokens(tokens);
+        self.then_branch.to_tokens(tokens);
+    }
+}
+
+impl ParseRecoverable for RsxElseIf {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let else_token = parser.parse_simple(input)?;
+        let if_token = parser.parse_simple(input)?;
+        let condition = parser.parse_mixed_fn(input, |_, input| {
+            input.call(Expr::parse_without_eager_brace)
+        })?;
+        let then_branch = parser.parse_recoverable(input)?;
+        Some(RsxElseIf {
+            else_token,
+            if_token,
+            condition,
+            then_branch,
+        })
+    }
+}
+
+/// `else { body }`
+#[derive(Clone, Debug)]
+struct RsxElse {
+    else_token: Token![else],
+    then_branch: RsxBlock,
+}
+
+impl ToTokens for RsxElse {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        self.else_token.to_tokens(tokens);
+        self.then_branch.to_tokens(tokens);
+    }
+}
+
+impl ParseRecoverable for RsxElse {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let else_token = parser.parse_simple(input)?;
+        let then_branch = parser.parse_recoverable(input)?;
+        Some(RsxElse {
+            else_token,
+            then_branch,
+        })
+    }
+}
+
+/// `@if condition { then_branch } [else if ...]* [else { ... }]`
+#[derive(Clone, Debug)]
+struct RsxIfExpr {
+    keyword: Token![if],
+    condition: Expr,
+    then_branch: RsxBlock,
+    else_ifs: Vec<RsxElseIf>,
+    else_branch: Option<RsxElse>,
+}
+
+impl ToTokens for RsxIfExpr {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        self.keyword.to_tokens(tokens);
+        self.condition.to_tokens(tokens);
+        self.then_branch.to_tokens(tokens);
+        for ei in &self.else_ifs {
+            ei.to_tokens(tokens);
+        }
+        if let Some(else_branch) = &self.else_branch {
+            else_branch.to_tokens(tokens);
+        }
+    }
+}
+
+impl ParseRecoverable for RsxIfExpr {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let keyword = parser.parse_simple(input)?;
+        let condition = parser.parse_mixed_fn(input, |_, input| {
+            input.call(Expr::parse_without_eager_brace)
+        })?;
+        let then_branch = parser.parse_recoverable(input)?;
+
+        let mut else_ifs = vec![];
+        while input.peek(Token![else]) && input.peek2(Token![if]) {
+            else_ifs.push(parser.parse_recoverable(input)?);
+        }
+
+        let mut else_branch = None;
+        if input.peek(Token![else]) {
+            else_branch = Some(parser.parse_recoverable(input)?);
+        }
+
+        Some(RsxIfExpr {
+            keyword,
+            condition,
+            then_branch,
+            else_ifs,
+            else_branch,
+        })
+    }
+}
+
+/// Custom node for rstml parser.
+/// Supports `@for` and `@if`.
+#[derive(Clone, Debug)]
+enum RsxCustomNode {
+    For(RsxForExpr),
+    If(RsxIfExpr),
+}
+
+impl ToTokens for RsxCustomNode {
+    fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
+        match self {
+            RsxCustomNode::For(expr) => expr.to_tokens(tokens),
+            RsxCustomNode::If(expr) => expr.to_tokens(tokens),
+        }
+    }
+}
+
+impl ParseRecoverable for RsxCustomNode {
+    fn parse_recoverable(parser: &mut RecoverableContext, input: ParseStream) -> Option<Self> {
+        let fork = input.fork();
+        if fork.parse::<Token![@]>().is_err() {
+            return None;
+        }
+        let _at: Token![@] = parser.parse_simple(input)?;
+        if input.peek(Token![for]) {
+            let expr = parser.parse_recoverable(input)?;
+            return Some(RsxCustomNode::For(expr));
+        }
+        if input.peek(Token![if]) {
+            let expr = parser.parse_recoverable(input)?;
+            return Some(RsxCustomNode::If(expr));
+        }
+        None
+    }
+}
+
+impl CustomNode for RsxCustomNode {
+    fn peek_element(input: syn::parse::ParseStream) -> bool {
+        let fork = input.fork();
+        if fork.parse::<Token![@]>().is_err() {
+            return false;
+        }
+        fork.peek(Token![for]) || fork.peek(Token![if])
+    }
+}
+
+fn walk_nodes<'a>(nodes: &'a [Node<RsxCustomNode>]) -> WalkNodesOutput<'a> {
     let mut out = WalkNodesOutput::default();
 
     for node in nodes {
@@ -200,6 +437,73 @@ fn walk_nodes<'a>(nodes: &'a [Node]) -> WalkNodesOutput<'a> {
                 out.static_format.push_str("{}");
                 out.values.push(value);
             }
+            Node::Custom(custom) => match custom {
+                RsxCustomNode::For(for_expr) => {
+                    let pat = &for_expr.pat;
+                    let expr = &for_expr.expr;
+                    let body_output = walk_nodes(&for_expr.block.body);
+                    let body_values = &body_output.values;
+                    let body_format = &body_output.static_format;
+                    out.static_format.push_str("{}");
+                    out.values.push(quote! {
+                        {
+                            let mut __html = ::std::string::String::new();
+                            for #pat in #expr {
+                                __html.push_str(&format!(#body_format, #(#body_values),*));
+                            }
+                            __html
+                        }
+                    });
+                }
+                RsxCustomNode::If(if_expr) => {
+                    let cond = &if_expr.condition;
+                    let then_output = walk_nodes(&if_expr.then_branch.body);
+                    let then_values = &then_output.values;
+                    let then_format = &then_output.static_format;
+
+                    let else_ifs_tokens = if_expr
+                        .else_ifs
+                        .iter()
+                        .map(|ei| {
+                            let ei_cond = &ei.condition;
+                            let ei_output = walk_nodes(&ei.then_branch.body);
+                            let ei_values = &ei_output.values;
+                            let ei_format = &ei_output.static_format;
+                            quote! {
+                                else if #ei_cond {
+                                    format!(#ei_format, #(#ei_values),*)
+                                }
+                            }
+                        })
+                        .collect::<Vec<_>>();
+
+                    let else_tokens = if let Some(else_) = &if_expr.else_branch {
+                        let else_output = walk_nodes(&else_.then_branch.body);
+                        let else_values = &else_output.values;
+                        let else_format = &else_output.static_format;
+                        quote! {
+                            else {
+                                format!(#else_format, #(#else_values),*)
+                            }
+                        }
+                    } else {
+                        quote! {
+                            else {
+                                ::std::string::String::new()
+                            }
+                        }
+                    };
+
+                    out.static_format.push_str("{}");
+                    out.values.push(quote! {
+                        if #cond {
+                            format!(#then_format, #(#then_values),*)
+                        }
+                        #(#else_ifs_tokens)*
+                        #else_tokens
+                    });
+                }
+            },
         }
     }
 
@@ -371,11 +675,11 @@ fn walk_attribute(attribute: &KeyedAttribute) -> (String, Option<proc_macro2::To
 }
 
 struct CustomElement<'e> {
-    e: &'e NodeElement,
+    e: &'e NodeElement<RsxCustomNode>,
 }
 
 impl<'e> CustomElement<'e> {
-    fn new(e: &'e NodeElement) -> Self {
+    fn new(e: &'e NodeElement<RsxCustomNode>) -> Self {
         CustomElement { e }
     }
 }

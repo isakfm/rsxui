@@ -86,6 +86,39 @@ let html = rsx! {
         {for item in items { rsx! { <li>{item}</li> } }}
     </ul>
 };
+
+// JSX-style @for (preferred — no nested rsx! needed)
+let html = rsx! {
+    <ul>
+        @for item in &items {
+            <li>{item}</li>
+        }
+    </ul>
+};
+
+// JSX-style @if with else
+let html = rsx! {
+    <div>
+        @if show {
+            <p>"Visible"</p>
+        } else {
+            <p>"Hidden"</p>
+        }
+    </div>
+};
+
+// JSX-style @if with else if chain
+let html = rsx! {
+    <div>
+        @if status == 200 {
+            <p>"OK"</p>
+        } else if status == 404 {
+            <p>"Not Found"</p>
+        } else {
+            <p>"Error"</p>
+        }
+    </div>
+};
 ```
 
 ### Attribute Conventions
@@ -442,7 +475,7 @@ cargo build --release
 ```
 
 ### Rust Version
-Minimum supported Rust version is **1.94** (due to workspace inheritance and edition 2021 features).
+Minimum supported Rust version is **1.94** (due to workspace inheritance and edition 2024 features).
 
 ---
 
@@ -506,3 +539,27 @@ Minimum supported Rust version is **1.94** (due to workspace inheritance and edi
 ---
 
 *Last updated: 2026-05-02*
+
+---
+
+## 15. Custom Node Architecture
+
+The `@for` and `@if` syntax is implemented via rstml's `CustomNode` trait in `rsx-macros/src/lib.rs`.
+
+### How it works
+
+1. `RsxCustomNode` enum implements `rstml::node::CustomNode`
+2. `RsxForExpr` and `RsxIfExpr` structs implement `ParseRecoverable` for parsing
+3. `ParserConfig::custom_node::<RsxCustomNode>()` registers the custom node with rstml
+4. `walk_nodes` handles `Node::Custom(RsxCustomNode::For(...))` and `Node::Custom(RsxCustomNode::If(...))` by generating the appropriate loop/conditional code
+
+### Key structs
+
+| Struct | Purpose |
+|--------|---------|
+| `RsxBlock` | Generic `{ body }` block containing parsed `Node<RsxCustomNode>` children |
+| `RsxForExpr` | `@for pat in expr { block }` |
+| `RsxIfExpr` | `@if condition { then } [else if ...]* [else { ... }]` |
+| `RsxElseIf` | `else if condition { block }` |
+| `RsxElse` | `else { block }` |
+| `RsxCustomNode` | Enum wrapping `For` or `If` variants |

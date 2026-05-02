@@ -12,6 +12,7 @@ RsxUI combines the familiar JSX syntax with Rust's type safety. Write HTML-like 
 ## Features
 
 - **JSX-like Syntax** — Familiar HTML-in-Rust syntax with dynamic interpolation
+- **JSX Control Flow** — Native `@for` and `@if` for loops and conditionals inside markup
 - **Type-Safe Components** — Props structs with compile-time checking via `bon`
 - **Zero Runtime** — Pure compile-time macro expansion, outputs HTML strings
 - **DaisyUI Components** — Pre-built, beautiful DaisyUI based components
@@ -93,6 +94,68 @@ let html = rsx! {
                 <li>{item}</li>
             })}
         </ul>
+    </div>
+};
+```
+
+#### `@for` — JSX-style Loops
+
+Iterate directly inside markup without nested `rsx!` blocks:
+
+```rust
+let products = vec!["Apples", "Bananas", "Oranges"];
+
+let html = rsx! {
+    <ul>
+        @for product in &products {
+            <li>{product}</li>
+        }
+    </ul>
+};
+```
+
+Works with components too:
+
+```rust
+let html = rsx! {
+    <div>
+        @for p in &products {
+            <ProductItem item=p.clone() />
+        }
+    </div>
+};
+```
+
+#### `@if` — JSX-style Conditionals
+
+Write conditionals inline like JSX:
+
+```rust
+let logged_in = true;
+
+let html = rsx! {
+    <nav>
+        @if logged_in {
+            <a href="/logout">"Logout"</a>
+        } else {
+            <a href="/login">"Login"</a>
+        }
+    </nav>
+};
+```
+
+Also supports `else if` chains:
+
+```rust
+let html = rsx! {
+    <div>
+        @if status == 200 {
+            <p>"OK"</p>
+        } else if status == 404 {
+            <p>"Not Found"</p>
+        } else {
+            <p>"Error"</p>
+        }
     </div>
 };
 ```

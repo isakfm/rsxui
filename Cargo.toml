@@ -9,7 +9,7 @@ members = [
 
 [workspace.package]
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 authors = ["Isak Rickyanto <isak.rickyanto@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/rsxui/rsxui"
@@ -26,7 +26,7 @@ mime = "0.3"
 proc-macro2 = "1.0"
 proc-macro2-diagnostics = "0.10"
 quote = "1.0"
-rstml = "0.11"
+rstml = "0.12"
 rsx = { path = "rsx" }
 serde = { version = "1.0", features = ["derive"] }
 syn = { version = "2.0", features = ["full"] }

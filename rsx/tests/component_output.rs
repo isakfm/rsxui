@@ -361,11 +361,9 @@ async fn test_for_loop_with_filter() {
     ];
     let html = rsx! {
         <div>
-            {
-                for p in &products {
-                    if p.price > 1.0 {
-                        rsx! { <ProductItem item=p.clone() /> }
-                    }
+            @for p in &products {
+                @if p.price > 1.0 {
+                    <ProductItem item=p.clone() />
                 }
             }
         </div>
@@ -406,14 +404,137 @@ async fn test_for_loop_empty_collection() {
     let empty: Vec<Product> = vec![];
     let html = rsx! {
         <div>
-            {
-                for p in &empty {
-                    rsx! { <ProductItem item=p.clone() /> }
-                }
+            @for p in &empty {
+                <ProductItem item=p.clone() />
             }
         </div>
     };
     assert!(html.contains("<div>"));
     assert!(html.contains("</div>"));
     assert!(!html.contains("product-item"));
+}
+
+#[tokio::test]
+async fn test_at_for_syntax() {
+    let items = vec![
+        "Apple".to_string(),
+        "Banana".to_string(),
+        "Cherry".to_string(),
+    ];
+    let html = rsx! {
+        <ul>
+            @for item in &items { <li>{item}</li> }
+        </ul>
+    };
+    assert!(html.contains("<ul>"));
+    assert!(html.contains("</ul>"));
+    assert!(html.contains("<li>Apple</li>"));
+    assert!(html.contains("<li>Banana</li>"));
+    assert!(html.contains("<li>Cherry</li>"));
+}
+
+#[tokio::test]
+async fn test_at_for_empty_collection() {
+    let empty: Vec<String> = vec![];
+    let html = rsx! {
+        <ul>
+            @for item in &empty { <li>{item}</li> }
+        </ul>
+    };
+    assert!(html.contains("<ul>"));
+    assert!(html.contains("</ul>"));
+    assert!(!html.contains("<li>"));
+}
+
+#[tokio::test]
+async fn test_at_for_nested_elements() {
+    let items = vec![("A", 1), ("B", 2)];
+    let html = rsx! {
+        <div>
+            @for (name, count) in &items {
+                <span class="item">
+                    <strong>{name}</strong>
+                    <em>{count}</em>
+                </span>
+            }
+        </div>
+    };
+    assert!(html.contains("<span class=\"item\">"));
+    assert!(html.contains("<strong>A</strong>"));
+    assert!(html.contains("<em>2</em>"));
+}
+
+#[tokio::test]
+async fn test_at_if_true() {
+    let show = true;
+    let html = rsx! {
+        <div>
+            @if show { <p>visible</p> }
+        </div>
+    };
+    assert!(html.contains("<p>visible</p>"));
+}
+
+#[tokio::test]
+async fn test_at_if_false() {
+    let show = false;
+    let html = rsx! {
+        <div>
+            @if show { <p>visible</p> }
+        </div>
+    };
+    assert!(html.contains("<div>"));
+    assert!(html.contains("</div>"));
+    assert!(!html.contains("<p>visible</p>"));
+}
+
+#[tokio::test]
+async fn test_at_if_else() {
+    let logged_in = true;
+    let html = rsx! {
+        <nav>
+            @if logged_in {
+                <a href="/logout">Logout</a>
+            } else {
+                <a href="/login">Login</a>
+            }
+        </nav>
+    };
+    assert!(html.contains("<a href=\"/logout\">Logout</a>"));
+    assert!(!html.contains("<a href=\"/login\">Login</a>"));
+}
+
+#[tokio::test]
+async fn test_at_if_else_false() {
+    let logged_in = false;
+    let html = rsx! {
+        <nav>
+            @if logged_in {
+                <a href="/logout">Logout</a>
+            } else {
+                <a href="/login">Login</a>
+            }
+        </nav>
+    };
+    assert!(html.contains("<a href=\"/login\">Login</a>"));
+    assert!(!html.contains("<a href=\"/logout\">Logout</a>"));
+}
+
+#[tokio::test]
+async fn test_at_if_else_if() {
+    let status = 404;
+    let html = rsx! {
+        <div>
+            @if status == 200 {
+                <p>OK</p>
+            } else if status == 404 {
+                <p>Not Found</p>
+            } else {
+                <p>Error</p>
+            }
+        </div>
+    };
+    assert!(html.contains("<p>Not Found</p>"));
+    assert!(!html.contains("<p>OK</p>"));
+    assert!(!html.contains("<p>Error</p>"));
 }

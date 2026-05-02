@@ -197,4 +197,3 @@ fn test_span_element() {
     };
     assert_eq!(html, r#"<span class="highlight">Important</span>"#);
 }
-

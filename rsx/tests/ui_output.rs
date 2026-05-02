@@ -20,4 +20,3 @@ async fn test_daisy_card() {
     assert!(html.contains("<div class=\"card\">"));
     assert!(html.contains("<h2>My Card</h2>"));
 }
-
