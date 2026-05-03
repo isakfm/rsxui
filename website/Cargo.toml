@@ -1,11 +1,15 @@
 [package]
 name = "rsxui-website"
-version = "0.1.0"
-edition = "2021"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
 
 [dependencies]
-axum = { version = "0.7", features = ["macros"] }
-tokio = { version = "1.0", features = ["full"] }
-tower-http = { version = "0.5", features = ["fs"] }
+axum.workspace = true
+tokio.workspace = true
 rsx = { path = "../rsx" }
 rsxui = { path = "../rsxui" }
+tower-http = { version = "0.6.8", features = ["fs"] }

@@ -195,7 +195,7 @@ pub async fn drawer(content: String, active_path: &str) -> String {
             <script>{theme_script}</script>
         </head>
         <body>
-            <Drawer id="main-drawer" open=true>
+            <Drawer open=true>
                 <DrawerToggle id="main-drawer" />
                 <DrawerContent class="p-5">
                     <div class="navbar bg-base-100 lg:hidden">
