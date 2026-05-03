@@ -16,22 +16,19 @@ repository = "https://github.com/rsxui/rsxui"
 rust-version = "1.94"
 
 [workspace.dependencies]
-async-trait = "0.1"
-axum = { version = "0.7", features = ["macros"] }
-bon = "3.9"
-convert_case = "0.6"
+axum = { version = "0.8.9", features = ["macros"] }
+bon = "3.9.1"
 futures = "0.3"
-html-escape = "0.2"
-mime = "0.3"
-proc-macro2 = "1.0"
-proc-macro2-diagnostics = "0.10"
-quote = "1.0"
+html-escape = "0.2.13"
+proc-macro2 = "1.0.106"
+proc-macro2-diagnostics = "0.10.1"
+quote = "1.0.45"
 rstml = "0.12"
 rsx = { path = "rsx" }
-serde = { version = "1.0", features = ["derive"] }
-syn = { version = "2.0", features = ["full"] }
-thiserror = "1.0"
-tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0.221", features = ["derive"] }
+syn = { version = "2.0.117", features = ["full"] }
+thiserror = "2.0.18"
+tokio = { version = "1.44", features = ["full"] }
 
 [profile.release]
 opt-level = 3

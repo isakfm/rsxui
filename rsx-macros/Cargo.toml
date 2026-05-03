@@ -16,7 +16,6 @@ proc-macro2-diagnostics.workspace = true
 quote.workspace = true
 rstml.workspace = true
 syn.workspace = true
-convert_case.workspace = true
 html-escape.workspace = true
 serde.workspace = true
 
