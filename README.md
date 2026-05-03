@@ -222,6 +222,8 @@ pub fn Card(title: String, content: String) -> String {
 }
 ```
 
+> **Note:** All RsxUI DaisyUI components use `#[ui]` for full HTML/HTMX/ARIA support. Use `#[component]` only when you don't need those attributes.
+
 ---
 
 ## Utility Functions
@@ -272,6 +274,8 @@ let html = rsx! {
 ---
 
 ## DaisyUI Components
+
+All DaisyUI components in the `rsxui` crate use the `#[ui]` attribute, giving them automatic support for HTML attributes (`id`, `class`, `title`), HTMX attributes (`hx_get`, `hx_post`, `hx_swap`), ARIA attributes (`aria_label`, `aria_disabled`), and event handlers (`onclick`, `onchange`).
 
 ### Implemented Components
 
@@ -363,6 +367,19 @@ rsx! { <Button label="Soft" style=ButtonStyle::Soft /> }
 
 // With icons and loading
 rsx! { <Button label="Loading..." loading=true /> }
+
+// With HTMX and HTML attributes (all components support these)
+rsx! {
+    <Button
+        label="Save"
+        color=Color::Primary
+        id="save-btn"
+        hx_post="/api/save"
+        hx_swap="outerHTML"
+        onclick="alert('saved')"
+        aria_label="Save button"
+    />
+}
 ```
 
 #### Card

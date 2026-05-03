@@ -211,6 +211,8 @@ Key rules for `#[ui]`:
 - The struct derives `bon::Builder` and `Default`
 - A `children: Option<String>` field is auto-added if not already present
 
+> **All RsxUI DaisyUI components use `#[ui]`** for full HTML/HTMX/ARIA support. Use `#[component]` only for custom components that don't need those attributes.
+
 ### `#[props]` — Standalone Props Struct
 
 Use when you need a props struct without a component function:
@@ -484,7 +486,7 @@ Minimum supported Rust version is **1.94** (due to workspace inheritance and edi
 ### Adding a New DaisyUI Component
 
 1. **Create file**: `rsxui/src/components/<name>.rs`
-2. **Implement**: Use `#[ui]` if the component needs HTML/HTMX/ARIA attributes; otherwise use `#[component]`
+2. **Implement**: Use `#[ui]` so the component supports HTML/HTMX/ARIA attributes automatically
 3. **Export**: Add `pub mod <name>;` and `pub use <name>::{...};` in `rsxui/src/components/mod.rs`
 4. **Add tests**: Cover basic rendering, all enum variants, and attribute passthrough
 5. **Add documentation page**: Create `website/src/pages/<name>.rs`, add route in `website/src/main.rs`, add sidebar link in `website/src/layout.rs`
@@ -538,7 +540,7 @@ Minimum supported Rust version is **1.94** (due to workspace inheritance and edi
 
 ---
 
-*Last updated: 2026-05-02*
+*Last updated: 2026-05-03*
 
 ---
 
