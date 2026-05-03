@@ -21,7 +21,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -29,16 +30,16 @@ use super::class_if;
 // TextRotate - Rotating text animation
 // ============================================
 
-#[component]
+#[ui]
 pub fn TextRotate(
     #[builder(default)] center: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <span class={classes!("text-rotate", class)}>
-            <span class={classes!(class_if(center, "justify-items-center"))}>
-                {children}
+        <span class={classes!("text-rotate", props.class)} {props.render_attrs()}>
+            <span class={classes!(class_if(props.center, "justify-items-center"))}>
+                {props.children}
             </span>
         </span>
     }

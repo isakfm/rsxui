@@ -20,7 +20,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // No additional imports needed
 
@@ -28,11 +29,11 @@ use rsx::{classes, component, rsx};
 // Breadcrumb - Navigation breadcrumb
 // ============================================
 
-#[component]
+#[ui]
 pub fn Breadcrumb(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("breadcrumbs", class)}>
-            <ul>{children}</ul>
+        <div class={classes!("breadcrumbs", props.class)} {props.render_attrs()}>
+            <ul>{props.children}</ul>
         </div>
     }
 }

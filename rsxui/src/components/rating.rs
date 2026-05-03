@@ -19,7 +19,7 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::{classes, rsx, ui};
 
 use super::{Size, class_if, show_if};
 
@@ -27,7 +27,7 @@ use super::{Size, class_if, show_if};
 // Rating - DaisyUI rating
 // ============================================
 
-#[component]
+#[ui]
 pub fn Rating(
     #[builder(default = 5)] max: u8,
     #[builder(default)] size: Size,
@@ -40,26 +40,30 @@ pub fn Rating(
     #[builder(default)] read_only: bool,
     #[builder(default)] class: String,
 ) -> String {
-    let name = if name.is_empty() {
+    let name = if props.name.is_empty() {
         "rating".to_string()
     } else {
-        name
+        props.name.clone()
     };
 
-    let mask_class = if mask.is_empty() {
+    let mask_class = if props.mask.is_empty() {
         "mask-star".to_string()
     } else {
-        mask
+        props.mask.clone()
     };
 
-    let item_count = if half { max as u16 * 2 } else { max as u16 };
+    let item_count = if props.half {
+        props.max as u16 * 2
+    } else {
+        props.max as u16
+    };
 
     let mut items = Vec::new();
 
     // Hidden clear input (optional)
-    if hidden {
-        let is_checked = checked == 0;
-        if read_only {
+    if props.hidden {
+        let is_checked = props.checked == 0;
+        if props.read_only {
             items.push(rsx! {
                 <div class="rating-hidden" aria-label="clear" />
             });
@@ -77,19 +81,23 @@ pub fn Rating(
     }
 
     for i in 1..=item_count {
-        let star_num = if half { (i as f32) / 2.0 } else { i as f32 };
+        let star_num = if props.half {
+            (i as f32) / 2.0
+        } else {
+            i as f32
+        };
 
-        let aria_label = if half && i % 2 == 1 {
+        let aria_label = if props.half && i % 2 == 1 {
             format!("{} star", star_num)
-        } else if half {
+        } else if props.half {
             format!("{} star", star_num)
         } else {
             format!("{} star", i)
         };
 
-        let is_checked = u16::from(checked) == i;
+        let is_checked = u16::from(props.checked) == i;
 
-        let half_class = if half {
+        let half_class = if props.half {
             if i % 2 == 1 {
                 "mask-half-1"
             } else {
@@ -99,15 +107,15 @@ pub fn Rating(
             ""
         };
 
-        let item_class = if color.is_empty() {
+        let item_class = if props.color.is_empty() {
             format!("mask {} {}", mask_class, half_class)
         } else {
-            format!("mask {} {} {}", mask_class, half_class, color)
+            format!("mask {} {} {}", mask_class, half_class, props.color)
         }
         .trim()
         .to_string();
 
-        if read_only {
+        if props.read_only {
             let current = if is_checked {
                 r#" aria-current="true""#
             } else {
@@ -136,9 +144,9 @@ pub fn Rating(
     rsx! {
         <div class={classes!(
             "rating",
-            size.prefix("rating"),
-            class_if(half, "rating-half"),
-            class,
+            props.size.prefix("rating"),
+            class_if(props.half, "rating-half"),
+            props.class,
         )}>
             {items_html}
         </div>

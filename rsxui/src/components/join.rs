@@ -21,7 +21,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -29,11 +30,11 @@ use super::class_if;
 // JoinItem - Marks an element as part of a join
 // ============================================
 
-#[component]
+#[ui]
 pub fn JoinItem(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("join-item", class)}>
-            {children}
+        <div class={classes!("join-item", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -42,15 +43,15 @@ pub fn JoinItem(#[builder(default)] class: String, children: String) -> String {
 // Join - Container for grouped items
 // ============================================
 
-#[component]
+#[ui]
 pub fn Join(
     #[builder(default)] vertical: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("join", class_if(vertical, "join-vertical"), class)}>
-            {children}
+        <div class={classes!("join", class_if(props.vertical, "join-vertical"), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

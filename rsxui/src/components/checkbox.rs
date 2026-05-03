@@ -18,7 +18,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Color, Size, attr_if, show_if};
 
@@ -26,7 +27,7 @@ use super::{Color, Size, attr_if, show_if};
 // Checkbox
 // ============================================
 
-#[component]
+#[ui]
 pub fn Checkbox(
     #[builder(into)] name: Option<String>,
     #[builder(into)] value: Option<String>,
@@ -41,15 +42,15 @@ pub fn Checkbox(
             type="checkbox"
             class={classes!(
                 "checkbox",
-                color.prefix("checkbox"),
-                size.prefix("checkbox"),
-                class,
+                props.color.prefix("checkbox"),
+                props.size.prefix("checkbox"),
+                props.class,
             )}
-            {show_if(checked, "checked")}
-            {show_if(disabled, "disabled")}
-            {attr_if("name", &name)}
-            {attr_if("value", &value)}
-        />
+            {show_if(props.checked, "checked")}
+            {show_if(props.disabled, "disabled")}
+            {attr_if("name", &props.name)}
+            {attr_if("value", &props.value)}
+         {props.render_attrs()}/>
     }
 }
 

@@ -3,7 +3,8 @@
 
 use crate::components::{Size, class_if, show_if};
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx, ui};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // MenuState - Menu item state
@@ -38,20 +39,21 @@ pub fn Menu(size: Size, #[builder(default)] class: String, children: String) -> 
 // ============================================
 
 #[allow(clippy::unnecessary_braces_for_condition)]
-#[component]
+#[ui]
 pub fn MenuItem(#[builder(default)] state: MenuState, url: String, children: String) -> String {
-    if state != MenuState::Normal {
+    if props.state != MenuState::Normal {
         rsx! {
-            <li class={state.to_string()}>
+            <li class={props.state.to_string()}>
                 <button
-                {show_if(state==MenuState::Disabled, "disabled")}
-                class={class_if(state==MenuState::Focus, "menu-focus")}
-                >{children}</button>
+                {show_if(props.state==MenuState::Disabled, "disabled")}
+                class={class_if(props.state==MenuState::Focus, "menu-focus")}
+                {props.render_attrs()}>{props.children}</button>
             </li>
         }
     } else {
+        let attrs = props.render_attrs();
         rsx! {
-            <li><a href={url}>{children}</a></li>
+            <li><a href={props.url} {attrs}>{props.children}</a></li>
         }
     }
 }

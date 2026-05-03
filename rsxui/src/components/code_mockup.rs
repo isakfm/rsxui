@@ -19,16 +19,17 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // CodeMockup - Code editor mockup
 // ============================================
 
-#[component]
+#[ui]
 pub fn CodeMockup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("mockup-code", class)}>{children}</div>
+        <div class={classes!("mockup-code", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 

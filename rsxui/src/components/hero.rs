@@ -22,17 +22,18 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // HeroContent - Content wrapper inside hero
 // ============================================
 
-#[component]
+#[ui]
 pub fn HeroContent(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("hero-content", class)}>
-            {children}
+        <div class={classes!("hero-content", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -41,11 +42,11 @@ pub fn HeroContent(#[builder(default)] class: String, children: String) -> Strin
 // HeroOverlay - Overlay for background image
 // ============================================
 
-#[component]
+#[ui]
 pub fn HeroOverlay(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("hero-overlay", class)}>
-            {children}
+        <div class={classes!("hero-overlay", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -54,15 +55,15 @@ pub fn HeroOverlay(#[builder(default)] class: String, children: String) -> Strin
 // Hero - Hero section container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Hero(
     #[builder(default)] class: String,
     #[builder(into)] style: Option<String>,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("hero", class)} {super::attr_if("style", &style)}>
-            {children}
+        <div class={classes!("hero", props.class)} {super::attr_if("style", &props.style)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

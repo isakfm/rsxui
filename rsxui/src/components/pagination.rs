@@ -22,13 +22,14 @@
 //! ```
 
 use crate::components::class_if;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // PaginationItem - Individual page button
 // ============================================
 
-#[component]
+#[ui]
 pub fn PaginationItem(
     #[builder(default)] class: String,
     #[builder(default)] active: bool,
@@ -40,11 +41,11 @@ pub fn PaginationItem(
             class={classes!(
                 "join-item",
                 "btn",
-                class_if(active, "btn-active"),
-                class_if(disabled, "btn-disabled"),
-                class,
-            )}>
-            {children}
+                class_if(props.active, "btn-active"),
+                class_if(props.disabled, "btn-disabled"),
+                props.class,
+            )} {props.render_attrs()}>
+            {props.children}
         </button>
     }
 }
@@ -53,10 +54,10 @@ pub fn PaginationItem(
 // Pagination - Page navigation container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Pagination(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("join", class)}>{children}</div>
+        <div class={classes!("join", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 

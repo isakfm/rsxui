@@ -19,22 +19,23 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // PhoneMockup - iPhone mockup
 // ============================================
 
-#[component]
+#[ui]
 pub fn PhoneMockup(
     #[builder(default)] class: String,
     inner_class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("mockup-phone", class)}>
+        <div class={classes!("mockup-phone", props.class)} {props.render_attrs()}>
             <div class="mockup-phone-camera" />
-            <div class={classes!("mockup-phone-display", inner_class)}>{children}</div>
+            <div class={classes!("mockup-phone-display", props.inner_class)}>{props.children}</div>
         </div>
     }
 }

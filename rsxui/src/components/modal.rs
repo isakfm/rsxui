@@ -28,7 +28,7 @@
 
 use enum_stringify::EnumStringify;
 use rsx::attrs::RenderAttrs;
-use rsx::{classes, component, rsx, ui};
+use rsx::{classes, rsx, ui};
 
 use crate::components::{class_if, show_if};
 
@@ -53,10 +53,10 @@ pub enum ModalPlacement {
 // ModalBox - Content container inside modal
 // ============================================
 
-#[component]
+#[ui]
 pub fn ModalBox(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("modal-box", class)}>{children}</div>
+        <div class={classes!("modal-box", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -64,10 +64,10 @@ pub fn ModalBox(#[builder(default)] class: String, children: String) -> String {
 // ModalAction - Action buttons area inside modal
 // ============================================
 
-#[component]
+#[ui]
 pub fn ModalAction(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("modal-action", class)}>{children}</div>
+        <div class={classes!("modal-action", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -88,14 +88,11 @@ pub fn ModalBackdrop(#[builder(default)] class: String, children: String) -> Str
 // ModalToggle - Hidden checkbox for legacy modal
 // ============================================
 
-#[component]
-pub fn ModalToggle(
-    id: String,
-    #[builder(default)] class: String,
-    #[builder(default)] checked: bool,
-) -> String {
+#[ui]
+pub fn ModalToggle(#[builder(default)] class: String, #[builder(default)] checked: bool) -> String {
+    let attrs = props.render_attrs();
     rsx! {
-        <input type="checkbox" id={id} class={classes!("modal-toggle", class)} {show_if(checked, "checked")} />
+        <input type="checkbox" class={classes!("modal-toggle", props.class)} {show_if(props.checked, "checked")} {attrs} />
     }
 }
 

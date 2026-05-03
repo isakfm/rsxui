@@ -19,7 +19,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use crate::components::{attr_if, show_if};
 
@@ -27,7 +28,7 @@ use crate::components::{attr_if, show_if};
 // ThemeControllerToggle - Toggle switch for theme
 // ============================================
 
-#[component]
+#[ui]
 pub fn ThemeControllerToggle(
     value: String,
     #[builder(default)] checked: bool,
@@ -36,10 +37,10 @@ pub fn ThemeControllerToggle(
     rsx! {
         <input
             type="checkbox"
-            value={value}
-            class={classes!("toggle", "theme-controller", class)}
-            {show_if(checked, "checked")}
-        />
+            value={props.value.clone()}
+            class={classes!("toggle", "theme-controller", props.class)}
+            {show_if(props.checked, "checked")}
+         {props.render_attrs()}/>
     }
 }
 
@@ -47,7 +48,7 @@ pub fn ThemeControllerToggle(
 // ThemeControllerCheckbox - Checkbox for theme
 // ============================================
 
-#[component]
+#[ui]
 pub fn ThemeControllerCheckbox(
     value: String,
     #[builder(default)] checked: bool,
@@ -56,10 +57,10 @@ pub fn ThemeControllerCheckbox(
     rsx! {
         <input
             type="checkbox"
-            value={value}
-            class={classes!("checkbox", "theme-controller", class)}
-            {show_if(checked, "checked")}
-        />
+            value={props.value.clone()}
+            class={classes!("checkbox", "theme-controller", props.class)}
+            {show_if(props.checked, "checked")}
+         {props.render_attrs()}/>
     }
 }
 
@@ -67,7 +68,7 @@ pub fn ThemeControllerCheckbox(
 // ThemeControllerRadio - Radio button for theme
 // ============================================
 
-#[component]
+#[ui]
 pub fn ThemeControllerRadio(
     name: String,
     value: String,
@@ -77,11 +78,11 @@ pub fn ThemeControllerRadio(
     rsx! {
         <input
             type="radio"
-            name={name}
-            value={value}
-            class={classes!("radio", "theme-controller", class)}
-            {show_if(checked, "checked")}
-        />
+            name={props.name.clone()}
+            value={props.value.clone()}
+            class={classes!("radio", "theme-controller", props.class)}
+            {show_if(props.checked, "checked")}
+         {props.render_attrs()}/>
     }
 }
 
@@ -89,7 +90,7 @@ pub fn ThemeControllerRadio(
 // ThemeControllerButton - Button-style radio for theme
 // ============================================
 
-#[component]
+#[ui]
 pub fn ThemeControllerButton(
     name: String,
     value: String,
@@ -100,12 +101,12 @@ pub fn ThemeControllerButton(
     rsx! {
         <input
             type="radio"
-            name={name}
-            value={value}
-            class={classes!("btn", "theme-controller", class)}
-            {attr_if("aria-label", &aria_label)}
-            {show_if(checked, "checked")}
-        />
+            name={props.name.clone()}
+            value={props.value.clone()}
+            class={classes!("btn", "theme-controller", props.class)}
+            {attr_if("aria-label", &props.aria_label)}
+            {show_if(props.checked, "checked")}
+         {props.render_attrs()}/>
     }
 }
 

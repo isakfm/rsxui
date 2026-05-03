@@ -24,7 +24,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -32,10 +33,10 @@ use super::class_if;
 // FooterTitle - Title for a footer nav section
 // ============================================
 
-#[component]
+#[ui]
 pub fn FooterTitle(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <h6 class={classes!("footer-title", class)}>{children}</h6>
+        <h6 class={classes!("footer-title", props.class)} {props.render_attrs()}>{props.children}</h6>
     }
 }
 
@@ -43,7 +44,7 @@ pub fn FooterTitle(#[builder(default)] class: String, children: String) -> Strin
 // Footer - Page footer container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Footer(
     #[builder(default)] vertical: bool,
     #[builder(default)] center: bool,
@@ -53,11 +54,11 @@ pub fn Footer(
     rsx! {
         <footer class={classes!(
             "footer",
-            class_if(vertical, "footer-vertical"),
-            class_if(center, "footer-center"),
-            class,
-        )}>
-            {children}
+            class_if(props.vertical, "footer-vertical"),
+            class_if(props.center, "footer-center"),
+            props.class,
+        )} {props.render_attrs()}>
+            {props.children}
         </footer>
     }
 }

@@ -23,7 +23,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // CarouselSnap - Snap alignment for carousel
@@ -58,10 +59,10 @@ pub enum CarouselDirection {
 // CarouselItem - Individual carousel slide
 // ============================================
 
-#[component]
+#[ui]
 pub fn CarouselItem(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("carousel-item", class)}>{children}</div>
+        <div class={classes!("carousel-item", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -69,7 +70,7 @@ pub fn CarouselItem(#[builder(default)] class: String, children: String) -> Stri
 // Carousel - Carousel container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Carousel(
     #[builder(default)] snap: CarouselSnap,
     #[builder(default)] direction: CarouselDirection,
@@ -77,17 +78,19 @@ pub fn Carousel(
     #[builder(into)] aria_label: Option<String>,
     children: String,
 ) -> String {
-    let aria = aria_label
+    let aria = props
+        .aria_label
+        .clone()
         .map(|l| format!(r#" aria-label="{}""#, l))
         .unwrap_or_default();
     rsx! {
         <div
             tabindex="0"
             role="region"
-            class={classes!("carousel", snap, direction, class)}
+            class={classes!("carousel", props.snap, props.direction, props.class)}
             {aria}
-        >
-            {children}
+         {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

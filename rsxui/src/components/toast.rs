@@ -20,7 +20,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // ToastHorizontal - Horizontal placement
@@ -56,7 +57,7 @@ pub enum ToastVertical {
 // Toast - Toast notification container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Toast(
     #[builder(default)] horizontal: ToastHorizontal,
     #[builder(default)] vertical: ToastVertical,
@@ -64,8 +65,8 @@ pub fn Toast(
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("toast", horizontal, vertical, class)}>
-            {children}
+        <div class={classes!("toast", props.horizontal, props.vertical, props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

@@ -27,7 +27,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // TimelineDirection - Timeline layout direction
@@ -61,10 +62,10 @@ pub enum TimelineModifier {
 // TimelineStart - Start content of a timeline item
 // ============================================
 
-#[component]
+#[ui]
 pub fn TimelineStart(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("timeline-start", class)}>{children}</div>
+        <div class={classes!("timeline-start", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -72,10 +73,10 @@ pub fn TimelineStart(#[builder(default)] class: String, children: String) -> Str
 // TimelineMiddle - Middle icon/content of a timeline item
 // ============================================
 
-#[component]
+#[ui]
 pub fn TimelineMiddle(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("timeline-middle", class)}>{children}</div>
+        <div class={classes!("timeline-middle", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -83,10 +84,10 @@ pub fn TimelineMiddle(#[builder(default)] class: String, children: String) -> St
 // TimelineEnd - End content of a timeline item
 // ============================================
 
-#[component]
+#[ui]
 pub fn TimelineEnd(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("timeline-end", class)}>{children}</div>
+        <div class={classes!("timeline-end", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -94,10 +95,10 @@ pub fn TimelineEnd(#[builder(default)] class: String, children: String) -> Strin
 // TimelineItem - Individual timeline entry
 // ============================================
 
-#[component]
+#[ui]
 pub fn TimelineItem(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <li class={classes!(class)}>{children}</li>
+        <li class={classes!(props.class)} {props.render_attrs()}>{props.children}</li>
     }
 }
 
@@ -105,7 +106,7 @@ pub fn TimelineItem(#[builder(default)] class: String, children: String) -> Stri
 // Timeline - Timeline container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Timeline(
     #[builder(default)] direction: TimelineDirection,
     #[builder(default)] modifier: TimelineModifier,
@@ -113,8 +114,8 @@ pub fn Timeline(
     children: String,
 ) -> String {
     rsx! {
-        <ul class={classes!("timeline", direction, modifier, class)}>
-            {children}
+        <ul class={classes!("timeline", props.direction, props.modifier, props.class)} {props.render_attrs()}>
+            {props.children}
         </ul>
     }
 }

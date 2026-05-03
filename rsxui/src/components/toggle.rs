@@ -18,7 +18,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Color, Size, attr_if, show_if};
 
@@ -26,7 +27,7 @@ use super::{Color, Size, attr_if, show_if};
 // Toggle
 // ============================================
 
-#[component]
+#[ui]
 pub fn Toggle(
     #[builder(into)] name: Option<String>,
     #[builder(into)] value: Option<String>,
@@ -41,14 +42,15 @@ pub fn Toggle(
             type="checkbox"
             class={classes!(
                 "toggle",
-                color.prefix("toggle"),
-                size.prefix("toggle"),
-                class,
+                props.color.prefix("toggle"),
+                props.size.prefix("toggle"),
+                props.class,
             )}
-            {show_if(checked, "checked")}
-            {show_if(disabled, "disabled")}
-            {attr_if("name", &name)}
-            {attr_if("value", &value)}
+            {show_if(props.checked, "checked")}
+            {show_if(props.disabled, "disabled")}
+            {attr_if("name", &props.name)}
+            {attr_if("value", &props.value)}
+            {props.render_attrs()}
         />
     }
 }

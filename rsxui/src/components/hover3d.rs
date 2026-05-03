@@ -18,17 +18,18 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // Hover3d - 3D hover effect wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Hover3d(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("hover-3d", class)}>
-            {children}
+        <div class={classes!("hover-3d", props.class)} {props.render_attrs()}>
+            {props.children}
             <div />
             <div />
             <div />

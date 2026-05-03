@@ -22,16 +22,17 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // BrowserToolbar - Browser address bar
 // ============================================
 
-#[component]
+#[ui]
 pub fn BrowserToolbar(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("mockup-browser-toolbar", class)}>{children}</div>
+        <div class={classes!("mockup-browser-toolbar", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -39,10 +40,10 @@ pub fn BrowserToolbar(#[builder(default)] class: String, children: String) -> St
 // BrowserMockup - Browser window mockup
 // ============================================
 
-#[component]
+#[ui]
 pub fn BrowserMockup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("mockup-browser", class)}>{children}</div>
+        <div class={classes!("mockup-browser", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 

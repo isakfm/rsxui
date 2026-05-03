@@ -18,17 +18,18 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // WindowMockup - OS window mockup
 // ============================================
 
-#[component]
+#[ui]
 pub fn WindowMockup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("mockup-window", class)}>
-            {children}
+        <div class={classes!("mockup-window", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

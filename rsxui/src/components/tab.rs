@@ -25,7 +25,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{class_if, show_if};
 
@@ -62,7 +63,7 @@ pub enum TabPlacement {
 // Tab - Button-based tab
 // ============================================
 
-#[component]
+#[ui]
 pub fn Tab(
     #[builder(default)] active: bool,
     #[builder(default)] disabled: bool,
@@ -74,11 +75,11 @@ pub fn Tab(
             role="tab"
             class={classes!(
                 "tab",
-                class_if(active, "tab-active"),
-                class_if(disabled, "tab-disabled"),
-                class,
-            )}>
-            {children}
+                class_if(props.active, "tab-active"),
+                class_if(props.disabled, "tab-disabled"),
+                props.class,
+            )} {props.render_attrs()}>
+            {props.children}
         </button>
     }
 }
@@ -87,7 +88,7 @@ pub fn Tab(
 // TabRadio - Radio input-based tab
 // ============================================
 
-#[component]
+#[ui]
 pub fn TabRadio(
     name: String,
     aria_label: String,
@@ -97,10 +98,10 @@ pub fn TabRadio(
     rsx! {
         <input
             type="radio"
-            name={name}
-            aria-label={aria_label}
-            class={classes!("tab", class)}
-            {show_if(checked, "checked")} />
+            name={props.name.clone()}
+            aria-label={props.aria_label.clone()}
+            class={classes!("tab", props.class)}
+            {show_if(props.checked, "checked")}  {props.render_attrs()}/>
     }
 }
 
@@ -108,11 +109,11 @@ pub fn TabRadio(
 // TabContent - Tab content panel
 // ============================================
 
-#[component]
+#[ui]
 pub fn TabContent(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div role="tabpanel" class={classes!("tab-content", class)}>
-            {children}
+        <div role="tabpanel" class={classes!("tab-content", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -121,7 +122,7 @@ pub fn TabContent(#[builder(default)] class: String, children: String) -> String
 // Tabs - Tab container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Tabs(
     #[builder(default)] style: TabStyle,
     #[builder(default)] placement: TabPlacement,
@@ -131,8 +132,8 @@ pub fn Tabs(
     rsx! {
         <div
             role="tablist"
-            class={classes!("tabs", style.to_string(), placement.to_string(), class)}>
-            {children}
+            class={classes!("tabs", props.style.to_string(), props.placement.to_string(), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

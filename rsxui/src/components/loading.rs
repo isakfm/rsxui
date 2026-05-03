@@ -19,7 +19,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::Size;
 
@@ -43,7 +44,7 @@ pub enum LoadingStyle {
 // Loading - Loading animation
 // ============================================
 
-#[component]
+#[ui]
 pub fn Loading(
     #[builder(default)] style: LoadingStyle,
     #[builder(default)] size: Size,
@@ -52,10 +53,10 @@ pub fn Loading(
     rsx! {
         <span class={classes!(
             "loading",
-            style,
-            size.prefix("loading"),
-            class,
-        )} />
+            props.style,
+            props.size.prefix("loading"),
+            props.class,
+        )}  {props.render_attrs()}/>
     }
 }
 

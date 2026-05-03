@@ -24,7 +24,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Color, class_if};
 
@@ -32,10 +33,10 @@ use super::{Color, class_if};
 // StatTitle - Title part of a stat
 // ============================================
 
-#[component]
+#[ui]
 pub fn StatTitle(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("stat-title", class)}>{children}</div>
+        <div class={classes!("stat-title", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -43,14 +44,14 @@ pub fn StatTitle(#[builder(default)] class: String, children: String) -> String 
 // StatValue - Value part of a stat
 // ============================================
 
-#[component]
+#[ui]
 pub fn StatValue(
     #[builder(default)] color: Color,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("stat-value", color.prefix("text"), class)}>{children}</div>
+        <div class={classes!("stat-value", props.color.prefix("text"), props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -58,14 +59,14 @@ pub fn StatValue(
 // StatDesc - Description part of a stat
 // ============================================
 
-#[component]
+#[ui]
 pub fn StatDesc(
     #[builder(default)] color: Color,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("stat-desc", color.prefix("text"), class)}>{children}</div>
+        <div class={classes!("stat-desc", props.color.prefix("text"), props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -73,14 +74,14 @@ pub fn StatDesc(
 // StatFigure - Figure/icon part of a stat
 // ============================================
 
-#[component]
+#[ui]
 pub fn StatFigure(
     #[builder(default)] color: Color,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("stat-figure", color.prefix("text"), class)}>{children}</div>
+        <div class={classes!("stat-figure", props.color.prefix("text"), props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -88,10 +89,10 @@ pub fn StatFigure(
 // StatActions - Actions part of a stat
 // ============================================
 
-#[component]
+#[ui]
 pub fn StatActions(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("stat-actions", class)}>{children}</div>
+        <div class={classes!("stat-actions", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -99,10 +100,10 @@ pub fn StatActions(#[builder(default)] class: String, children: String) -> Strin
 // Stat - A single stat block
 // ============================================
 
-#[component]
+#[ui]
 pub fn Stat(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("stat", class)}>{children}</div>
+        <div class={classes!("stat", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -110,15 +111,15 @@ pub fn Stat(#[builder(default)] class: String, children: String) -> String {
 // Stats - Container for multiple stats
 // ============================================
 
-#[component]
+#[ui]
 pub fn Stats(
     #[builder(default)] vertical: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("stats", class_if(vertical, "stats-vertical"), class)}>
-            {children}
+        <div class={classes!("stats", class_if(props.vertical, "stats-vertical"), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

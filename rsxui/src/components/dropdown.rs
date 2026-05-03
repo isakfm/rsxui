@@ -27,7 +27,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -67,11 +68,11 @@ pub enum DropdownModifier {
 // DropdownContent - Content part of dropdown
 // ============================================
 
-#[component]
+#[ui]
 pub fn DropdownContent(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div tabindex="-1" class={classes!("dropdown-content", class)}>
-            {children}
+        <div tabindex="-1" class={classes!("dropdown-content", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -80,24 +81,24 @@ pub fn DropdownContent(#[builder(default)] class: String, children: String) -> S
 // Dropdown - Dropdown container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Dropdown(
     #[builder(default)] placement: DropdownPlacement,
     #[builder(default)] modifier: DropdownModifier,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let placement_str = placement.to_string();
-    let modifier_str = modifier.to_string();
+    let placement_str = props.placement.to_string();
+    let modifier_str = props.modifier.to_string();
 
     rsx! {
         <div class={classes!(
             "dropdown",
             class_if(!placement_str.is_empty(), &placement_str),
             class_if(!modifier_str.is_empty(), &modifier_str),
-            class,
-        )}>
-            {children}
+            props.class,
+        )} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

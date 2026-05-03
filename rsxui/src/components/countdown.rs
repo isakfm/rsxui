@@ -1,17 +1,18 @@
 // Countdown Component
 // Based on DaisyUI Countdown: https://daisyui.com/components/countdown/
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // CountdownGroup - Wrapper for multiple countdown values
 // ============================================
 
-#[component]
+#[ui]
 pub fn CountdownGroup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <span class={classes!("countdown", class)}>
-            {children}
+        <span class={classes!("countdown", props.class)} {props.render_attrs()}>
+            {props.children}
         </span>
     }
 }
@@ -20,27 +21,27 @@ pub fn CountdownGroup(#[builder(default)] class: String, children: String) -> St
 // CountdownValue - Single countdown digit (no wrapper)
 // ============================================
 
-#[component]
+#[ui]
 pub fn CountdownValue(
     value: u16,
     #[builder(default)] aria_label: String,
     #[builder(default)] digits: u8,
 ) -> String {
-    let val_str = value.to_string();
-    let aria = if aria_label.is_empty() {
+    let val_str = props.value.to_string();
+    let aria = if props.aria_label.is_empty() {
         val_str.clone()
     } else {
-        aria_label
+        props.aria_label.clone()
     };
 
-    let digits_style = if digits > 0 {
-        format!(" --digits:{};", digits)
+    let digits_style = if props.digits > 0 {
+        format!(" --digits:{};", props.digits)
     } else {
         String::new()
     };
 
     rsx! {
-        <span style={format!("--value:{};{}", value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
+        <span style={format!("--value:{};{}", props.value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
     }
 }
 
@@ -48,7 +49,7 @@ pub fn CountdownValue(
 // Countdown - Standalone countdown with wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Countdown(
     value: u16,
     #[builder(default)] class: String,
@@ -56,22 +57,22 @@ pub fn Countdown(
     #[builder(default)] digits: u8,
     #[builder(default)] dynamic: bool,
 ) -> String {
-    let val_str = value.to_string();
-    let aria = if aria_label.is_empty() {
+    let val_str = props.value.to_string();
+    let aria = if props.aria_label.is_empty() {
         val_str.clone()
     } else {
-        aria_label
+        props.aria_label.clone()
     };
 
-    let digits_style = if digits > 0 {
-        format!(" --digits:{};", digits)
+    let digits_style = if props.digits > 0 {
+        format!(" --digits:{};", props.digits)
     } else {
         String::new()
     };
 
-    let id = format!("countdown-{}-{}", value, rand::random::<u32>());
+    let id = format!("countdown-{}-{}", props.value, rand::random::<u32>());
 
-    if dynamic {
+    if props.dynamic {
         let script = format!(
             r#"<script>
 (function() {{
@@ -89,19 +90,19 @@ pub fn Countdown(
   update();
 }})();
 </script>"#,
-            id, value
+            id, props.value
         );
 
         rsx! {
-            <span class={classes!("countdown", class)}>
-                <span id={id} style={format!("--value:{};{}", value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
+            <span class={classes!("countdown", props.class)} {props.render_attrs()}>
+                <span id={id.clone()} style={format!("--value:{};{}", props.value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
             </span>
             {script}
         }
     } else {
         rsx! {
-            <span class={classes!("countdown", class)}>
-                <span style={format!("--value:{};{}", value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
+            <span class={classes!("countdown", props.class)}>
+                <span style={format!("--value:{};{}", props.value, digits_style)} aria-live="polite" aria-label={aria}>{val_str}</span>
             </span>
         }
     }

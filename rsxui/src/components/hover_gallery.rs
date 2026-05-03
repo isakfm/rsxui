@@ -21,17 +21,18 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // HoverGallery - Image hover gallery
 // ============================================
 
-#[component]
+#[ui]
 pub fn HoverGallery(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <figure class={classes!("hover-gallery", class)}>
-            {children}
+        <figure class={classes!("hover-gallery", props.class)} {props.render_attrs()}>
+            {props.children}
         </figure>
     }
 }

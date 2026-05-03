@@ -21,16 +21,17 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // NavbarStart - Left-aligned section
 // ============================================
 
-#[component]
+#[ui]
 pub fn NavbarStart(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("navbar-start", class)}>{children}</div>
+        <div class={classes!("navbar-start", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -38,10 +39,10 @@ pub fn NavbarStart(#[builder(default)] class: String, children: String) -> Strin
 // NavbarCenter - Center-aligned section
 // ============================================
 
-#[component]
+#[ui]
 pub fn NavbarCenter(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("navbar-center", class)}>{children}</div>
+        <div class={classes!("navbar-center", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -49,10 +50,10 @@ pub fn NavbarCenter(#[builder(default)] class: String, children: String) -> Stri
 // NavbarEnd - Right-aligned section
 // ============================================
 
-#[component]
+#[ui]
 pub fn NavbarEnd(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("navbar-end", class)}>{children}</div>
+        <div class={classes!("navbar-end", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -60,10 +61,10 @@ pub fn NavbarEnd(#[builder(default)] class: String, children: String) -> String 
 // Navbar - Navigation bar container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Navbar(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("navbar", class)}>{children}</div>
+        <div class={classes!("navbar", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 

@@ -2,7 +2,8 @@
 // Based on DaisyUI Collapse: https://daisyui.com/components/collapse/
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // CollapseModifier - Collapse modifier
@@ -24,17 +25,17 @@ pub enum CollapseModifier {
 // Collapse - Toggle content visibility
 // ============================================
 
-#[component]
+#[ui]
 pub fn Collapse(
     #[builder(default)] modifier: CollapseModifier,
     #[builder(default)] open: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let open_class = if open { "collapse-open" } else { "" };
+    let open_class = if props.open { "collapse-open" } else { "" };
     rsx! {
-        <div tabindex="0" class={classes!("collapse", modifier, open_class, class)}>
-            {children}
+        <div tabindex="0" class={classes!("collapse", props.modifier, open_class, props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -43,10 +44,10 @@ pub fn Collapse(
 // CollapseTitle - Collapse title
 // ============================================
 
-#[component]
+#[ui]
 pub fn CollapseTitle(children: String) -> String {
     rsx! {
-        <div class="collapse-title">{children}</div>
+        <div class="collapse-title" {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -54,10 +55,10 @@ pub fn CollapseTitle(children: String) -> String {
 // CollapseContent - Collapse content
 // ============================================
 
-#[component]
+#[ui]
 pub fn CollapseContent(children: String) -> String {
     rsx! {
-        <div class="collapse-content">{children}</div>
+        <div class="collapse-content" {props.render_attrs()}>{props.children}</div>
     }
 }
 

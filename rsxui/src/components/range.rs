@@ -18,7 +18,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Color, Size, attr_if, show_if};
 
@@ -26,7 +27,7 @@ use super::{Color, Size, attr_if, show_if};
 // Range
 // ============================================
 
-#[component]
+#[ui]
 pub fn Range(
     #[builder(into)] name: Option<String>,
     #[builder(into)] min: Option<String>,
@@ -42,16 +43,16 @@ pub fn Range(
             type="range"
             class={classes!(
                 "range",
-                color.prefix("range"),
-                size.prefix("range"),
-                class,
+                props.color.prefix("range"),
+                props.size.prefix("range"),
+                props.class,
             )}
-            {show_if(disabled, "disabled")}
-            {attr_if("name", &name)}
-            {attr_if("min", &min)}
-            {attr_if("max", &max)}
-            {attr_if("value", &value)}
-        />
+            {show_if(props.disabled, "disabled")}
+            {attr_if("name", &props.name)}
+            {attr_if("min", &props.min)}
+            {attr_if("max", &props.max)}
+            {attr_if("value", &props.value)}
+         {props.render_attrs()}/>
     }
 }
 

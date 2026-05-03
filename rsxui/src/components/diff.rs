@@ -1,17 +1,18 @@
 // Diff Component
 // Based on DaisyUI Diff: https://daisyui.com/components/diff/
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // DiffItem1 - First comparison item
 // ============================================
 
-#[component]
+#[ui]
 pub fn DiffItem1(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("diff-item-1", class)} role="img" tabindex="0">
-            {children}
+        <div class={classes!("diff-item-1", props.class)} role="img" tabindex="0" {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -20,11 +21,11 @@ pub fn DiffItem1(#[builder(default)] class: String, children: String) -> String 
 // DiffItem2 - Second comparison item
 // ============================================
 
-#[component]
+#[ui]
 pub fn DiffItem2(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("diff-item-2", class)} role="img">
-            {children}
+        <div class={classes!("diff-item-2", props.class)} role="img" {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -33,10 +34,10 @@ pub fn DiffItem2(#[builder(default)] class: String, children: String) -> String 
 // DiffResizer - The resizer control
 // ============================================
 
-#[component]
+#[ui]
 pub fn DiffResizer() -> String {
     rsx! {
-        <div class="diff-resizer" />
+        <div class="diff-resizer"  {props.render_attrs()}/>
     }
 }
 
@@ -44,11 +45,11 @@ pub fn DiffResizer() -> String {
 // Diff - Side-by-side comparison container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Diff(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <figure class={classes!("diff", class)} tabindex="0">
-            {children}
+        <figure class={classes!("diff", props.class)} tabindex="0" {props.render_attrs()}>
+            {props.children}
         </figure>
     }
 }

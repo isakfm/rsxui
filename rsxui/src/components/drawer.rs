@@ -30,7 +30,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 #[allow(unused_imports)]
 use super::{Menu, MenuItem, MenuState};
@@ -59,21 +60,20 @@ impl DrawerPlacement {
 // Drawer - Main wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Drawer(
-    id: String,
     #[builder(default)] placement: DrawerPlacement,
     #[builder(default)] open: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let lg_class = if open { "lg:drawer-open" } else { "" };
+    let lg_class = if props.open { "lg:drawer-open" } else { "" };
 
     rsx! {
         <div
-            class={classes!("drawer", lg_class, placement.as_class(), class)}
-            id={id}>
-            {children}
+            class={classes!("drawer", lg_class, props.placement.as_class(), props.class)}
+            {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -82,10 +82,10 @@ pub fn Drawer(
 // DrawerToggle - Hidden checkbox for state
 // ============================================
 
-#[component]
-pub fn DrawerToggle(id: String) -> String {
+#[ui]
+pub fn DrawerToggle() -> String {
     rsx! {
-        <input id={id} type="checkbox" class="drawer-toggle" />
+        <input type="checkbox" class="drawer-toggle"  {props.render_attrs()}/>
     }
 }
 
@@ -93,11 +93,11 @@ pub fn DrawerToggle(id: String) -> String {
 // DrawerContent - Main page content
 // ============================================
 
-#[component]
+#[ui]
 pub fn DrawerContent(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("drawer-content", class)}>
-            {children}
+        <div class={classes!("drawer-content", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -106,11 +106,11 @@ pub fn DrawerContent(#[builder(default)] class: String, children: String) -> Str
 // DrawerSide - Sidebar container
 // ============================================
 
-#[component]
+#[ui]
 pub fn DrawerSide(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("drawer-side", class)}>
-            {children}
+        <div class={classes!("drawer-side", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -119,10 +119,10 @@ pub fn DrawerSide(#[builder(default)] class: String, children: String) -> String
 // DrawerOverlay - Click to close overlay
 // ============================================
 
-#[component]
+#[ui]
 pub fn DrawerOverlay(for_id: String) -> String {
     rsx! {
-        <label for={for_id} aria-label="close sidebar" class="drawer-overlay" />
+        <label for={props.for_id.clone()} aria-label="close sidebar" class="drawer-overlay"  {props.render_attrs()}/>
     }
 }
 
@@ -130,7 +130,7 @@ pub fn DrawerOverlay(for_id: String) -> String {
 // DrawerButton - Toggle button
 // ============================================
 
-#[component]
+#[ui]
 pub fn DrawerButton(
     for_id: String,
     #[builder(default)] show_on: String,
@@ -138,7 +138,7 @@ pub fn DrawerButton(
     label: String,
 ) -> String {
     rsx! {
-        <label for={for_id} class={classes!("btn drawer-button", show_on, class)} >{label}</label>
+        <label for={props.for_id.clone()} class={classes!("btn drawer-button", props.show_on.clone(), props.class)}  {props.render_attrs()}>{props.label.clone()}</label>
     }
 }
 

@@ -16,13 +16,14 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // RadialProgress - Circular progress indicator
 // ============================================
 
-#[component]
+#[ui]
 pub fn RadialProgress(
     value: String,
     #[builder(into)] size: Option<String>,
@@ -30,20 +31,26 @@ pub fn RadialProgress(
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let style_value = format!("--value:{};", value);
-    let size_style = size.map(|s| format!("--size:{};", s)).unwrap_or_default();
-    let thickness_style = thickness
+    let style_value = format!("--value:{};", props.value.clone());
+    let size_style = props
+        .size
+        .as_ref()
+        .map(|s| format!("--size:{};", s))
+        .unwrap_or_default();
+    let thickness_style = props
+        .thickness
+        .as_ref()
         .map(|t| format!("--thickness:{};", t))
         .unwrap_or_default();
     let full_style = format!("{}{}{}", style_value, size_style, thickness_style);
 
     rsx! {
         <div
-            class={classes!("radial-progress", class)}
+            class={classes!("radial-progress", props.class)}
             style={full_style}
-            aria-valuenow={value}
-            role="progressbar">
-            {children}
+            aria-valuenow={props.value.clone()}
+            role="progressbar" {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

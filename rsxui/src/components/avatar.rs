@@ -2,7 +2,8 @@
 // Based on DaisyUI Avatar: https://daisyui.com/components/avatar/
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // AvatarStatus - Avatar status modifier
@@ -23,7 +24,7 @@ pub enum AvatarStatus {
 // Avatar - User thumbnail image
 // ============================================
 
-#[component]
+#[ui]
 pub fn Avatar(
     #[builder(into)] src: Option<String>,
     #[builder(default)] alt: String,
@@ -33,15 +34,15 @@ pub fn Avatar(
     #[builder(into)] placeholder: Option<String>,
 ) -> String {
     rsx! {
-        <div class={classes!("avatar", status, class)}>
-            <div class={inner_class}>
+        <div class={classes!("avatar", props.status, props.class)} {props.render_attrs()}>
+            <div class={props.inner_class.clone()}>
                 {
-                    if let Some(img_src) = src {
-                       rsx!{ <img src={img_src} alt={alt} /> }
+                    if let Some(ref img_src) = props.src {
+                       rsx!{ <img src={img_src.clone()} alt={props.alt.clone()} /> }
                     }
                 }
                 {
-                    if let Some(placeholder) = placeholder {
+                    if let Some(ref placeholder) = props.placeholder {
                        rsx!{ <span>{placeholder}</span> }
                     }
                 }
@@ -54,11 +55,11 @@ pub fn Avatar(
 // AvatarGroup - Group of overlapping avatars
 // ============================================
 
-#[component]
+#[ui]
 pub fn AvatarGroup(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("avatar-group", class)}>
-            {children}
+        <div class={classes!("avatar-group", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

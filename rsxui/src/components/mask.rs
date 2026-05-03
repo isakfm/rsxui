@@ -19,7 +19,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // MaskShape - Mask shape styles
@@ -71,7 +72,7 @@ pub enum MaskModifier {
 // Mask - Shape mask wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Mask(
     shape: MaskShape,
     #[builder(default)] modifier: MaskModifier,
@@ -79,8 +80,8 @@ pub fn Mask(
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("mask", shape.to_string(), modifier.to_string(), class)}>
-            {children}
+        <div class={classes!("mask", props.shape.to_string(), props.modifier.to_string(), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

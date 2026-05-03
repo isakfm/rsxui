@@ -22,7 +22,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // StackModifier - Stack alignment modifier
@@ -44,15 +45,15 @@ pub enum StackModifier {
 // Stack - Overlapping elements container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Stack(
     #[builder(default)] modifier: StackModifier,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("stack", modifier.to_string(), class)}>
-            {children}
+        <div class={classes!("stack", props.modifier.to_string(), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

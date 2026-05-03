@@ -17,7 +17,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::Color;
 
@@ -25,7 +26,7 @@ use super::Color;
 // Progress - Progress bar
 // ============================================
 
-#[component]
+#[ui]
 pub fn Progress(
     #[builder(into)] value: Option<String>,
     #[builder(into)] max: Option<String>,
@@ -34,10 +35,10 @@ pub fn Progress(
 ) -> String {
     rsx! {
         <progress
-            class={classes!("progress", color.prefix("progress"), class)}
-            {super::attr_if("value", &value)}
-            {super::attr_if("max", &max)}
-        />
+            class={classes!("progress", props.color.prefix("progress"), props.class)}
+            {super::attr_if("value", &props.value)}
+            {super::attr_if("max", &props.max)}
+         {props.render_attrs()}/>
     }
 }
 

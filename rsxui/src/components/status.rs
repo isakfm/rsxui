@@ -18,7 +18,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Color, Size};
 
@@ -26,7 +27,7 @@ use super::{Color, Size};
 // Status - Status indicator dot
 // ============================================
 
-#[component]
+#[ui]
 pub fn Status(
     #[builder(default)] color: Color,
     #[builder(default)] size: Size,
@@ -34,7 +35,7 @@ pub fn Status(
     #[builder(into)] aria_label: Option<String>,
     #[builder(default)] class: String,
 ) -> String {
-    let anim_class = match animate.as_str() {
+    let anim_class = match props.animate.as_str() {
         "ping" => "animate-ping",
         "bounce" => "animate-bounce",
         _ => "",
@@ -42,9 +43,9 @@ pub fn Status(
 
     rsx! {
         <div
-            class={classes!("status", color.prefix("status"), size.prefix("status"), anim_class, class)}
-            {super::attr_if("aria-label", &aria_label)}
-        />
+            class={classes!("status", props.color.prefix("status"), props.size.prefix("status"), anim_class, props.class)}
+            {super::attr_if("aria-label", &props.aria_label)}
+         {props.render_attrs()}/>
     }
 }
 

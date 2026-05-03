@@ -1,18 +1,19 @@
 // Label Component
 // Based on DaisyUI Label: https://daisyui.com/components/label/
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // Label - Input label wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Label(text: String, #[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <label class={classes!("label", class)}>
-            <span class="label-text">{text}</span>
-            {children}
+        <label class={classes!("label", props.class)} {props.render_attrs()}>
+            <span class="label-text">{props.text}</span>
+            {props.children}
         </label>
     }
 }
@@ -21,12 +22,12 @@ pub fn Label(text: String, #[builder(default)] class: String, children: String) 
 // FloatingLabel - Floating label for input
 // ============================================
 
-#[component]
+#[ui]
 pub fn FloatingLabel(text: String, #[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <label class={classes!("floating-label", class)}>
-            {children}
-            <span>{text}</span>
+        <label class={classes!("floating-label", props.class)} {props.render_attrs()}>
+            {props.children}
+            <span>{props.text}</span>
         </label>
     }
 }

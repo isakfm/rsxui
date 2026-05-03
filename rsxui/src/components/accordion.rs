@@ -2,7 +2,8 @@
 // Based on DaisyUI Accordion: https://daisyui.com/components/accordion/
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // AccordionModifier - Accordion modifier
@@ -22,7 +23,7 @@ pub enum AccordionModifier {
 // AccordionItem - Single accordion item with radio input
 // ============================================
 
-#[component]
+#[ui]
 pub fn AccordionItem(
     name: String,
     title: String,
@@ -32,10 +33,10 @@ pub fn AccordionItem(
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("collapse", modifier, class)}>
-            <input type="radio" name={name} checked=checked />
-            <div class="collapse-title">{title}</div>
-            <div class="collapse-content">{children}</div>
+        <div class={classes!("collapse", props.modifier, props.class)} {props.render_attrs()}>
+            <input type="radio" name={props.name.clone()} checked=props.checked />
+            <div class="collapse-title">{props.title.clone()}</div>
+            <div class="collapse-content">{props.children}</div>
         </div>
     }
 }
@@ -44,7 +45,7 @@ pub fn AccordionItem(
 // AccordionDetails - Single accordion item using details element
 // ============================================
 
-#[component]
+#[ui]
 pub fn AccordionDetails(
     name: String,
     title: String,
@@ -54,9 +55,9 @@ pub fn AccordionDetails(
     children: String,
 ) -> String {
     rsx! {
-        <details class={classes!("collapse", modifier, class)} name={name} open={open}>
-            <summary class="collapse-title">{title}</summary>
-            <div class="collapse-content">{children}</div>
+        <details class={classes!("collapse", props.modifier, props.class)} name={props.name.clone()} open={props.open} {props.render_attrs()}>
+            <summary class="collapse-title">{props.title.clone()}</summary>
+            <div class="collapse-content">{props.children}</div>
         </details>
     }
 }

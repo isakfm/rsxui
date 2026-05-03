@@ -23,7 +23,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -31,7 +32,7 @@ use super::class_if;
 // IndicatorItem - Badge/element on corner
 // ============================================
 
-#[component]
+#[ui]
 pub fn IndicatorItem(
     #[builder(default)] start: bool,
     #[builder(default)] center: bool,
@@ -45,15 +46,15 @@ pub fn IndicatorItem(
     rsx! {
         <span class={classes!(
             "indicator-item",
-            class_if(start, "indicator-start"),
-            class_if(center, "indicator-center"),
-            class_if(end_, "indicator-end"),
-            class_if(top, "indicator-top"),
-            class_if(middle, "indicator-middle"),
-            class_if(bottom, "indicator-bottom"),
-            class,
-        )}>
-            {children}
+            class_if(props.start, "indicator-start"),
+            class_if(props.center, "indicator-center"),
+            class_if(props.end_, "indicator-end"),
+            class_if(props.top, "indicator-top"),
+            class_if(props.middle, "indicator-middle"),
+            class_if(props.bottom, "indicator-bottom"),
+            props.class,
+        )} {props.render_attrs()}>
+            {props.children}
         </span>
     }
 }
@@ -62,11 +63,11 @@ pub fn IndicatorItem(
 // Indicator - Container with corner element
 // ============================================
 
-#[component]
+#[ui]
 pub fn Indicator(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("indicator", class)}>
-            {children}
+        <div class={classes!("indicator", props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

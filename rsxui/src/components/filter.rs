@@ -17,13 +17,14 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // Filter - DaisyUI filter
 // ============================================
 
-#[component]
+#[ui]
 pub fn Filter(
     tabs: Vec<String>,
     #[builder(default)] name: String,
@@ -31,23 +32,23 @@ pub fn Filter(
     #[builder(default)] reset_label: String,
     #[builder(default)] class: String,
 ) -> String {
-    let name = if name.is_empty() {
+    let name = if props.name.is_empty() {
         "filter-tabs".to_string()
     } else {
-        name
+        props.name.clone()
     };
-    let reset_label = if reset_label.is_empty() {
+    let reset_label = if props.reset_label.is_empty() {
         "×".to_string()
     } else {
-        reset_label
+        props.reset_label.clone()
     };
 
-    if use_form {
+    if props.use_form {
         rsx! {
-            <form class={classes!("filter", class)}>
-                <input class="btn btn-square" type="reset" value={reset_label} />
+            <form class={classes!("filter", props.class)} {props.render_attrs()}>
+                <input class="btn btn-square" type="reset" value={reset_label.clone()} />
                 {
-                    for tab in &tabs {
+                    for tab in &props.tabs {
                         rsx! {
                             <input class="btn" type="radio" name={name.clone()} aria-label={tab} />
                         }
@@ -57,10 +58,10 @@ pub fn Filter(
         }
     } else {
         rsx! {
-            <div class={classes!("filter", class)}>
-                <input class="btn filter-reset" type="radio" name={name.clone()} aria-label={reset_label} />
+            <div class={classes!("filter", props.class)}>
+                <input class="btn filter-reset" type="radio" name={name.clone()} aria-label={reset_label.clone()} />
                 {
-                    for tab in &tabs {
+                    for tab in &props.tabs {
                         rsx! {
                             <input class="btn" type="radio" name={name.clone()} aria-label={tab} />
                         }

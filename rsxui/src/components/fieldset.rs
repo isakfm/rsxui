@@ -1,32 +1,33 @@
 // Fieldset Component
 // Based on DaisyUI Fieldset: https://daisyui.com/components/fieldset/
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // Fieldset - Form field grouping
 // ============================================
 
-#[component]
+#[ui]
 pub fn Fieldset(
     title: String,
     #[builder(default)] description: String,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    if description.is_empty() {
+    if props.description.is_empty() {
         rsx! {
-            <fieldset class={classes!("fieldset", class)}>
-                <legend class="fieldset-legend">{title}</legend>
-                {children}
+            <fieldset class={classes!("fieldset", props.class)} {props.render_attrs()}>
+                <legend class="fieldset-legend">{props.title}</legend>
+                {props.children}
             </fieldset>
         }
     } else {
         rsx! {
-            <fieldset class={classes!("fieldset", class)}>
-                <legend class="fieldset-legend">{title}</legend>
-                {children}
-                <p class="label">{description}</p>
+            <fieldset class={classes!("fieldset", props.class)}>
+                <legend class="fieldset-legend">{props.title}</legend>
+                {props.children}
+                <p class="label">{props.description}</p>
             </fieldset>
         }
     }

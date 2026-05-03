@@ -21,7 +21,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -29,7 +30,7 @@ use super::class_if;
 // ListRow - A single row in a list
 // ============================================
 
-#[component]
+#[ui]
 pub fn ListRow(
     #[builder(default)] grow: bool,
     #[builder(default)] wrap: bool,
@@ -37,8 +38,8 @@ pub fn ListRow(
     children: String,
 ) -> String {
     rsx! {
-        <li class={classes!("list-row", class_if(grow, "list-col-grow"), class_if(wrap, "list-col-wrap"), class)}>
-            {children}
+        <li class={classes!("list-row", class_if(props.grow, "list-col-grow"), class_if(props.wrap, "list-col-wrap"), props.class)} {props.render_attrs()}>
+            {props.children}
         </li>
     }
 }
@@ -47,11 +48,11 @@ pub fn ListRow(
 // List - Vertical list container
 // ============================================
 
-#[component]
+#[ui]
 pub fn List(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <ul class={classes!("list", class)}>
-            {children}
+        <ul class={classes!("list", props.class)} {props.render_attrs()}>
+            {props.children}
         </ul>
     }
 }

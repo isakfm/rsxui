@@ -23,17 +23,18 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // CallyCalendar - Cally web component wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn CallyCalendar(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <calendar-date class={classes!("cally", class)}>
-            {children}
+        <calendar-date class={classes!("cally", props.class)} {props.render_attrs()}>
+            {props.children}
         </calendar-date>
     }
 }

@@ -22,7 +22,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Size, class_if};
 
@@ -30,22 +31,22 @@ use super::{Size, class_if};
 // DockItem - A single item in the dock
 // ============================================
 
-#[component]
+#[ui]
 pub fn DockItem(
     #[builder(default)] active: bool,
     #[builder(into)] label: Option<String>,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
-    let label_html = if let Some(l) = label {
-        rsx! { <span class="dock-label">{l}</span> }
+    let label_html = if let Some(ref l) = props.label {
+        rsx! { <span class="dock-label">{l.clone()}</span> }
     } else {
         String::new()
     };
 
     rsx! {
-        <button class={classes!(class_if(active, "dock-active"), class)}>
-            {children}
+        <button class={classes!(class_if(props.active, "dock-active"), props.class)}>
+            {props.children}
             {label_html}
         </button>
     }
@@ -55,15 +56,15 @@ pub fn DockItem(
 // Dock - Bottom navigation container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Dock(
     #[builder(default)] size: Size,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("dock", size.prefix("dock"), class)}>
-            {children}
+        <div class={classes!("dock", props.size.prefix("dock"), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

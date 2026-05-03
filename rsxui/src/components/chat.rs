@@ -3,7 +3,8 @@
 
 use crate::components::Color;
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // ChatPlacement - Message placement
@@ -21,15 +22,15 @@ pub enum ChatPlacement {
 // Chat - Chat message wrapper
 // ============================================
 
-#[component]
+#[ui]
 pub fn Chat(
     #[builder(default)] placement: ChatPlacement,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("chat", placement, class)}>
-            {children}
+        <div class={classes!("chat", props.placement, props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -38,11 +39,11 @@ pub fn Chat(
 // ChatImage - Avatar image
 // ============================================
 
-#[component]
+#[ui]
 pub fn ChatImage(children: String) -> String {
     rsx! {
-        <div class="chat-image avatar">
-            {children}
+        <div class="chat-image avatar" {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -51,10 +52,10 @@ pub fn ChatImage(children: String) -> String {
 // ChatHeader - Message header
 // ============================================
 
-#[component]
+#[ui]
 pub fn ChatHeader(children: String) -> String {
     rsx! {
-        <div class="chat-header">{children}</div>
+        <div class="chat-header" {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -62,15 +63,15 @@ pub fn ChatHeader(children: String) -> String {
 // ChatBubble - Message bubble
 // ============================================
 
-#[component]
+#[ui]
 pub fn ChatBubble(
     #[builder(default)] color: Color,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("chat-bubble", color.prefix("chat-bubble"), class)}>
-            {children}
+        <div class={classes!("chat-bubble", props.color.prefix("chat-bubble"), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }
@@ -79,10 +80,10 @@ pub fn ChatBubble(
 // ChatFooter - Message footer
 // ============================================
 
-#[component]
+#[ui]
 pub fn ChatFooter(children: String) -> String {
     rsx! {
-        <div class="chat-footer">{children}</div>
+        <div class="chat-footer" {props.render_attrs()}>{props.children}</div>
     }
 }
 

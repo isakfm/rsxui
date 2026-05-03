@@ -2,13 +2,14 @@
 // Based on DaisyUI Divider: https://daisyui.com/components/divider/
 
 use crate::components::Color;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // Divider - Content separator
 // ============================================
 
-#[component]
+#[ui]
 pub fn Divider(
     #[builder(default)] text: String,
     #[builder(default)] color: Color,
@@ -20,13 +21,13 @@ pub fn Divider(
     rsx! {
         <div class={classes!(
             "divider",
-            color.prefix("divider"),
-            class_if(vertical, "divider-vertical"),
-            class_if(start, "divider-start"),
-            class_if(end, "divider-end"),
-            class
-        )}>
-            {text}
+            props.color.prefix("divider"),
+            class_if(props.vertical, "divider-vertical"),
+            class_if(props.start, "divider-start"),
+            class_if(props.end, "divider-end"),
+            props.class
+        )} {props.render_attrs()}>
+            {props.text}
         </div>
     }
 }

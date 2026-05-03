@@ -23,7 +23,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -31,15 +32,15 @@ use super::class_if;
 // ValidatorHint — Standalone hint element
 // ============================================
 
-#[component]
+#[ui]
 pub fn ValidatorHint(
     #[builder(into)] hint: String,
     #[builder(default)] hidden: bool,
     #[builder(default)] class: String,
 ) -> String {
     rsx! {
-        <div class={classes!("validator-hint", class_if(hidden, "hidden"), class)}>
-            {hint}
+        <div class={classes!("validator-hint", class_if(props.hidden, "hidden"), props.class)} {props.render_attrs()}>
+            {props.hint}
         </div>
     }
 }
@@ -48,7 +49,7 @@ pub fn ValidatorHint(
 // Validator — Wrapper: children + hint
 // ============================================
 
-#[component]
+#[ui]
 pub fn Validator(
     #[builder(into)] hint: String,
     #[builder(default)] hidden_hint: bool,
@@ -56,9 +57,9 @@ pub fn Validator(
     children: String,
 ) -> String {
     rsx! {
-        <div class={class}>
-            {children}
-            <ValidatorHint hint=hint hidden=hidden_hint />
+        <div class={props.class.clone()} {props.render_attrs()}>
+            {props.children}
+            <ValidatorHint hint=props.hint.clone() hidden=props.hidden_hint />
         </div>
     }
 }

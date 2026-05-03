@@ -23,7 +23,8 @@
 //! ```
 
 use enum_stringify::EnumStringify;
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 // ============================================
 // FabModifier - FAB layout modifier
@@ -42,10 +43,10 @@ pub enum FabModifier {
 // FabClose - Close button wrapper for FAB
 // ============================================
 
-#[component]
+#[ui]
 pub fn FabClose(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("fab-close", class)}>{children}</div>
+        <div class={classes!("fab-close", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -53,10 +54,10 @@ pub fn FabClose(#[builder(default)] class: String, children: String) -> String {
 // FabMainAction - Main action button wrapper for FAB
 // ============================================
 
-#[component]
+#[ui]
 pub fn FabMainAction(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("fab-main-action", class)}>{children}</div>
+        <div class={classes!("fab-main-action", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -64,15 +65,15 @@ pub fn FabMainAction(#[builder(default)] class: String, children: String) -> Str
 // Fab - Floating Action Button container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Fab(
     #[builder(default)] modifier: FabModifier,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("fab", modifier, class)}>
-            {children}
+        <div class={classes!("fab", props.modifier, props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

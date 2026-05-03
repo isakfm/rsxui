@@ -17,7 +17,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -25,15 +26,15 @@ use super::class_if;
 // Skeleton - Loading placeholder
 // ============================================
 
-#[component]
+#[ui]
 pub fn Skeleton(
     #[builder(default)] text: bool,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <div class={classes!("skeleton", class_if(text, "skeleton-text"), class)}>
-            {children}
+        <div class={classes!("skeleton", class_if(props.text, "skeleton-text"), props.class)} {props.render_attrs()}>
+            {props.children}
         </div>
     }
 }

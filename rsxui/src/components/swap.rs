@@ -23,7 +23,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::class_if;
 
@@ -31,10 +32,10 @@ use super::class_if;
 // SwapOn - Visible when swap is active
 // ============================================
 
-#[component]
+#[ui]
 pub fn SwapOn(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("swap-on", class)}>{children}</div>
+        <div class={classes!("swap-on", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -42,10 +43,10 @@ pub fn SwapOn(#[builder(default)] class: String, children: String) -> String {
 // SwapOff - Visible when swap is inactive
 // ============================================
 
-#[component]
+#[ui]
 pub fn SwapOff(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("swap-off", class)}>{children}</div>
+        <div class={classes!("swap-off", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -53,10 +54,10 @@ pub fn SwapOff(#[builder(default)] class: String, children: String) -> String {
 // SwapIndeterminate - Visible when indeterminate
 // ============================================
 
-#[component]
+#[ui]
 pub fn SwapIndeterminate(#[builder(default)] class: String, children: String) -> String {
     rsx! {
-        <div class={classes!("swap-indeterminate", class)}>{children}</div>
+        <div class={classes!("swap-indeterminate", props.class)} {props.render_attrs()}>{props.children}</div>
     }
 }
 
@@ -64,7 +65,7 @@ pub fn SwapIndeterminate(#[builder(default)] class: String, children: String) ->
 // Swap - Toggle visibility container
 // ============================================
 
-#[component]
+#[ui]
 pub fn Swap(
     #[builder(default)] active: bool,
     #[builder(default)] rotate: bool,
@@ -75,12 +76,12 @@ pub fn Swap(
     rsx! {
         <label class={classes!(
             "swap",
-            class_if(active, "swap-active"),
-            class_if(rotate, "swap-rotate"),
-            class_if(flip, "swap-flip"),
-            class,
-        )}>
-            {children}
+            class_if(props.active, "swap-active"),
+            class_if(props.rotate, "swap-rotate"),
+            class_if(props.flip, "swap-flip"),
+            props.class,
+        )} {props.render_attrs()}>
+            {props.children}
         </label>
     }
 }

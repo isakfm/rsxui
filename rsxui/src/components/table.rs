@@ -21,7 +21,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::{Size, class_if};
 
@@ -29,7 +30,7 @@ use super::{Size, class_if};
 // Table - Data table
 // ============================================
 
-#[component]
+#[ui]
 pub fn Table(
     #[builder(default)] zebra: bool,
     #[builder(default)] pin_rows: bool,
@@ -39,16 +40,16 @@ pub fn Table(
     children: String,
 ) -> String {
     rsx! {
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto" {props.render_attrs()}>
             <table class={classes!(
                 "table",
-                class_if(zebra, "table-zebra"),
-                class_if(pin_rows, "table-pin-rows"),
-                class_if(pin_cols, "table-pin-cols"),
-                size.prefix("table"),
-                class,
+                class_if(props.zebra, "table-zebra"),
+                class_if(props.pin_rows, "table-pin-rows"),
+                class_if(props.pin_cols, "table-pin-cols"),
+                props.size.prefix("table"),
+                props.class,
             )}>
-                {children}
+                {props.children}
             </table>
         </div>
     }

@@ -17,7 +17,8 @@
 //! };
 //! ```
 
-use rsx::{classes, component, rsx};
+use rsx::attrs::RenderAttrs;
+use rsx::{classes, rsx, ui};
 
 use super::Size;
 
@@ -25,15 +26,15 @@ use super::Size;
 // Kbd - Keyboard key display
 // ============================================
 
-#[component]
+#[ui]
 pub fn Kbd(
     #[builder(default)] size: Size,
     #[builder(default)] class: String,
     children: String,
 ) -> String {
     rsx! {
-        <kbd class={classes!("kbd", size.prefix("kbd"), class)}>
-            {children}
+        <kbd class={classes!("kbd", props.size.prefix("kbd"), props.class)} {props.render_attrs()}>
+            {props.children}
         </kbd>
     }
 }
